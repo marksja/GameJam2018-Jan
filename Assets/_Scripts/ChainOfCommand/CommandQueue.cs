@@ -79,7 +79,7 @@ public class CommandQueue : MonoBehaviour {
 				//Add temp hp = 150
 				targetShip = ships[sixtySix.target];
 				//Apply a temporary hp pool
-				targetShip.TakeDamage(-Ship.ship.shieldHealth);
+				targetShip.AddShield(Ship.ship.shieldHealth);
 
 				break;
 			case Command.Heavy:

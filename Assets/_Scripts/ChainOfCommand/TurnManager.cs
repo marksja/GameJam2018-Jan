@@ -22,7 +22,7 @@ public class TurnManager : MonoBehaviour {
 	public List<CommandQueue> registeredCommandQueues;
 
 	// Use this for initialization
-	void Start () {
+	void Awake() {
 		Instance = this;
 		turnNum = 0;
         playersWithTurnsCompleted = 0;
