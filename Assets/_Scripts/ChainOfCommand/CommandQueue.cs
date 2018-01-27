@@ -22,7 +22,8 @@ public class CommandQueue : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		orderQueue = new Queue<Order>();	
+		orderQueue = new Queue<Order>();
+        TurnManager.Instance.RegisterCommandQueue(this);
 	}
 	
 	// Update is called once per frame
@@ -65,25 +66,25 @@ public class CommandQueue : MonoBehaviour {
 		int shipNum = sixtySix.shipID;
 		Ship Ship = ships[shipNum];
 		Ship targetShip;
+        Debug.Log(sixtySix.shipID);
 		switch(sixtySix.order){
-
 			case Command.Light:
 				//damage = 50
-				targetShip = opponentQueue.ships[sixtySix.shipID];
+				targetShip = opponentQueue.ships[sixtySix.target];
 				//Deal damage to the target ship
 				targetShip.TakeDamage(Ship.ship.lightDamage);
 
 				break;
 			case Command.Shield:
 				//Add temp hp = 150
-				targetShip = ships[sixtySix.shipID];
+				targetShip = ships[sixtySix.target];
 				//Apply a temporary hp pool
 				targetShip.TakeDamage(-Ship.ship.shieldHealth);
 
 				break;
 			case Command.Heavy:
 				//damage = 150
-				targetShip = opponentQueue.ships[sixtySix.shipID];
+				targetShip = opponentQueue.ships[sixtySix.target];
 				//Deal damage to the target ship
 				targetShip.TakeDamage(Ship.ship.heavyDamage);
 

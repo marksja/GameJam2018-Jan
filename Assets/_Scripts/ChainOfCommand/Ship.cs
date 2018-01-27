@@ -12,6 +12,7 @@ public class Ship : MonoBehaviour {
 
 	public void Start(){
 		damageTaken = 0;
+        health = ship.maxHealth;
 	}
 
 	public void TakeDamage(int damageAmnt){
@@ -25,7 +26,7 @@ public class Ship : MonoBehaviour {
 		damageTaken = 0;
 
 		if(health <= 0){
-			Destroy(this);
+			this.gameObject.SetActive(false);
 		}
 	}
 	
