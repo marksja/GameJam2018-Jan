@@ -14,11 +14,9 @@ public class InputHandler : MonoBehaviour
     private bool needInput = false;
     private int input;
     private int[] inputs;
-    private InputDevice device;
 
     // Use this for initialization
     void Start() {
-        device = InputManager.Devices[playerNumber];
         inputs = new int[numberOfShips];
         for (int i = 0; i < numberOfShips; i++) {
             inputs[i] = -1;
@@ -27,18 +25,18 @@ public class InputHandler : MonoBehaviour
     }
 
     void Update() {
-        while (needInput) {
-            if (device.Action1) {
+        if (needInput) {
+            if (playerNumber == 0 ? Input.GetKeyDown(KeyCode.Q) : Input.GetKeyDown(KeyCode.LeftArrow)) {
                 Debug.Log("Oy");
                 input = 0;
                 needInput = false;
             }
-            else if (device.Action2) {
+            else if (playerNumber == 0 ? Input.GetKeyDown(KeyCode.W) : Input.GetKeyDown(KeyCode.DownArrow)) {
                 Debug.Log("Oof");
                 input = 1;
                 needInput = false;
             }
-            else if (device.Action3) {
+            else if (playerNumber == 0 ? Input.GetKeyDown(KeyCode.E) : Input.GetKeyDown(KeyCode.RightArrow)) {
                 Debug.Log("Meh");
                 input = 2;
                 needInput = false;
@@ -46,27 +44,6 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    IEnumerator WaitForInput() {
-        while (true) {
-            if (device.Action1) {
-                Debug.Log("Oy");
-                input = 0;
-                needInput = false;
-            }
-            else if (device.Action2) {
-                Debug.Log("Oof");
-                input = 1;
-                needInput = false;
-            }
-            else if (device.Action3) {
-                Debug.Log("Meh");
-                input = 2;
-                needInput = false;
-            }
-
-            yield return new WaitForEndOfFrame();
-        }
-    }
 
     IEnumerator ChooseCommands() {
         int shipId = -1;
@@ -79,7 +56,6 @@ public class InputHandler : MonoBehaviour
 
             if (inputs[i] != 1) {
                 needInput = true;
-                StartCoroutine("WaitForInput");
                 while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
                 attackId = (CommandQueue.Command)input;
             }
@@ -88,7 +64,6 @@ public class InputHandler : MonoBehaviour
             }
 
             needInput = true;
-            StartCoroutine("WaitForInput");
             while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
             targetId = input;
 
