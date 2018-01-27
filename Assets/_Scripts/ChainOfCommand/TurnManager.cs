@@ -5,8 +5,14 @@ using UnityEngine.Events;
 
 public class TurnManager : MonoBehaviour {
 
-	public UnityEvent<int> onTurnStart;
-	public UnityEvent<int> onTurnEnd;
+    [System.Serializable]
+    public class IntEvent : UnityEvent<int>
+    {
+
+    }
+
+	public IntEvent onTurnStart;
+	public IntEvent onTurnEnd;
 
 	public int turnNum;
 	int playersWithTurnsCompleted;
@@ -19,6 +25,7 @@ public class TurnManager : MonoBehaviour {
 	void Start () {
 		Instance = this;
 		turnNum = 0;
+        playersWithTurnsCompleted = 0;
 	}
 	
 	// Update is called once per frame
@@ -53,8 +60,13 @@ public class TurnManager : MonoBehaviour {
 			q.ApplyAllDamages();
 		}
 
-		onTurnEnd.Invoke(turnNum);
+		//onTurnEnd.Invoke(turnNum);
 		turnNum ++;
-		onTurnStart.Invoke(turnNum);
-	}
+        playersWithTurnsCompleted = 0;
+        onTurnStart.Invoke(turnNum);
+
+        foreach (CommandQueue q in registeredCommandQueues) {
+            q.ApplyAllDamages();
+        }
+    }
 }

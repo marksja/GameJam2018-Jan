@@ -21,29 +21,34 @@ public class InputHandler : MonoBehaviour
         for (int i = 0; i < numberOfShips; i++) {
             inputs[i] = -1;
         }
+
         StartCoroutine("ChooseCommands");
     }
 
     void Update() {
         if (needInput) {
             if (playerNumber == 0 ? Input.GetKeyDown(KeyCode.Q) : Input.GetKeyDown(KeyCode.LeftArrow)) {
-                Debug.Log("Oy");
+                //Debug.Log("Oy");
                 input = 0;
                 needInput = false;
             }
             else if (playerNumber == 0 ? Input.GetKeyDown(KeyCode.W) : Input.GetKeyDown(KeyCode.DownArrow)) {
-                Debug.Log("Oof");
+                //Debug.Log("Oof");
                 input = 1;
                 needInput = false;
             }
             else if (playerNumber == 0 ? Input.GetKeyDown(KeyCode.E) : Input.GetKeyDown(KeyCode.RightArrow)) {
-                Debug.Log("Meh");
+                //Debug.Log("Meh");
                 input = 2;
                 needInput = false;
             }
         }
     }
 
+    public void StartTurn(int turnStart) {
+        Debug.Log("Beginning New Turn");
+        StartCoroutine("ChooseCommands");
+    }
 
     IEnumerator ChooseCommands() {
         int shipId = -1;
@@ -57,19 +62,22 @@ public class InputHandler : MonoBehaviour
             if (inputs[i] != 1) {
                 needInput = true;
                 while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
+                Debug.Log("Input Attack: " + input + " for ship " + i);
                 attackId = (CommandQueue.Command)input;
             }
             else {
-                attackId = (CommandQueue.Command)3; //Hold if we Heavy attacked last turn
+                attackId = CommandQueue.Command.Hold; //Hold if we Heavy attacked last turn
             }
 
             needInput = true;
             while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
+            Debug.Log("Input Target: " + input + " for ship " + i);
             targetId = input;
 
             orders.IssueCommand(shipId, attackId, targetId); //Give the order
             inputs[i] = (int)attackId; //Store the last attack 
         }
+        TurnManager.Instance.TurnComplete();
         yield return new WaitForSeconds(0);
     }
 }

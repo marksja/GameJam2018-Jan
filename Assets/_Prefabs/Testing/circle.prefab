@@ -199,6 +199,8 @@ MonoBehaviour:
     type: 2}
   arrows:
   - {fileID: 1883746916404582, guid: cacca59055bd2fd4eb563c247a3c2bce, type: 2}
+  bow_draw: event:/SFX/Player/Bow_Draw
+  bow_shot: event:/SFX/Player/Bow_Shot
 --- !u!114 &114828933919502636
 MonoBehaviour:
   m_ObjectHideFlags: 1
