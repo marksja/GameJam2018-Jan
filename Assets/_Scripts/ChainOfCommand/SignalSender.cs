@@ -20,7 +20,6 @@ public class SignalSender : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
 	[ContextMenu("Editor shit!")]
