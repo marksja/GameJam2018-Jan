@@ -73,14 +73,8 @@ public class TurnManager : MonoBehaviour {
 			q.ApplyAllDamages();
 		}
 
-
-        
         turnNum++;
         playersWithTurnsCompleted = 0;
         onTurnStart.Invoke(turnNum);
-
-        foreach (CommandQueue q in registeredCommandQueues) {
-            q.ApplyAllDamages();
-        }
 	}
 }
