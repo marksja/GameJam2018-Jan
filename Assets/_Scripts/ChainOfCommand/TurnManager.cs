@@ -11,6 +11,11 @@ public class TurnManager : MonoBehaviour {
 
     }
 
+	struct QueueOrdersForTurn {
+		public CommandQueue queue;
+		public List<CommandQueue.Order> orders;
+	}
+
 	public IntEvent onTurnStart;
 	public IntEvent onTurnEnd;
 
@@ -54,19 +59,27 @@ public class TurnManager : MonoBehaviour {
         onTurnEnd.Invoke(turnNum);
 
         //Get all orders for this current turn;
-        foreach (CommandQueue q in registeredCommandQueues){
-			var ordersFromSingleQueue = q.SendCommands(turnNum);
-			for(int currPriority = 0; currPriority < 2; ++currPriority){
-				foreach(CommandQueue.Order o in ordersFromSingleQueue){
-					if(o.priority == currPriority){ 
-						q.ExecuteOrder(o);
+
+		// TODO: Not this.
+		List<QueueOrdersForTurn> incomingCommands = new List<QueueOrdersForTurn>();
+		foreach (CommandQueue q in registeredCommandQueues) {
+			QueueOrdersForTurn queueOrders = new QueueOrdersForTurn();
+			queueOrders.queue = q;
+			queueOrders.orders = q.SendCommands(turnNum);
+			incomingCommands.Add(queueOrders);
+		}
+		
+		for (int currPriority = 0; currPriority < 2; ++currPriority) {
+			foreach (QueueOrdersForTurn queueOrders in incomingCommands) {
+				foreach (CommandQueue.Order o in queueOrders.orders) {
+					if (o.priority == currPriority) { 
+						queueOrders.queue.ExecuteOrder(o);
 						yield return new WaitForSeconds(0.4f);
 						orders.Add(o);
 					}
 				}
 			}
 		}
-
         
         foreach (CommandQueue q in registeredCommandQueues){
 			q.ApplyAllDamages();
