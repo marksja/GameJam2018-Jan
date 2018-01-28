@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb33f4e1be37424faaa2bf28b7a7043, type: 3}
   m_Name: Destroyer
   m_EditorClassIdentifier: 
-  maxHealth: 500
+  maxHealth: 750
   actions: 0000000001000000
   lightDamage: 50
   heavyDamage: 150
