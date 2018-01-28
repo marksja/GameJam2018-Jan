@@ -44,6 +44,7 @@ public class InputHandler : MonoBehaviour
                 //Debug.Log("Meh");
                 input = 2;
                 needInput = false;
+                needAction = true;
             }
         }
     }
