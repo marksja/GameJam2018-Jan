@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
+//using DG.Tweening;
 
 [RequireComponent(typeof(AudioSource))]
 public class CutsceneManager : MonoBehaviour {
@@ -61,8 +61,8 @@ public class CutsceneManager : MonoBehaviour {
 
 		// Two beats before the main theme, slide in the commander portraits
 		// and open their textboxes
-		p1CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
-		p2CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
+		//p1CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
+		//p2CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
 
 		// Display commander text
 	}
