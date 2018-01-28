@@ -11,11 +11,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  EditorBanks: []
-  EditorEvents: []
-  MasterBankRef: {fileID: 0}
-  StringsBankRef: {fileID: 0}
-  stringsBankWriteTime: 0
+  EditorBanks:
+  - {fileID: 114166210049058414}
+  - {fileID: 114444116546185508}
+  EditorEvents:
+  - {fileID: 114735934891116250}
+  MasterBankRef: {fileID: 114444116546185508}
+  StringsBankRef: {fileID: 114166210049058414}
+  stringsBankWriteTime: 636526675960000000
   cacheVersion: 2
 --- !u!114 &114017377908106068
 MonoBehaviour:
@@ -53,6 +56,24 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 776
+  Exists: 1
+--- !u!114 &114166210049058414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: /Users/dbraunst/Documents/FMOD/2018GGJ/Build/Desktop/Master Bank.strings.bank
+  lastModified: 636526675960000000
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 736
   Exists: 1
 --- !u!114 &114216075686131242
 MonoBehaviour:
@@ -116,6 +137,24 @@ MonoBehaviour:
   - Name: Desktop
     Value: 736
   Exists: 1
+--- !u!114 &114444116546185508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: /Users/dbraunst/Documents/FMOD/2018GGJ/Build/Desktop/Master Bank.bank
+  lastModified: 636526675960000000
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 521312
+  Exists: 1
 --- !u!114 &114485642203708544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +177,28 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1000
+--- !u!114 &114735934891116250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambience/BaseAmbience
+  guid: 4d8e4bfaaa807248babbc52fb4bf85a7
+  Banks:
+  - {fileID: 114444116546185508}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 56981
 --- !u!114 &114740151334290610
 MonoBehaviour:
   m_ObjectHideFlags: 0
