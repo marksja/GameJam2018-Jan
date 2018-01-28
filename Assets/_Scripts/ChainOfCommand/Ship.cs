@@ -28,21 +28,24 @@ public class Ship : MonoBehaviour {
     // Effects
     public GameObject bobObject;
 
+	public ShipAudioManager shipAudioManager;
+	public int playerNum;
+
     private ShieldHandler shieldHandler;
     private BobbingHandler bobbingHandler;
 
-	public void Awake(){
+	void Awake() {
+        shieldHandler = shieldObject.GetComponent<ShieldHandler>();
+        bobbingHandler = bobObject.GetComponent<BobbingHandler>();
+	}
+
+	public void Start(){
 		lineRenderer = GetComponentInChildren<LineRenderer>();
 		alive = true;
 		damageTaken = 0;
 		shield = 0;
         health = shipData.maxHealth;
         text.text = health + "/" + shipData.maxHealth;
-        shieldHandler = shieldObject.GetComponent<ShieldHandler>();
-        bobbingHandler = bobObject.GetComponent<BobbingHandler>();
-
-        
-
 	}
 
 	public void TakeDamage(int damageAmnt){
@@ -50,6 +53,7 @@ public class Ship : MonoBehaviour {
 	}
 
 	public void AddShield(int shieldAmnt){
+		FMODUnity.RuntimeManager.PlayOneShot(shipData.shieldEvent, transform.position);
 		shield += shieldAmnt;
         
         shieldHandler.ShieldGrow(shield);
@@ -69,6 +73,7 @@ public class Ship : MonoBehaviour {
 		text.text = health + "/" + shipData.maxHealth;
 
 		if(health <= 0){
+			shipAudioManager.ShipDied(playerNum);
 			alive = false;
 			this.gameObject.SetActive(false);
 		}
@@ -134,8 +139,20 @@ public class Ship : MonoBehaviour {
 		lineRenderer.SetPosition(1, start);
 	}
 
+	IEnumerator HeavyLaser(Vector3 target) {
+		lineRenderer.widthMultiplier *= 2;
+		yield return Laser(target);
+		lineRenderer.widthMultiplier /= 2;
+	}
+
 	public void LaserCaller(Vector3 target){
+		FMODUnity.RuntimeManager.PlayOneShot(shipData.lightAttackEvent, transform.position);
         StartCoroutine(Laser(target));
+	}
+
+	public void HeavyLaserCaller(Vector3 target){
+		FMODUnity.RuntimeManager.PlayOneShot(shipData.heavyAttackEvent, transform.position);
+		StartCoroutine(HeavyLaser(target));
 	}
 	
 	public void Shield(){

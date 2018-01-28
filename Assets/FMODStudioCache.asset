@@ -13,18 +13,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114097355311356496}
-  - {fileID: 114399182848827056}
+  - {fileID: 114697416165992520}
   EditorEvents:
   - {fileID: 114726221570591010}
-  - {fileID: 114614629085588462}
-  - {fileID: 114314827139324514}
-  - {fileID: 114192187770150936}
-  - {fileID: 114483074579915532}
-  - {fileID: 114195318020909994}
-  - {fileID: 114033245584094926}
-  MasterBankRef: {fileID: 114399182848827056}
+  - {fileID: 114289465670980026}
+  - {fileID: 114930232575057952}
+  - {fileID: 114828358902026678}
+  - {fileID: 114050772749054640}
+  - {fileID: 114085774918283454}
+  - {fileID: 114325018834707228}
+  MasterBankRef: {fileID: 114697416165992520}
   StringsBankRef: {fileID: 114097355311356496}
-  stringsBankWriteTime: 636527477034972381
+  stringsBankWriteTime: 636527466268381568
   cacheVersion: 2
 --- !u!114 &114017377908106068
 MonoBehaviour:
@@ -44,22 +44,7 @@ MonoBehaviour:
   - Name: Desktop
     Value: 521312
   Exists: 1
---- !u!114 &114032582571993684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: commanderLoop
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114033245584094926
+--- !u!114 &114050772749054640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -70,18 +55,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Ships/Corvette_Shield
-  guid: e86265063b1e4848a092c851b9e5f983
+  Path: event:/SFX/Ships/Destroyer_Atk
+  guid: 54eda7141ea50e4cbfd0973e256081c9
   Banks:
-  - {fileID: 114399182848827056}
+  - {fileID: 114697416165992520}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 2952
---- !u!114 &114075812830588060
+  Length: 1666
+--- !u!114 &114085774918283454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -89,16 +74,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: C:\Users\jussn\Documents\GameJam2018-Jan\2018GGJ\Build\Desktop\Master Bank.bank
-  lastModified: 636527473006108772
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 2162912
-  Exists: 1
+  Path: event:/SFX/Ships/Destroyer_Hvy
+  guid: 94295d43a732e546841e01119a9e7d42
+  Banks:
+  - {fileID: 114697416165992520}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3916
 --- !u!114 &114096418075547818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: 2018GGJ\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636527477034972381
+  lastModified: 636527466268381568
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -176,50 +165,6 @@ MonoBehaviour:
   - Name: Desktop
     Value: 736
   Exists: 1
---- !u!114 &114192187770150936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Ships/Corvette_Atk
-  guid: 54b1d0412391414c9ecbcb22398977a4
-  Banks:
-  - {fileID: 114399182848827056}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1666
---- !u!114 &114195318020909994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Ships/Destroyer_Hvy
-  guid: 94295d43a732e546841e01119a9e7d42
-  Banks:
-  - {fileID: 114399182848827056}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 3916
 --- !u!114 &114216075686131242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,13 +240,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: /Users/dbraunst/Documents/Github/GameJam2018-Jan/2018GGJ/Build/Desktop/Master
     Bank.bank
-  lastModified: 636526675960000000
+  lastModified: 636527465070000000
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 521312
-  Exists: 1
---- !u!114 &114314827139324514
+    Value: 2162912
+  Exists: 0
+--- !u!114 &114289465670980026
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -312,17 +257,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: event:/Music/Chain_of_Command_Main_Theme
-  guid: 35cdbebb51d0da4bb015e4f904b2b656
+  Path: event:/Music/Commander Intro_Music
+  guid: 18a0dfed25995a45a92340d4a1f4911d
   Banks:
-  - {fileID: 114399182848827056}
+  - {fileID: 114697416165992520}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: 114772135745712146}
   MinDistance: 0
   MaxDistance: 0
-  Length: 40435
+  Length: 29183
+--- !u!114 &114325018834707228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ships/Corvette_Shield
+  guid: e86265063b1e4848a092c851b9e5f983
+  Banks:
+  - {fileID: 114697416165992520}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2952
 --- !u!114 &114325400752831040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,39 +309,6 @@ MonoBehaviour:
   - Name: Desktop
     Value: 521312
   Exists: 1
---- !u!114 &114399182848827056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: C:\Users\Evan\Documents\GameJam2018-Jan\2018GGJ\Build\Desktop\Master Bank.bank
-  lastModified: 636527477034872304
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 2162912
-  Exists: 1
---- !u!114 &114423463666722004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: commanderLoop
-  Min: 0
-  Max: 1
-  Default: 0
 --- !u!114 &114433958574172838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,28 +345,6 @@ MonoBehaviour:
   - Name: Desktop
     Value: 521312
   Exists: 1
---- !u!114 &114483074579915532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Ships/Destroyer_Atk
-  guid: 54eda7141ea50e4cbfd0973e256081c9
-  Banks:
-  - {fileID: 114399182848827056}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1666
 --- !u!114 &114485642203708544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,7 +367,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1000
---- !u!114 &114614629085588462
+--- !u!114 &114697416165992520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -462,21 +375,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: event:/Music/Commander Intro_Music
-  guid: 18a0dfed25995a45a92340d4a1f4911d
-  Banks:
-  - {fileID: 114399182848827056}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 114423463666722004}
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 29183
+  Path: C:\dev\projects\Unity\GGJ 2018 Take 2\2018GGJ\Build\Desktop\Master Bank.bank
+  lastModified: 636527466268221456
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 2162912
+  Exists: 1
 --- !u!114 &114726221570591010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,7 +399,7 @@ MonoBehaviour:
   Path: event:/SFX/Ambience/BaseAmbience
   guid: 4d8e4bfaaa807248babbc52fb4bf85a7
   Banks:
-  - {fileID: 114399182848827056}
+  - {fileID: 114697416165992520}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -540,6 +448,43 @@ MonoBehaviour:
   - Name: Desktop
     Value: 12474
   Exists: 1
+--- !u!114 &114772135745712146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: commanderLoop
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114828358902026678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ships/Corvette_Atk
+  guid: 54b1d0412391414c9ecbcb22398977a4
+  Banks:
+  - {fileID: 114697416165992520}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1666
 --- !u!114 &114919625372636858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,6 +504,43 @@ MonoBehaviour:
   - Name: Desktop
     Value: 39008
   Exists: 1
+--- !u!114 &114930232575057952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Chain_of_Command_Main_Theme
+  guid: 35cdbebb51d0da4bb015e4f904b2b656
+  Banks:
+  - {fileID: 114697416165992520}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 40435
+--- !u!114 &114954119078619716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: commanderLoop
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114996542047202022
 MonoBehaviour:
   m_ObjectHideFlags: 0
