@@ -47,22 +47,22 @@ public class CutsceneManager : MonoBehaviour {
 	float BeatsToSeconds(int numBeats) {
 		return numBeats * secondsPerBeat;
 	}
-	
-	IEnumerator PlayCutscene() {
-		yield return WaitForBeats(2);
-		// Start audio
-		GetComponent<AudioSource>().Play();
-		// There is a beat of silence at the start of the audio clip.
-		// This line may need to be removed in the future.
-		yield return WaitForBeats(1);
 
-		// Flash the first transmission text for the first "call" sound
-		StartCoroutine(FlashTransmission(p1TransmissionText, 16, 2));
-		yield return WaitForBeats(8);
+    IEnumerator PlayCutscene() {
+        yield return WaitForBeats(2);
+        // Start audio
+        GetComponent<AudioSource>().Play();
+        // There is a beat of silence at the start of the audio clip.
+        // This line may need to be removed in the future.
+        yield return WaitForBeats(1);
 
-		// Add in the second transmission text for the second "call" sound
-		StartCoroutine(FlashTransmission(p2TransmissionText, 8, 2));
-		yield return WaitForBeats(6);
+        // Flash the first transmission text for the first "call" sound
+        StartCoroutine(FlashTransmission(p1TransmissionText, 16, 2));
+        yield return WaitForBeats(8);
+
+        // Add in the second transmission text for the second "call" sound
+        StartCoroutine(FlashTransmission(p2TransmissionText, 8, 2));
+        yield return WaitForBeats(6);
 
         // Two beats before the main theme, slide in the commander portraits
         // and open their textboxes
@@ -70,20 +70,20 @@ public class CutsceneManager : MonoBehaviour {
         //p2CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
 
         // Display commander text
+        string str1 = p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().text;
+        string str2 = p2MissionText.GetComponent<TMPro.TextMeshProUGUI>().text;
+
+        p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+        p2MissionText.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+
         p1MissionText.SetActive(true);
         p2MissionText.SetActive(true);
-
-        //for (int i = 0; i < p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().textInfo.characterCount; ++i) {
-        //    p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().textInfo.characterInfo[i].isVisible = false;
-        //    p2MissionText.GetComponent<TMPro.TextMeshProUGUI>().textInfo.characterInfo[i].isVisible = false;
-        //}
-
-
-        //for (int i = 0; i < p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().textInfo.characterCount; ++i) {
-        //    p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().textInfo.characterInfo[i].isVisible = true;
-        //    p2MissionText.GetComponent<TMPro.TextMeshProUGUI>().textInfo.characterInfo[i].isVisible = true;
-        //    yield return new WaitForSeconds(.1f);
-        //}
+        
+        for (int i = 0; i < str1.Length; i++){
+            p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().text = str1.Substring(0, i);
+            p2MissionText.GetComponent<TMPro.TextMeshProUGUI>().text = str2.Substring(0, i);
+            yield return null;
+        }
 
     }
 
