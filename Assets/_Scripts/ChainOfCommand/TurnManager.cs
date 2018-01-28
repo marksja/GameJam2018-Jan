@@ -38,8 +38,6 @@ public class TurnManager : MonoBehaviour {
 	}
 
 	public void TurnComplete(){
-		Debug.Log("Completed a turn?");
-		Debug.Log(registeredCommandQueues.Count);
 		playersWithTurnsCompleted++;
 		if(playersWithTurnsCompleted >= registeredCommandQueues.Count){
 			ResolveTurn();
@@ -47,17 +45,26 @@ public class TurnManager : MonoBehaviour {
 	}
 
 	public void ResolveTurn(){
+		StartCoroutine(GrossCoroutine());
+    }
+
+	IEnumerator GrossCoroutine(){
 		List<CommandQueue.Order> orders = new List<CommandQueue.Order>();
 		
 		//Get all orders for this current turn;
-		for(int i = 0; i < 2; ++i){
-			foreach(CommandQueue q in registeredCommandQueues){
-				CommandQueue.Order[] ordersFromSingleQueue = q.SendCommands(turnNum);
+		foreach(CommandQueue q in registeredCommandQueues){
+			CommandQueue.Order[] ordersFromSingleQueue = q.SendCommands(turnNum);
+			for(int i = 0; i < 2; ++i){
 				foreach(CommandQueue.Order o in ordersFromSingleQueue){
-					if(o.priority == i) continue;
-					if(o.shipID == -1) continue;
-					q.ExecuteOrder(o);
-					orders.Add(o);
+					print(o.order);
+					print("Priority: " + o.priority.ToString());
+					print("Iteration: " + i.ToString());
+					if(o.priority == i){ 
+						if(o.shipID == -1) continue;
+						q.ExecuteOrder(o);
+						yield return new WaitForSeconds(0.4f);
+						orders.Add(o);
+					}
 				}
 			}
 		}
@@ -74,5 +81,5 @@ public class TurnManager : MonoBehaviour {
         foreach (CommandQueue q in registeredCommandQueues) {
             q.ApplyAllDamages();
         }
-    }
+	}
 }

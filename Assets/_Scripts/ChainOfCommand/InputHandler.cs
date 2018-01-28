@@ -43,12 +43,12 @@ public class InputHandler : MonoBehaviour
                 //Debug.Log("Meh");
                 input = 2;
                 needInput = false;
+                needAction = true;
             }
         }
     }
 
     public void StartTurn(int turnStart) {
-        Debug.Log("Beginning New Turn");
         StartCoroutine("ChooseCommands");
     }
 
@@ -60,7 +60,6 @@ public class InputHandler : MonoBehaviour
         //We go through all the ships we have and choose the ship Id, the attack the choose, and their target
         for (int i = 0; i < numberOfShips; i++) {
             if(!orders.ships[i].alive){
-                Debug.Log("Dead ship!");
                 continue;
             }
 
@@ -76,7 +75,6 @@ public class InputHandler : MonoBehaviour
                 needInput = true;
                 needAction = true;
                 while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
-                Debug.Log("Input Attack: " + input + " for ship " + i);
                 attackId = FindAttack(i, input);
             
                 orders.ships[i].ShowTargetChoice();
@@ -89,7 +87,6 @@ public class InputHandler : MonoBehaviour
                 needInput = true;
                 needAction = false;
                 while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
-                Debug.Log("Input Target: " + input + " for ship " + i);
                 targetId = input;
             }
             else {
@@ -105,6 +102,7 @@ public class InputHandler : MonoBehaviour
     }
 
     CommandQueue.Command FindAttack(int ship, int input) {
+        if(input == 1) Debug.Log(ship + " " + orders.ships[ship].ship.actions[input]);
         return orders.ships[ship].ship.actions[input];
     }
 }
