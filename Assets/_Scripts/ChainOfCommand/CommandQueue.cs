@@ -39,9 +39,6 @@ public class CommandQueue : MonoBehaviour {
 		sixtySix.target = targetID;
 		sixtySix.turnIssued = TurnManager.Instance.turnNum;
 		sixtySix.turnExecuted = sixtySix.turnIssued + GetTurnDelay();
-		if(sixtySix.order == Command.Shield){
-			//Debug.Log("Issued shield command");
-		}
 		sixtySix.priority = (sixtySix.order == Command.Shield) ? 0 : 1;
 		orderQueue.Enqueue(sixtySix);
 	}
@@ -64,7 +61,7 @@ public class CommandQueue : MonoBehaviour {
 				//This order is invalid, make it so the turnManager can't execute it!
 				sixtySix.shipID = -1;
 			}
-			else{
+			else {
 				orderQueue.Dequeue();
 			}
 			ordersForThisTurn[i] = sixtySix;
@@ -77,7 +74,7 @@ public class CommandQueue : MonoBehaviour {
         int shipNum = sixtySix.shipID;
         Ship currentShip = ships[shipNum];
         Ship targetShip;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0f);
         switch (sixtySix.order) {
             case Command.Light:
                 //damage = 50
