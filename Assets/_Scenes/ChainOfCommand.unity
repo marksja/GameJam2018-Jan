@@ -10253,7 +10253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446c8e33e7c60a343966712c444068ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winText: {fileID: 0}
+  winText: {fileID: 1719787928}
   p1Destroyer: {fileID: 305828312}
   p2Destroyer: {fileID: 1272132918}
 --- !u!4 &1366996614
