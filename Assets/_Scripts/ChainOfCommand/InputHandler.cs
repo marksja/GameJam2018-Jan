@@ -110,7 +110,7 @@ public class InputHandler : MonoBehaviour
                 }
                 Target:
                 input = -1;
-                while (!ShipIsAlive(input)) {
+                while (!ShipIsAlive(input, attackId)) {
                     needInput = true;
                     needAction = false;
                     while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
@@ -141,9 +141,18 @@ public class InputHandler : MonoBehaviour
         yield return new WaitForSeconds(0);
     }
 
-    bool ShipIsAlive(int targetShip) {
-        if (targetShip < 0 || targetShip > 2) return false;
-        return orders.ships[targetShip].alive;
+    bool ShipIsAlive(int targetId, CommandQueue.Command attackId) {
+        if (targetId < 0) return false;
+        switch (attackId) {
+            case CommandQueue.Command.Shield: {
+                // Ensure requested allied ship is alive
+                return orders.ships[targetId].alive;
+            }
+            default: {
+                // Offensive; ensure requested enemy ship is alive
+                return orders.opponentQueue.ships[targetId].alive;
+            }
+        }
     }
 
     CommandQueue.Command FindAttack(int ship, int input) {
