@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EndGameWatcher : MonoBehaviour {
 
-	public Text winText;
+	public TextMeshProUGUI winText;
 
 	public Ship p1Destroyer;
 	public Ship p2Destroyer;
