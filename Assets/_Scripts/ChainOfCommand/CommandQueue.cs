@@ -14,6 +14,7 @@ public class CommandQueue : MonoBehaviour {
 		public int target;
 		public int turnIssued;
 		public int turnExecuted;
+		public int priority;
 	}
 
 	public CommandQueue opponentQueue;
@@ -38,6 +39,7 @@ public class CommandQueue : MonoBehaviour {
 		sixtySix.target = targetID;
 		sixtySix.turnIssued = TurnManager.Instance.turnNum;
 		sixtySix.turnExecuted = sixtySix.turnIssued + GetTurnDelay();
+		sixtySix.priority = (sixtySix.order == Command.Shield) ? 0 : 1;
 		orderQueue.Enqueue(sixtySix);
 	}
 
@@ -51,7 +53,7 @@ public class CommandQueue : MonoBehaviour {
 			return null;
 		}
 		for(int i = 0; i < ships.Length; ++i){
-			if(!ships[i].gameObject.activeInHierarchy){
+			if(!ships[i].alive){
 				continue;
 			}
 			Order sixtySix = orderQueue.Peek();

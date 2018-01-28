@@ -48,19 +48,21 @@ public class TurnManager : MonoBehaviour {
 		List<CommandQueue.Order> orders = new List<CommandQueue.Order>();
 		
 		//Get all orders for this current turn;
-		foreach(CommandQueue q in registeredCommandQueues){
-			CommandQueue.Order[] ordersFromSingleQueue = q.SendCommands(turnNum);
-			foreach(CommandQueue.Order o in ordersFromSingleQueue){
-				if(o.shipID == -1) continue;
-				
-				q.ExecuteOrder(o);
-				orders.Add(o);
+		for(int i = 0; i < 2; ++i){
+			foreach(CommandQueue q in registeredCommandQueues){
+				CommandQueue.Order[] ordersFromSingleQueue = q.SendCommands(turnNum);
+				foreach(CommandQueue.Order o in ordersFromSingleQueue){
+					if(o.priority == i) continue;
+					if(o.shipID == -1) continue;
+					q.ExecuteOrder(o);
+					orders.Add(o);
+				}
 			}
 		}
-
 		foreach(CommandQueue q in registeredCommandQueues){
 			q.ApplyAllDamages();
 		}
+
 
 		//onTurnEnd.Invoke(turnNum);
 		turnNum ++;

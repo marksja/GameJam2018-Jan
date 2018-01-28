@@ -11,15 +11,16 @@ public class InputHandler : MonoBehaviour
     public CommandQueue orders;
 
     private bool controllersIn = false;
+    private bool needAction = true;
     private bool needInput = false;
     private int input;
-    private int[] prevInputs;
+    private CommandQueue.Command[] prevInputs;
 
     // Use this for initialization
     void Start() {
-        prevInputs = new int[numberOfShips];
+        prevInputs = new CommandQueue.Command[numberOfShips];
         for (int i = 0; i < numberOfShips; i++) {
-            prevInputs[i] = -1;
+            prevInputs[i] = CommandQueue.Command.Hold;
         }
 
         StartCoroutine("ChooseCommands");
@@ -37,7 +38,7 @@ public class InputHandler : MonoBehaviour
                 input = 1;
                 needInput = false;
             }
-            else if (playerNumber == 0 ? Input.GetKeyDown(KeyCode.E) : Input.GetKeyDown(KeyCode.P)) {
+            else if (!needAction && playerNumber == 0 ? Input.GetKeyDown(KeyCode.E) : Input.GetKeyDown(KeyCode.P)) {
                 //Debug.Log("Meh");
                 input = 2;
                 needInput = false;
@@ -57,24 +58,26 @@ public class InputHandler : MonoBehaviour
 
         //We go through all the ships we have and choose the ship Id, the attack the choose, and their target
         for (int i = 0; i < numberOfShips; i++) {
-            if(!orders.ships[i].gameObject.activeInHierarchy){
+            if(!orders.ships[i].alive){
                 continue;
             }
 
+            //This Ship
             shipId = i;
 
             orders.ships[i].ShowAttackTypeChoice();
 
-            //1 is a heavy attack
-            if (prevInputs[i] != 1) {
+            if (prevInputs[i] != CommandQueue.Command.Heavy) {
                 needInput = true;
+                needAction = true;
                 while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
                 Debug.Log("Input Attack: " + input + " for ship " + i);
-                attackId = (CommandQueue.Command)input;
+                attackId = FindAttack(i, input);
             
                 orders.ships[i].ShowTargetChoice();
 
                 needInput = true;
+                needAction = false;
                 while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
                 Debug.Log("Input Target: " + input + " for ship " + i);
                 targetId = input;
@@ -84,11 +87,14 @@ public class InputHandler : MonoBehaviour
             }
 
             orders.ships[i].HideAll();
-
             orders.IssueCommand(shipId, attackId, targetId); //Give the order
-            prevInputs[i] = (int)attackId; //Store the last attack 
+            prevInputs[i] = attackId; //Store the last attack 
         }
         TurnManager.Instance.TurnComplete();
         yield return new WaitForSeconds(0);
+    }
+
+    CommandQueue.Command FindAttack(int ship, int input) {
+        return orders.ships[ship].ship.actions[input];
     }
 }
