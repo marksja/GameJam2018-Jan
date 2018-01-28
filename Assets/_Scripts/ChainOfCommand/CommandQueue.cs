@@ -74,7 +74,7 @@ public class CommandQueue : MonoBehaviour {
         int shipNum = sixtySix.shipID;
         Ship currentShip = ships[shipNum];
         Ship targetShip;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0f);
         switch (sixtySix.order) {
             case Command.Light:
                 //damage = 50
