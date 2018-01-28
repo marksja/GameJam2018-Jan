@@ -2856,7 +2856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipData: {fileID: 0}
+  shipData: {fileID: 11400000, guid: cd4ae4ff80079444f8f209902fe44a51, type: 2}
   health: 0
   damageTaken: 0
   shield: 0
@@ -5283,7 +5283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipData: {fileID: 0}
+  shipData: {fileID: 11400000, guid: 9268151b72303f34dbb7335cfe76fecd, type: 2}
   health: 0
   damageTaken: 0
   shield: 0
@@ -5730,7 +5730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipData: {fileID: 0}
+  shipData: {fileID: 11400000, guid: cd4ae4ff80079444f8f209902fe44a51, type: 2}
   health: 0
   damageTaken: 0
   shield: 0
@@ -9616,7 +9616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipData: {fileID: 0}
+  shipData: {fileID: 11400000, guid: cd4ae4ff80079444f8f209902fe44a51, type: 2}
   health: 0
   damageTaken: 0
   shield: 0
@@ -11229,7 +11229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipData: {fileID: 0}
+  shipData: {fileID: 11400000, guid: 9268151b72303f34dbb7335cfe76fecd, type: 2}
   health: 0
   damageTaken: 0
   shield: 0
@@ -12621,7 +12621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipData: {fileID: 0}
+  shipData: {fileID: 11400000, guid: cd4ae4ff80079444f8f209902fe44a51, type: 2}
   health: 0
   damageTaken: 0
   shield: 0
