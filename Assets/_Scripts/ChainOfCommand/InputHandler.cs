@@ -59,6 +59,7 @@ public class InputHandler : MonoBehaviour
         //We go through all the ships we have and choose the ship Id, the attack the choose, and their target
         for (int i = 0; i < numberOfShips; i++) {
             if(!orders.ships[i].alive){
+                Debug.Log("Dead ship!");
                 continue;
             }
 

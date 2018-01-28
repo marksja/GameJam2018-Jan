@@ -12,7 +12,7 @@ public class Ship : MonoBehaviour {
 	public int damageTaken;
 	public int shield;
 
-	public bool alive;
+	public bool alive = true;
 
 	public TextMeshProUGUI text;
 
