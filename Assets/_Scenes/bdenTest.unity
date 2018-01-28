@@ -2820,6 +2820,7 @@ GameObject:
   m_Component:
   - component: {fileID: 325412998}
   - component: {fileID: 325412999}
+  - component: {fileID: 325413000}
   m_Layer: 0
   m_Name: Corvette_1
   m_TagString: Untagged
@@ -2867,6 +2868,50 @@ MonoBehaviour:
   shieldObject: {fileID: 1037881848}
   typeTutorial: {fileID: 291378589}
   targetTutorial: {fileID: 727097520}
+--- !u!114 &325413000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 325412997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3c43347d97f244e86a1709cd6359bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 3
+  speed: 2
+  journeyLength: 4
+  animCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 3.8119671
+      outSlope: 3.8119671
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.2804532
+      value: 0.5068683
+      inSlope: 0.012455464
+      outSlope: 0.012455464
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.76931435
+      value: -0.494841
+      inSlope: -0.14678447
+      outSlope: -0.14678447
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.0040281
+      value: 0.0052214265
+      inSlope: 4.1837025
+      outSlope: 4.1837025
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 1
+    m_RotationOrder: 0
 --- !u!1 &341415199
 GameObject:
   m_ObjectHideFlags: 0
@@ -5219,6 +5264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 721201234}
   - component: {fileID: 721201233}
+  - component: {fileID: 721201235}
   m_Layer: 0
   m_Name: Destroyer
   m_TagString: Untagged
@@ -5266,6 +5312,50 @@ Transform:
   m_Father: {fileID: 584666121}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &721201235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 721201232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3c43347d97f244e86a1709cd6359bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 3
+  speed: 2
+  journeyLength: 4
+  animCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 3.8119671
+      outSlope: 3.8119671
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.2804532
+      value: 0.5068683
+      inSlope: 0.012455464
+      outSlope: 0.012455464
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.76931435
+      value: -0.494841
+      inSlope: -0.14678447
+      outSlope: -0.14678447
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.0040281
+      value: 0.0052214265
+      inSlope: 4.1837025
+      outSlope: 4.1837025
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 1
+    m_RotationOrder: 0
 --- !u!1001 &727097518
 Prefab:
   m_ObjectHideFlags: 0
@@ -5604,6 +5694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 757996740}
   - component: {fileID: 757996741}
+  - component: {fileID: 757996742}
   m_Layer: 0
   m_Name: Corvette_2
   m_TagString: Untagged
@@ -5651,6 +5742,50 @@ MonoBehaviour:
   shieldObject: {fileID: 1926574461}
   typeTutorial: {fileID: 1477408334}
   targetTutorial: {fileID: 810076118}
+--- !u!114 &757996742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 757996739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3c43347d97f244e86a1709cd6359bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 3
+  speed: 2
+  journeyLength: 4
+  animCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 3.8119671
+      outSlope: 3.8119671
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.2804532
+      value: 0.5068683
+      inSlope: 0.012455464
+      outSlope: 0.012455464
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.76931435
+      value: -0.494841
+      inSlope: -0.14678447
+      outSlope: -0.14678447
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.0040281
+      value: 0.0052214265
+      inSlope: 4.1837025
+      outSlope: 4.1837025
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 1
+    m_RotationOrder: 0
 --- !u!1 &769428756
 GameObject:
   m_ObjectHideFlags: 0
@@ -9444,6 +9579,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1492522243}
   - component: {fileID: 1492522244}
+  - component: {fileID: 1492522245}
   m_Layer: 0
   m_Name: Corvette_1
   m_TagString: Untagged
@@ -9492,6 +9628,50 @@ MonoBehaviour:
   shieldObject: {fileID: 1650135328}
   typeTutorial: {fileID: 1371062189}
   targetTutorial: {fileID: 1392993566}
+--- !u!114 &1492522245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1492522242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3c43347d97f244e86a1709cd6359bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 3
+  speed: 2
+  journeyLength: 4
+  animCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 3.8119671
+      outSlope: 3.8119671
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.2804532
+      value: 0.5068683
+      inSlope: 0.012455464
+      outSlope: 0.012455464
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.76931435
+      value: -0.494841
+      inSlope: -0.14678447
+      outSlope: -0.14678447
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.0040281
+      value: 0.0052214265
+      inSlope: 4.1837025
+      outSlope: 4.1837025
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 1
+    m_RotationOrder: 0
 --- !u!1 &1504909513
 GameObject:
   m_ObjectHideFlags: 0
@@ -11030,6 +11210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1745278502}
   - component: {fileID: 1745278501}
+  - component: {fileID: 1745278503}
   m_Layer: 0
   m_Name: Destroyer
   m_TagString: Untagged
@@ -11077,6 +11258,50 @@ Transform:
   m_Father: {fileID: 239074419}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1745278503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1745278500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3c43347d97f244e86a1709cd6359bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 3
+  speed: 2
+  journeyLength: 4
+  animCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 3.8119671
+      outSlope: 3.8119671
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.2804532
+      value: 0.5068683
+      inSlope: 0.012455464
+      outSlope: 0.012455464
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.76931435
+      value: -0.494841
+      inSlope: -0.14678447
+      outSlope: -0.14678447
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.0040281
+      value: 0.0052214265
+      inSlope: 4.1837025
+      outSlope: 4.1837025
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 1
+    m_RotationOrder: 0
 --- !u!1 &1751003090
 GameObject:
   m_ObjectHideFlags: 0
@@ -12360,6 +12585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2084322159}
   - component: {fileID: 2084322160}
+  - component: {fileID: 2084322161}
   m_Layer: 0
   m_Name: Corvette_2
   m_TagString: Untagged
@@ -12407,6 +12633,50 @@ MonoBehaviour:
   shieldObject: {fileID: 2011525722}
   typeTutorial: {fileID: 395645906}
   targetTutorial: {fileID: 50624818}
+--- !u!114 &2084322161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2084322158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3c43347d97f244e86a1709cd6359bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 3
+  speed: 2
+  journeyLength: 4
+  animCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 3.8119671
+      outSlope: 3.8119671
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.2804532
+      value: 0.5068683
+      inSlope: 0.012455464
+      outSlope: 0.012455464
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.76931435
+      value: -0.494841
+      inSlope: -0.14678447
+      outSlope: -0.14678447
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.0040281
+      value: 0.0052214265
+      inSlope: 4.1837025
+      outSlope: 4.1837025
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 1
+    m_RotationOrder: 0
 --- !u!1 &2102129851
 GameObject:
   m_ObjectHideFlags: 0
