@@ -13,12 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: C:\Users\Dan Braunstein\Dropbox\Documents\Software\FMOD Studio\Special_Delivery\Special
-    Delivery\Special Delivery.fspro
-  SourceProjectPathUnformatted: C:\Users\Dan Braunstein\Dropbox\Documents\Software\FMOD
-    Studio\Special_Delivery\Special Delivery\Special Delivery.fspro
-  SourceBankPathUnformatted: C:\Users\Dan Braunstein\Dropbox\Documents\Software\FMOD
-    Studio\Special_Delivery\Special Delivery\Build
+  sourceProjectPath: /Users/dbraunst/Documents/FMOD/2018GGJ/2018GGJ.fspro
+  SourceProjectPathUnformatted: /Users/dbraunst/Documents/FMOD/2018GGJ/2018GGJ.fspro
+  SourceBankPathUnformatted: /Users/dbraunst/Documents/FMOD/2018GGJ/Build
   AutomaticEventLoading: 1
   AutomaticSampleLoading: 0
   ImportType: 0
@@ -58,5 +55,5 @@ MonoBehaviour:
   - Platform: 2
     Value: 32
   Plugins: []
-  MasterBank: 
+  MasterBank: Master Bank
   Banks: []
