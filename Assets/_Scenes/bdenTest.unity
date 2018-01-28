@@ -2856,7 +2856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ship: {fileID: 11400000, guid: cd4ae4ff80079444f8f209902fe44a51, type: 2}
+  shipData: {fileID: 0}
   health: 0
   damageTaken: 0
   shield: 0
@@ -2874,7 +2874,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 325412997}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c3c43347d97f244e86a1709cd6359bf, type: 3}
   m_Name: 
@@ -5283,7 +5283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ship: {fileID: 11400000, guid: 9268151b72303f34dbb7335cfe76fecd, type: 2}
+  shipData: {fileID: 0}
   health: 0
   damageTaken: 0
   shield: 0
@@ -5318,7 +5318,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 721201232}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c3c43347d97f244e86a1709cd6359bf, type: 3}
   m_Name: 
@@ -5730,7 +5730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ship: {fileID: 11400000, guid: cd4ae4ff80079444f8f209902fe44a51, type: 2}
+  shipData: {fileID: 0}
   health: 0
   damageTaken: 0
   shield: 0
@@ -5748,7 +5748,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 757996739}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c3c43347d97f244e86a1709cd6359bf, type: 3}
   m_Name: 
@@ -9616,7 +9616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ship: {fileID: 11400000, guid: cd4ae4ff80079444f8f209902fe44a51, type: 2}
+  shipData: {fileID: 0}
   health: 0
   damageTaken: 0
   shield: 0
@@ -9634,7 +9634,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1492522242}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c3c43347d97f244e86a1709cd6359bf, type: 3}
   m_Name: 
@@ -11229,7 +11229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ship: {fileID: 11400000, guid: 9268151b72303f34dbb7335cfe76fecd, type: 2}
+  shipData: {fileID: 0}
   health: 0
   damageTaken: 0
   shield: 0
@@ -11264,7 +11264,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1745278500}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c3c43347d97f244e86a1709cd6359bf, type: 3}
   m_Name: 
@@ -12621,7 +12621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ship: {fileID: 11400000, guid: cd4ae4ff80079444f8f209902fe44a51, type: 2}
+  shipData: {fileID: 0}
   health: 0
   damageTaken: 0
   shield: 0
@@ -12639,7 +12639,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2084322158}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c3c43347d97f244e86a1709cd6359bf, type: 3}
   m_Name: 
