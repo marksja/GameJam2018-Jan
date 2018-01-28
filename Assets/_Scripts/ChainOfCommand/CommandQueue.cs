@@ -40,7 +40,7 @@ public class CommandQueue : MonoBehaviour {
 		sixtySix.turnIssued = TurnManager.Instance.turnNum;
 		sixtySix.turnExecuted = sixtySix.turnIssued + GetTurnDelay();
 		if(sixtySix.order == Command.Shield){
-			Debug.Log("Issued shield command");
+			//Debug.Log("Issued shield command");
 		}
 		sixtySix.priority = (sixtySix.order == Command.Shield) ? 0 : 1;
 		orderQueue.Enqueue(sixtySix);
@@ -81,25 +81,34 @@ public class CommandQueue : MonoBehaviour {
 			case Command.Light:
 				//damage = 50
 				targetShip = opponentQueue.ships[sixtySix.target];
+                if(!targetShip.alive) { return; }
 				//Deal damage to the target ship
 				targetShip.TakeDamage(Ship.ship.lightDamage);
-				Ship.LaserCaller(targetShip.transform.position);
+                if(targetShip.alive)
+    				Ship.LaserCaller(targetShip.transform.position);
 
 				break;
 			case Command.Shield:
 				//Add temp hp = 150
 				targetShip = ships[sixtySix.target];
-				//Apply a temporary hp pool
-				targetShip.AddShield(Ship.ship.shieldHealth);
+                if (!targetShip.alive) { return; }
+                //Apply a temporary hp pool
+                targetShip.AddShield(Ship.ship.shieldHealth);
 
 				break;
 			case Command.Heavy:
 				//damage = 150
 				targetShip = opponentQueue.ships[sixtySix.target];
-				//Deal damage to the target ship
-				targetShip.TakeDamage(Ship.ship.heavyDamage);
+                if (!targetShip.alive) { return; }
+                //Deal damage to the target ship
+                targetShip.TakeDamage(Ship.ship.heavyDamage);
+                //Call two lasers for visual P L A C E H O L D E R
+                if (targetShip.alive) {
+                    Ship.LaserCaller(targetShip.transform.position);
+                    Ship.LaserCaller(targetShip.transform.position);
+                }
 
-				break;
+                break;
 			case Command.Hold:
 				//Do nothing
 

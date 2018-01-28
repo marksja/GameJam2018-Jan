@@ -56,9 +56,6 @@ public class TurnManager : MonoBehaviour {
 			CommandQueue.Order[] ordersFromSingleQueue = q.SendCommands(turnNum);
 			for(int i = 0; i < 2; ++i){
 				foreach(CommandQueue.Order o in ordersFromSingleQueue){
-					print(o.order);
-					print("Priority: " + o.priority.ToString());
-					print("Iteration: " + i.ToString());
 					if(o.priority == i){ 
 						if(o.shipID == -1) continue;
 						q.ExecuteOrder(o);

@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using InControl;
 
 public class InputHandler : MonoBehaviour
 {
@@ -39,7 +37,7 @@ public class InputHandler : MonoBehaviour
                 input = 1;
                 needInput = false;
             }
-            else if (!needAction && playerNumber == 0 ? Input.GetKeyDown(KeyCode.E) : Input.GetKeyDown(KeyCode.P)) {
+            else if (!needAction && (playerNumber == 0 ? Input.GetKeyDown(KeyCode.E) : Input.GetKeyDown(KeyCode.P))) {
                 //Debug.Log("Meh");
                 input = 2;
                 needInput = false;
@@ -69,7 +67,7 @@ public class InputHandler : MonoBehaviour
             orders.ships[i].ShowAttackTypeChoice();
             
             // Display tutorial blurbs first time that commands are requested
-            if (displayTutorial) { orders.ships[i].ShowTypeTutorial(); }
+            //if (displayTutorial) { orders.ships[i].ShowTypeTutorial(); }
 
             if (prevInputs[i] != CommandQueue.Command.Heavy) {
                 needInput = true;
@@ -79,14 +77,16 @@ public class InputHandler : MonoBehaviour
             
                 orders.ships[i].ShowTargetChoice();
 
-                if (displayTutorial) { 
-                    orders.ships[i].ShowTargetTutorial(); 
-                    displayTutorial = false;
+                //if (displayTutorial) { 
+                //    orders.ships[i].ShowTargetTutorial(); 
+                //    displayTutorial = false;
+                //}
+                input = -1;
+                while (!ShipIsAlive(input)) {
+                    needInput = true;
+                    needAction = false;
+                    while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
                 }
-
-                needInput = true;
-                needAction = false;
-                while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
                 targetId = input;
             }
             else {
@@ -101,8 +101,13 @@ public class InputHandler : MonoBehaviour
         yield return new WaitForSeconds(0);
     }
 
+    bool ShipIsAlive(int targetShip) {
+        if (targetShip < 0) return false;
+        return orders.ships[targetShip].alive;
+    }
+
     CommandQueue.Command FindAttack(int ship, int input) {
-        if(input == 1) Debug.Log(ship + " " + orders.ships[ship].ship.actions[input]);
+        //if(input == 1) Debug.Log(ship + " " + orders.ships[ship].ship.actions[input]);
         return orders.ships[ship].ship.actions[input];
     }
 }
