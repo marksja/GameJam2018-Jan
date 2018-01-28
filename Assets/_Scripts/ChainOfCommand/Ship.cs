@@ -13,6 +13,7 @@ public class Ship : MonoBehaviour {
 	public int shield;
 
 	public bool alive = true;
+    
 
 	public TextMeshProUGUI text;
 
@@ -24,6 +25,19 @@ public class Ship : MonoBehaviour {
 	// Tutorial text
 	public GameObject typeTutorial;
 	public GameObject targetTutorial;
+    // Effects
+    public GameObject bobObject;
+
+	public ShipAudioManager shipAudioManager;
+	public int playerNum;
+
+    private ShieldHandler shieldHandler;
+    private BobbingHandler bobbingHandler;
+
+	void Awake() {
+        shieldHandler = shieldObject.GetComponent<ShieldHandler>();
+        bobbingHandler = bobObject.GetComponent<BobbingHandler>();
+	}
 
 	public void Start(){
 		lineRenderer = GetComponentInChildren<LineRenderer>();
@@ -31,7 +45,7 @@ public class Ship : MonoBehaviour {
 		damageTaken = 0;
 		shield = 0;
         health = shipData.maxHealth;
-		text.text = health + "/" + shipData.maxHealth;
+        text.text = health + "/" + shipData.maxHealth;
 	}
 
 	public void TakeDamage(int damageAmnt){
@@ -39,14 +53,17 @@ public class Ship : MonoBehaviour {
 	}
 
 	public void AddShield(int shieldAmnt){
+		FMODUnity.RuntimeManager.PlayOneShot(shipData.shieldEvent, transform.position);
 		shield += shieldAmnt;
-		StartCoroutine(ShieldGrow());
+        
+        shieldHandler.ShieldGrow(shield);
+        
 	}
 
 	public void ApplyDamage(){
 		damageTaken -= shield;
-		if(shield > 0) StartCoroutine(ShieldShrink());
-		shield = 0;
+		if(shield > 0) TurnOffShieldInSeconds(1);
+        shield = 0;
 		
 		if(damageTaken > 0){
 			health -= damageTaken;
@@ -56,15 +73,24 @@ public class Ship : MonoBehaviour {
 		text.text = health + "/" + shipData.maxHealth;
 
 		if(health <= 0){
+			shipAudioManager.ShipDied(playerNum);
 			alive = false;
 			this.gameObject.SetActive(false);
 		}
-	}
+        TurnOffShieldInSeconds(0);
 
-    public void ShowAttackTypeChoice() {
+    }
+
+    public void TurnOffShieldInSeconds(float seconds) {
+        shieldHandler.ShieldShrink(seconds);
+    }
+
+    public void ShowAttackTypeChoice() {       
         typeChoice.SetActive(true);
         targetChoice.SetActive(false);
-	}
+        // Juice
+        bobbingHandler.StartBobbing();
+    }
 
 	public void ShowTargetChoice(){
         typeChoice.SetActive(false);
@@ -72,12 +98,15 @@ public class Ship : MonoBehaviour {
 	}
 
 	public void HideAll(){
+        
 		typeChoice.SetActive(false);
 		targetChoice.SetActive(false);
-		if (targetTutorial != null) {
-			targetTutorial.SetActive(false);
-		}
-	}	
+        if (targetTutorial != null) {
+            targetTutorial.SetActive(false);
+        }
+        // Juice
+        bobbingHandler.StopBobbing();
+    }	
 
 	IEnumerator Laser(Vector3 target){
 		
@@ -110,35 +139,27 @@ public class Ship : MonoBehaviour {
 		lineRenderer.SetPosition(1, start);
 	}
 
+	IEnumerator HeavyLaser(Vector3 target) {
+		lineRenderer.widthMultiplier *= 2;
+		yield return Laser(target);
+		lineRenderer.widthMultiplier /= 2;
+	}
+
 	public void LaserCaller(Vector3 target){
+		FMODUnity.RuntimeManager.PlayOneShot(shipData.lightAttackEvent, transform.position);
         StartCoroutine(Laser(target));
+	}
+
+	public void HeavyLaserCaller(Vector3 target){
+		FMODUnity.RuntimeManager.PlayOneShot(shipData.heavyAttackEvent, transform.position);
+		StartCoroutine(HeavyLaser(target));
 	}
 	
 	public void Shield(){
 
 	}
 
-	IEnumerator ShieldGrow(){
-		float time = 0;
-		while(time < 0.5f){
-			shieldObject.transform.localScale = Vector3.Lerp(Vector3.zero, new Vector3(1, .5f, 0), time / 0.5f);
-
-			yield return new WaitForEndOfFrame();
-
-			time += Time.deltaTime;
-		}
-	}
-
-	IEnumerator ShieldShrink(){
-		float time = 0;
-		while(time < 0.5f){
-			shieldObject.transform.localScale = Vector3.Lerp(new Vector3(1, .5f, 0), Vector3.zero, time / 0.5f);
-
-			yield return new WaitForEndOfFrame();
-
-			time += Time.deltaTime;
-		}
-	}
+	
 	
 	/* Tutorial blurbs - JF */
 	public void ShowTypeTutorial() {

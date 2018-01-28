@@ -108,8 +108,7 @@ public class CommandQueue : MonoBehaviour {
                 targetShip.TakeDamage(currentShip.shipData.heavyDamage);
                 //Call two lasers for visual P L A C E H O L D E R
                 if (currentShip.gameObject.activeInHierarchy) {
-                    currentShip.LaserCaller(targetShip.transform.position);
-                    currentShip.LaserCaller(targetShip.transform.position);
+                    currentShip.HeavyLaserCaller(targetShip.transform.position);
                 }
 
                 break;
@@ -125,6 +124,7 @@ public class CommandQueue : MonoBehaviour {
 	public void ApplyAllDamages(){
 		foreach(Ship s in ships){
 			s.ApplyDamage();
+            s.TurnOffShieldInSeconds(.5f);
 		}
 	}
 }

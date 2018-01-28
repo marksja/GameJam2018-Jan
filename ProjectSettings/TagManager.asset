@@ -32,9 +32,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - C1
+  - D
+  - C2
   - Player
   - Panel
   m_SortingLayers:
@@ -43,4 +43,13 @@ TagManager:
     locked: 0
   - name: UIForeground
     uniqueID: 2585076621
+    locked: 0
+  - name: C1
+    uniqueID: 1941140989
+    locked: 0
+  - name: D
+    uniqueID: 3314047659
+    locked: 0
+  - name: C2
+    uniqueID: 596663165
     locked: 0
