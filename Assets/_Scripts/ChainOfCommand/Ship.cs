@@ -12,12 +12,15 @@ public class Ship : MonoBehaviour {
 	public int damageTaken;
 	public int shield;
 
+	public bool alive;
+
 	public TextMeshProUGUI text;
 
 	public GameObject typeChoice;
 	public GameObject targetChoice;
 
 	public void Start(){
+		alive = true;
 		damageTaken = 0;
 		shield = 0;
         health = ship.maxHealth;
@@ -43,6 +46,7 @@ public class Ship : MonoBehaviour {
 		text.text = health + "/" + ship.maxHealth;
 
 		if(health <= 0){
+			alive = false;
 			this.gameObject.SetActive(false);
 		}
 	}
