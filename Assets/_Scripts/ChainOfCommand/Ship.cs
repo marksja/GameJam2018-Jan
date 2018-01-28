@@ -19,6 +19,10 @@ public class Ship : MonoBehaviour {
 	public GameObject typeChoice;
 	public GameObject targetChoice;
 
+	// Tutorial text
+	public GameObject typeTutorial;
+	public GameObject targetTutorial;
+
 	public void Start(){
 		alive = true;
 		damageTaken = 0;
@@ -64,6 +68,17 @@ public class Ship : MonoBehaviour {
 	public void HideAll(){
 		typeChoice.SetActive(false);
 		targetChoice.SetActive(false);
+		targetTutorial.SetActive(false);
 	}	
 	
+	/* Tutorial blurbs - JF */
+	public void ShowTypeTutorial() {
+		typeTutorial.SetActive(true);
+		targetTutorial.SetActive(false);
+	}
+
+	public void ShowTargetTutorial() {
+		typeTutorial.SetActive(false);
+		targetTutorial.SetActive(true);
+	}
 }
