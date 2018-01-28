@@ -105,8 +105,7 @@ public class InputHandler : MonoBehaviour
                 orders.ships[id].ShowTargetChoice();
 
                 if (displayTutorial) { 
-                    orders.ships[id].ShowTargetTutorial(); 
-                    displayTutorial = false;
+                    orders.ships[id].ShowTargetTutorial();
                 }
                 Target:
                 input = -1;
@@ -129,6 +128,9 @@ public class InputHandler : MonoBehaviour
             prevInputs[id] = attackId; //Store the last attack
             prevprevInputs[id] = prevInputs[id];
         }
+
+        // Tutorials are only displayed the first time
+        displayTutorial = false;
 
         for(int i = 0; i < 3; i++) {
             int shipId = ordersForThisTurn[i].me;

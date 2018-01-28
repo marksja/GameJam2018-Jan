@@ -74,7 +74,9 @@ public class Ship : MonoBehaviour {
 	public void HideAll(){
 		typeChoice.SetActive(false);
 		targetChoice.SetActive(false);
-		targetTutorial.SetActive(false);
+		if (targetTutorial != null) {
+			targetTutorial.SetActive(false);
+		}
 	}	
 
 	IEnumerator Laser(Vector3 target){
@@ -140,12 +142,20 @@ public class Ship : MonoBehaviour {
 	
 	/* Tutorial blurbs - JF */
 	public void ShowTypeTutorial() {
-		typeTutorial.SetActive(true);
-		targetTutorial.SetActive(false);
+		if (targetTutorial != null) {
+			targetTutorial.SetActive(false);
+		}
+		if (typeTutorial != null) {
+			typeTutorial.SetActive(true);
+		}
 	}
 
 	public void ShowTargetTutorial() {
-		typeTutorial.SetActive(false);
-		targetTutorial.SetActive(true);
+		if (typeTutorial != null) {
+			typeTutorial.SetActive(false);
+		}
+		if (targetTutorial != null) {
+			targetTutorial.SetActive(true);
+		}
 	}
 }
