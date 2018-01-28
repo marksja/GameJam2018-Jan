@@ -52,12 +52,17 @@ public class CommandQueue : MonoBehaviour {
 		if(orderQueue.Count == 0){
 			return null;
 		}
+		// JF: Pop off all expired commands
+		while (orderQueue.Peek().turnExecuted < turnNum) {
+			orderQueue.Dequeue();
+		}
+
 		for(int i = 0; i < ships.Length; ++i){
 			if(!ships[i].alive){
 				continue;
 			}
 			Order sixtySix = orderQueue.Peek();
-			if(sixtySix.turnExecuted != turnNum){
+			if(sixtySix.turnExecuted > turnNum){
 				//This order is invalid, make it so the turnManager can't execute it!
 				sixtySix.shipID = -1;
 			}
@@ -68,18 +73,16 @@ public class CommandQueue : MonoBehaviour {
 		}
 		return ordersForThisTurn;
 	}
-
-    IEnumerator ExecuteCo(Order sixtySix) {
+	public void ExecuteOrder(Order sixtySix){
         //Yes, My Lord
         int shipNum = sixtySix.shipID;
         Ship currentShip = ships[shipNum];
         Ship targetShip;
-        yield return new WaitForSeconds(0f);
         switch (sixtySix.order) {
             case Command.Light:
                 //damage = 50
                 targetShip = opponentQueue.ships[sixtySix.target];
-                if (!targetShip.alive) { yield return null; }
+                if (!targetShip.alive) { return; }
                 //Deal damage to the target ship
                 targetShip.TakeDamage(currentShip.shipData.lightDamage);
                 if (currentShip.gameObject.activeInHierarchy) {
@@ -90,7 +93,7 @@ public class CommandQueue : MonoBehaviour {
             case Command.Shield:
                 //Add temp hp = 150
                 targetShip = ships[sixtySix.target];
-                if (!targetShip.alive) { yield return null; }
+                if (!targetShip.alive) { return; }
                 //Apply a temporary hp pool
                 targetShip.AddShield(currentShip.shipData.shieldHealth);
 
@@ -98,7 +101,7 @@ public class CommandQueue : MonoBehaviour {
             case Command.Heavy:
                 //damage = 150
                 targetShip = opponentQueue.ships[sixtySix.target];
-                if (!targetShip.alive) { yield return null; }
+                if (!targetShip.alive) { return; }
                 //Deal damage to the target ship
                 targetShip.TakeDamage(currentShip.shipData.heavyDamage);
                 //Call two lasers for visual P L A C E H O L D E R
@@ -115,9 +118,6 @@ public class CommandQueue : MonoBehaviour {
             default:
                 break;
         }
-    }
-	public void ExecuteOrder(Order sixtySix){
-        StartCoroutine("ExecuteCo", sixtySix);
 	}
 
 	public void ApplyAllDamages(){
