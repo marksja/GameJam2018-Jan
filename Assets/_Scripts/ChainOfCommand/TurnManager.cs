@@ -50,9 +50,11 @@ public class TurnManager : MonoBehaviour {
 
 	IEnumerator GrossCoroutine(){
 		List<CommandQueue.Order> orders = new List<CommandQueue.Order>();
-		
-		//Get all orders for this current turn;
-		foreach(CommandQueue q in registeredCommandQueues){
+
+        onTurnEnd.Invoke(turnNum);
+
+        //Get all orders for this current turn;
+        foreach (CommandQueue q in registeredCommandQueues){
 			CommandQueue.Order[] ordersFromSingleQueue = q.SendCommands(turnNum);
 			for(int i = 0; i < 2; ++i){
 				foreach(CommandQueue.Order o in ordersFromSingleQueue){
@@ -65,13 +67,15 @@ public class TurnManager : MonoBehaviour {
 				}
 			}
 		}
-		foreach(CommandQueue q in registeredCommandQueues){
+
+        
+        foreach (CommandQueue q in registeredCommandQueues){
 			q.ApplyAllDamages();
 		}
 
 
-		onTurnEnd.Invoke(turnNum);
-		turnNum ++;
+        
+        turnNum++;
         playersWithTurnsCompleted = 0;
         onTurnStart.Invoke(turnNum);
 
