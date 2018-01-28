@@ -51,6 +51,8 @@ public class TurnManager : MonoBehaviour {
 		foreach(CommandQueue q in registeredCommandQueues){
 			CommandQueue.Order[] ordersFromSingleQueue = q.SendCommands(turnNum);
 			foreach(CommandQueue.Order o in ordersFromSingleQueue){
+				if(o.shipID == -1) continue;
+				
 				q.ExecuteOrder(o);
 				orders.Add(o);
 			}
