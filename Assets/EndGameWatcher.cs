@@ -17,18 +17,17 @@ public class EndGameWatcher : MonoBehaviour {
 	}
 
 	IEnumerator EndCheckLoop() {
-		while (true) {
+		int winningPlayerNum = 0;
+		while (winningPlayerNum == 0) {
+			yield return new WaitForSeconds(0.1f);
 			if (p1Destroyer.alive && !p2Destroyer.alive) {
-				winText.text = string.Format(winTextTemplate, "1");
-				winText.gameObject.SetActive(true);
-				yield break;
+				winningPlayerNum = 1;
 			}
 			else if (!p1Destroyer.alive && p2Destroyer.alive) {
-				winText.text = string.Format(winTextTemplate, "2");
-				winText.gameObject.SetActive(true);
-				yield break;
+				winningPlayerNum = 2;
 			}
-			yield return new WaitForSeconds(0.1f);
 		}
+		winText.text = string.Format(winTextTemplate, winningPlayerNum.ToString());
+		winText.gameObject.SetActive(true);
 	}
 }
