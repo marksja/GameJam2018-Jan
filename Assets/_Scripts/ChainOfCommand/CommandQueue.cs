@@ -75,7 +75,7 @@ public class CommandQueue : MonoBehaviour {
     IEnumerator ExecuteCo(Order sixtySix) {
         //Yes, My Lord
         int shipNum = sixtySix.shipID;
-        Ship Ship = ships[shipNum];
+        Ship currentShip = ships[shipNum];
         Ship targetShip;
         yield return new WaitForSeconds(1f);
         switch (sixtySix.order) {
@@ -84,9 +84,10 @@ public class CommandQueue : MonoBehaviour {
                 targetShip = opponentQueue.ships[sixtySix.target];
                 if (!targetShip.alive) { yield return null; }
                 //Deal damage to the target ship
-                targetShip.TakeDamage(Ship.ship.lightDamage);
-                if (targetShip.alive)
-                    Ship.LaserCaller(targetShip.transform.position);
+                targetShip.TakeDamage(currentShip.shipData.lightDamage);
+                if (currentShip.gameObject.activeInHierarchy) {
+                    currentShip.LaserCaller(targetShip.transform.position);
+				}
 
                 break;
             case Command.Shield:
@@ -94,7 +95,7 @@ public class CommandQueue : MonoBehaviour {
                 targetShip = ships[sixtySix.target];
                 if (!targetShip.alive) { yield return null; }
                 //Apply a temporary hp pool
-                targetShip.AddShield(Ship.ship.shieldHealth);
+                targetShip.AddShield(currentShip.shipData.shieldHealth);
 
                 break;
             case Command.Heavy:
@@ -102,11 +103,11 @@ public class CommandQueue : MonoBehaviour {
                 targetShip = opponentQueue.ships[sixtySix.target];
                 if (!targetShip.alive) { yield return null; }
                 //Deal damage to the target ship
-                targetShip.TakeDamage(Ship.ship.heavyDamage);
+                targetShip.TakeDamage(currentShip.shipData.heavyDamage);
                 //Call two lasers for visual P L A C E H O L D E R
-                if (targetShip.alive) {
-                    Ship.LaserCaller(targetShip.transform.position);
-                    Ship.LaserCaller(targetShip.transform.position);
+                if (currentShip.gameObject.activeInHierarchy) {
+                    currentShip.LaserCaller(targetShip.transform.position);
+                    currentShip.LaserCaller(targetShip.transform.position);
                 }
 
                 break;
