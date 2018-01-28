@@ -14,7 +14,9 @@ public class InputHandler : MonoBehaviour
     private CommandQueue.Command[] prevInputs;
     private CommandQueue.Command[] prevprevInputs;
 
+    // JF: Hacky way to control when tutorials appear
     private bool displayTutorial = true;
+    private bool displayDelayTutorial = false;
 
     class FancyTuple
     {
@@ -129,8 +131,10 @@ public class InputHandler : MonoBehaviour
             prevprevInputs[id] = prevInputs[id];
         }
 
-        // Tutorials are only displayed the first time
+        // Command tutorials are only displayed the first time
+        // Display the delay tutorial on the next turn
         displayTutorial = false;
+        displayDelayTutorial = true;
 
         for(int i = 0; i < 3; i++) {
             int shipId = ordersForThisTurn[i].me;

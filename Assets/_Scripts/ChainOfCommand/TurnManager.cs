@@ -26,6 +26,8 @@ public class TurnManager : MonoBehaviour {
 
 	public List<CommandQueue> registeredCommandQueues;
 
+	public GameObject delayTutorial;
+
 	// Use this for initialization
 	void Awake() {
 		Instance = this;
@@ -57,6 +59,9 @@ public class TurnManager : MonoBehaviour {
 		List<CommandQueue.Order> orders = new List<CommandQueue.Order>();
 
         onTurnEnd.Invoke(turnNum);
+
+		if (turnNum == 0) { delayTutorial.SetActive(true); }
+		if (turnNum == 1) { delayTutorial.SetActive(false); }
 
         //Get all orders for this current turn;
 

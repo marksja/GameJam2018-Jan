@@ -43,7 +43,7 @@ public class CommandQueue : MonoBehaviour {
 		orderQueue.Enqueue(sixtySix);
 	}
 
-	public int GetTurnDelay(){
+	static public int GetTurnDelay(){
 		return 1;
 	}
 

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114097355311356496}
-  - {fileID: 114286701144592972}
+  - {fileID: 114075812830588060}
   EditorEvents:
   - {fileID: 114726221570591010}
-  MasterBankRef: {fileID: 114286701144592972}
+  MasterBankRef: {fileID: 114075812830588060}
   StringsBankRef: {fileID: 114097355311356496}
-  stringsBankWriteTime: 636526675960000000
+  stringsBankWriteTime: 636527458305220606
   cacheVersion: 2
 --- !u!114 &114017377908106068
 MonoBehaviour:
@@ -33,6 +33,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: /Users/dbraunst/Documents/FMOD/2018GGJ/Build/Desktop/Master Bank.bank
   lastModified: 636526674430000000
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 521312
+  Exists: 1
+--- !u!114 &114075812830588060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Users\jussn\Documents\GameJam2018-Jan\2018GGJ\Build\Desktop\Master Bank.bank
+  lastModified: 636527458305205424
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -71,8 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: 2018GGJ/Build/Desktop/Master Bank.strings.bank
-  lastModified: 636526675960000000
+  Path: 2018GGJ\Build\Desktop\Master Bank.strings.bank
+  lastModified: 636527458305220606
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -286,7 +304,7 @@ MonoBehaviour:
   Path: event:/SFX/Ambience/BaseAmbience
   guid: 4d8e4bfaaa807248babbc52fb4bf85a7
   Banks:
-  - {fileID: 114286701144592972}
+  - {fileID: 114075812830588060}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
