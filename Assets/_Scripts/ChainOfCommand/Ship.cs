@@ -34,6 +34,11 @@ public class Ship : MonoBehaviour {
     private ShieldHandler shieldHandler;
     private BobbingHandler bobbingHandler;
 
+	void Awake() {
+        shieldHandler = shieldObject.GetComponent<ShieldHandler>();
+        bobbingHandler = bobObject.GetComponent<BobbingHandler>();
+	}
+
 	public void Start(){
 		lineRenderer = GetComponentInChildren<LineRenderer>();
 		alive = true;
@@ -41,8 +46,6 @@ public class Ship : MonoBehaviour {
 		shield = 0;
         health = shipData.maxHealth;
         text.text = health + "/" + shipData.maxHealth;
-        shieldHandler = shieldObject.GetComponent<ShieldHandler>();
-        bobbingHandler = bobObject.GetComponent<BobbingHandler>();
 	}
 
 	public void TakeDamage(int damageAmnt){
