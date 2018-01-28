@@ -55,11 +55,10 @@ public class TurnManager : MonoBehaviour {
 
         //Get all orders for this current turn;
         foreach (CommandQueue q in registeredCommandQueues){
-			CommandQueue.Order[] ordersFromSingleQueue = q.SendCommands(turnNum);
-			for(int i = 0; i < 2; ++i){
+			var ordersFromSingleQueue = q.SendCommands(turnNum);
+			for(int currPriority = 0; currPriority < 2; ++currPriority){
 				foreach(CommandQueue.Order o in ordersFromSingleQueue){
-					if(o.priority == i){ 
-						if(o.shipID == -1) continue;
+					if(o.priority == currPriority){ 
 						q.ExecuteOrder(o);
 						yield return new WaitForSeconds(0.4f);
 						orders.Add(o);
