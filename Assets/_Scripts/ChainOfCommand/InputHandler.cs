@@ -75,39 +75,37 @@ public class InputHandler : MonoBehaviour
     }
 
     IEnumerator ChooseCommands() {
-        int shipId = -1;
         CommandQueue.Command attackId = CommandQueue.Command.Hold;
         int targetId = -1;
 
         //We go through all the ships we have and choose the ship Id, the attack the choose, and their target
-        for (int i = 0; i < numberOfShips; i++) {
-            if(!orders.ships[i].alive){
+        for (int id = 0; id < numberOfShips; id++) {
+            if(!orders.ships[id].alive){
                 continue;
             }
 
-            shipId = i;
             Attack:
-            orders.ships[i].ShowAttackTypeChoice();
+            orders.ships[id].ShowAttackTypeChoice();
             
             // Display tutorial blurbs first time that commands are requested
-            if (displayTutorial) { orders.ships[i].ShowTypeTutorial(); }
+            if (displayTutorial) { orders.ships[id].ShowTypeTutorial(); }
 
-            if (prevInputs[i] != CommandQueue.Command.Heavy) {
+            if (prevInputs[id] != CommandQueue.Command.Heavy) {
                 
                 input = 4;
                 while (input > 2) {
                     needInput = true;
                     needAction = true;
                     while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
-                    if (input == 3 && i > 0) { orders.ships[i].HideAll(); i -= 1; orders.ships[i].ShowTargetChoice(); prevInputs = prevprevInputs; goto Target; }
+                    if (input == 3 && id > 0) { orders.ships[id].HideAll(); id -= 1; orders.ships[id].ShowTargetChoice(); prevInputs = prevprevInputs; goto Target; }
                 }
 
-                attackId = FindAttack(i, input);
+                attackId = FindAttack(id, input);
             
-                orders.ships[i].ShowTargetChoice();
+                orders.ships[id].ShowTargetChoice();
 
                 if (displayTutorial) { 
-                    orders.ships[i].ShowTargetTutorial(); 
+                    orders.ships[id].ShowTargetTutorial(); 
                     displayTutorial = false;
                 }
                 Target:
@@ -116,7 +114,7 @@ public class InputHandler : MonoBehaviour
                     needInput = true;
                     needAction = false;
                     while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
-                    if (input == 3) { attackId = CommandQueue.Command.Hold; orders.ships[i].HideAll(); goto Attack; } //Go back
+                    if (input == 3) { attackId = CommandQueue.Command.Hold; orders.ships[id].HideAll(); goto Attack; } //Go back
                 }
                 
                 targetId = input;
@@ -125,18 +123,19 @@ public class InputHandler : MonoBehaviour
                 attackId = CommandQueue.Command.Hold; //Hold if we Heavy attacked last turn
             }
 
-            orders.ships[i].HideAll();
-            FancyTuple order = new FancyTuple(shipId, attackId, targetId);
-            ordersForThisTurn[i] = order;
-            prevInputs[i] = attackId; //Store the last attack
-            prevprevInputs[i] = prevInputs[i];
+            orders.ships[id].HideAll();
+            FancyTuple order = new FancyTuple(id, attackId, targetId);
+            ordersForThisTurn[id] = order;
+            prevInputs[id] = attackId; //Store the last attack
+            prevprevInputs[id] = prevInputs[id];
         }
 
         for(int i = 0; i < 3; i++) {
-            shipId = ordersForThisTurn[i].me;
+            int shipId = ordersForThisTurn[i].me;
             attackId = ordersForThisTurn[i].attac;
             targetId = ordersForThisTurn[i].target;
-            orders.IssueCommand(shipId, attackId, targetId); //Give the order
+            if(orders.ships[shipId].alive)
+                orders.IssueCommand(shipId, attackId, targetId); //Give the order
         }
         TurnManager.Instance.TurnComplete();
         yield return new WaitForSeconds(0);
