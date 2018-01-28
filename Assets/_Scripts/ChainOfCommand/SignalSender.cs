@@ -17,10 +17,6 @@ public class SignalSender : MonoBehaviour {
 		midSignal = null;
 		finalSignal = null;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	}
 
 	[ContextMenu("Editor shit!")]
 	public void Editor(){
@@ -35,7 +31,7 @@ public class SignalSender : MonoBehaviour {
 		
 		StartCoroutine(LerpSignalStart());
 		StartCoroutine(LerpSignalMiddle());
-		StartCoroutine(LerpSignalFinal());
+		//StartCoroutine(LerpSignalFinal());
 	}
 
 	IEnumerator LerpSignalStart(){
@@ -59,16 +55,23 @@ public class SignalSender : MonoBehaviour {
 		}
 		float timeMid = 0;
 		Vector3 ogScale = midSignal.transform.localScale;
+		SpriteRenderer sr = midSignal.GetComponent<SpriteRenderer>();
+		Color startAlpha = sr.color;
 		
-		while(timeMid < 1f){
+		while(timeMid < 2f){
 
 
-			midSignal.transform.localScale = Vector3.Lerp(ogScale, new Vector3(3.5f, 5f, 1f), timeMid / 1f);
+			//midSignal.transform.localScale = Vector3.Lerp(ogScale, new Vector3(3.5f, 5f, 1f), timeMid / 1f);
+			midSignal.transform.localScale = Vector3.Lerp(ogScale, new Vector3(8f, 6f, 1f), timeMid / 2f);
+			if (timeMid >= 1f) {
+				sr.color = Color.Lerp(startAlpha, new Color(startAlpha.r, startAlpha.g, startAlpha.b, 0), (timeMid - 1f) / 1f);
+			}
 			
 			yield return new WaitForEndOfFrame();
 
 			timeMid += Time.deltaTime;
 		}
+		Destroy(midSignal);
 	}
 
 	IEnumerator LerpSignalFinal(){

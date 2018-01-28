@@ -5,7 +5,7 @@ using TMPro;
 
 public class Ship : MonoBehaviour {
 
-	public ShipData ship;
+	public ShipData shipData;
 
 	public int health;
 
@@ -36,10 +36,13 @@ public class Ship : MonoBehaviour {
 		alive = true;
 		damageTaken = 0;
 		shield = 0;
-        health = ship.maxHealth;
-		text.text = health + "/" + ship.maxHealth;
+        health = shipData.maxHealth;
+        text.text = health + "/" + shipData.maxHealth;
         shieldHandler = shieldObject.GetComponent<ShieldHandler>();
         bobbingHandler = bobObject.GetComponent<BobbingHandler>();
+
+        
+
 	}
 
 	public void TakeDamage(int damageAmnt){
@@ -63,7 +66,7 @@ public class Ship : MonoBehaviour {
 		}
 		damageTaken = 0;
 
-		text.text = health + "/" + ship.maxHealth;
+		text.text = health + "/" + shipData.maxHealth;
 
 		if(health <= 0){
 			alive = false;
@@ -93,7 +96,9 @@ public class Ship : MonoBehaviour {
         
 		typeChoice.SetActive(false);
 		targetChoice.SetActive(false);
-		targetTutorial.SetActive(false);
+        if (targetTutorial != null) {
+            targetTutorial.SetActive(false);
+        }
         // Juice
         bobbingHandler.StopBobbing();
     }	
@@ -141,12 +146,20 @@ public class Ship : MonoBehaviour {
 	
 	/* Tutorial blurbs - JF */
 	public void ShowTypeTutorial() {
-		typeTutorial.SetActive(true);
-		targetTutorial.SetActive(false);
+		if (targetTutorial != null) {
+			targetTutorial.SetActive(false);
+		}
+		if (typeTutorial != null) {
+			typeTutorial.SetActive(true);
+		}
 	}
 
 	public void ShowTargetTutorial() {
-		typeTutorial.SetActive(false);
-		targetTutorial.SetActive(true);
+		if (typeTutorial != null) {
+			typeTutorial.SetActive(false);
+		}
+		if (targetTutorial != null) {
+			targetTutorial.SetActive(true);
+		}
 	}
 }

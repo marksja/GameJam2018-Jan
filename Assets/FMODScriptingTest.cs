@@ -6,7 +6,7 @@ using UnityEngine;
 public class FMODScriptingTest : MonoBehaviour {
 
 
-[FMODUnity.EventRef]
+	[FMODUnity.EventRef]
 	public string Bow_Draw =  "event:/SFX/Player/Bow_Draw";
 
 	// Use this for initialization

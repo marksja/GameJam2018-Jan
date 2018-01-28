@@ -39,74 +39,77 @@ public class CommandQueue : MonoBehaviour {
 		sixtySix.target = targetID;
 		sixtySix.turnIssued = TurnManager.Instance.turnNum;
 		sixtySix.turnExecuted = sixtySix.turnIssued + GetTurnDelay();
-		if(sixtySix.order == Command.Shield){
-			//Debug.Log("Issued shield command");
-		}
 		sixtySix.priority = (sixtySix.order == Command.Shield) ? 0 : 1;
 		orderQueue.Enqueue(sixtySix);
 	}
 
-	public int GetTurnDelay(){
+	static public int GetTurnDelay(){
 		return 1;
 	}
 
-	public Order[] SendCommands(int turnNum){
-		Order[] ordersForThisTurn = new Order[ships.Length];
+	public List<Order> SendCommands(int turnNum){
+		List<Order> ordersForThisTurn = new List<Order>();
 		if(orderQueue.Count == 0){
 			return null;
 		}
+
+		// JF: Pop off all expired commands
+		while (orderQueue.Peek().turnExecuted < turnNum) {
+			orderQueue.Dequeue();
+		}
+
 		for(int i = 0; i < ships.Length; ++i){
 			if(!ships[i].alive){
 				continue;
 			}
-			Order sixtySix = orderQueue.Peek();
-			if(sixtySix.turnExecuted != turnNum){
-				//This order is invalid, make it so the turnManager can't execute it!
-				sixtySix.shipID = -1;
+			Order nextOrder = orderQueue.Peek();
+			if (nextOrder.turnExecuted > turnNum) {
+				// Not yet time to execute this order; leave it in queue
+				continue;
 			}
-			else{
-				orderQueue.Dequeue();
+			if (nextOrder.turnExecuted == turnNum) {
+				// Time to execute; add to list of orders
+				ordersForThisTurn.Add(nextOrder);
 			}
-			ordersForThisTurn[i] = sixtySix;
+			orderQueue.Dequeue();
 		}
 		return ordersForThisTurn;
 	}
-
-    IEnumerator ExecuteCo(Order sixtySix) {
+	public void ExecuteOrder(Order sixtySix){
         //Yes, My Lord
         int shipNum = sixtySix.shipID;
-        Ship Ship = ships[shipNum];
+        Ship currentShip = ships[shipNum];
         Ship targetShip;
-        yield return new WaitForSeconds(1f);
         switch (sixtySix.order) {
             case Command.Light:
                 //damage = 50
                 targetShip = opponentQueue.ships[sixtySix.target];
-                if (!targetShip.alive) { yield return null; }
+                if (!targetShip.alive) { return; }
                 //Deal damage to the target ship
-                targetShip.TakeDamage(Ship.ship.lightDamage);
-                if (targetShip.alive)
-                    Ship.LaserCaller(targetShip.transform.position);
+                targetShip.TakeDamage(currentShip.shipData.lightDamage);
+                if (currentShip.gameObject.activeInHierarchy) {
+                    currentShip.LaserCaller(targetShip.transform.position);
+				}
 
                 break;
             case Command.Shield:
                 //Add temp hp = 150
                 targetShip = ships[sixtySix.target];
-                if (!targetShip.alive) { yield return null; }
+                if (!targetShip.alive) { return; }
                 //Apply a temporary hp pool
-                targetShip.AddShield(Ship.ship.shieldHealth);
+                targetShip.AddShield(currentShip.shipData.shieldHealth);
 
                 break;
             case Command.Heavy:
                 //damage = 150
                 targetShip = opponentQueue.ships[sixtySix.target];
-                if (!targetShip.alive) { yield return null; }
+                if (!targetShip.alive) { return; }
                 //Deal damage to the target ship
-                targetShip.TakeDamage(Ship.ship.heavyDamage);
+                targetShip.TakeDamage(currentShip.shipData.heavyDamage);
                 //Call two lasers for visual P L A C E H O L D E R
-                if (targetShip.alive) {
-                    Ship.LaserCaller(targetShip.transform.position);
-                    Ship.LaserCaller(targetShip.transform.position);
+                if (currentShip.gameObject.activeInHierarchy) {
+                    currentShip.LaserCaller(targetShip.transform.position);
+                    currentShip.LaserCaller(targetShip.transform.position);
                 }
 
                 break;
@@ -117,9 +120,6 @@ public class CommandQueue : MonoBehaviour {
             default:
                 break;
         }
-    }
-	public void ExecuteOrder(Order sixtySix){
-        StartCoroutine("ExecuteCo", sixtySix);
 	}
 
 	public void ApplyAllDamages(){

@@ -11,6 +11,11 @@ public class TurnManager : MonoBehaviour {
 
     }
 
+	struct QueueOrdersForTurn {
+		public CommandQueue queue;
+		public List<CommandQueue.Order> orders;
+	}
+
 	public IntEvent onTurnStart;
 	public IntEvent onTurnEnd;
 
@@ -20,6 +25,8 @@ public class TurnManager : MonoBehaviour {
 	public static TurnManager Instance;
 
 	public List<CommandQueue> registeredCommandQueues;
+
+	public GameObject delayTutorial;
 
 	// Use this for initialization
 	void Awake() {
@@ -53,34 +60,38 @@ public class TurnManager : MonoBehaviour {
 
         onTurnEnd.Invoke(turnNum);
 
+		if (turnNum == 0) { delayTutorial.SetActive(true); }
+		if (turnNum == 1) { delayTutorial.SetActive(false); }
+
         //Get all orders for this current turn;
-        foreach (CommandQueue q in registeredCommandQueues){
-			CommandQueue.Order[] ordersFromSingleQueue = q.SendCommands(turnNum);
-			for(int i = 0; i < 2; ++i){
-				foreach(CommandQueue.Order o in ordersFromSingleQueue){
-					if(o.priority == i){ 
-						if(o.shipID == -1) continue;
-						q.ExecuteOrder(o);
+
+		// TODO: Not this.
+		List<QueueOrdersForTurn> incomingCommands = new List<QueueOrdersForTurn>();
+		foreach (CommandQueue q in registeredCommandQueues) {
+			QueueOrdersForTurn queueOrders = new QueueOrdersForTurn();
+			queueOrders.queue = q;
+			queueOrders.orders = q.SendCommands(turnNum);
+			incomingCommands.Add(queueOrders);
+		}
+		
+		for (int currPriority = 0; currPriority < 2; ++currPriority) {
+			foreach (QueueOrdersForTurn queueOrders in incomingCommands) {
+				foreach (CommandQueue.Order o in queueOrders.orders) {
+					if (o.priority == currPriority) { 
+						queueOrders.queue.ExecuteOrder(o);
 						yield return new WaitForSeconds(0.4f);
 						orders.Add(o);
 					}
 				}
 			}
 		}
-
         
         foreach (CommandQueue q in registeredCommandQueues){
 			q.ApplyAllDamages();
 		}
 
-
-        
         turnNum++;
         playersWithTurnsCompleted = 0;
         onTurnStart.Invoke(turnNum);
-
-        foreach (CommandQueue q in registeredCommandQueues) {
-            q.ApplyAllDamages();
-        }
 	}
 }

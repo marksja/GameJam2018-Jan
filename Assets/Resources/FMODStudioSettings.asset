@@ -13,10 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: /Users/dbraunst/Documents/FMOD/2018GGJ/2018GGJ.fspro
-  SourceProjectPathUnformatted: /Users/dbraunst/Documents/FMOD/2018GGJ/2018GGJ.fspro
-  SourceBankPathUnformatted: /Users/dbraunst/Documents/FMOD/2018GGJ/Build
-  AutomaticEventLoading: 1
+  sourceProjectPath: 2018GGJ/2018GGJ.fspro
+  SourceProjectPathUnformatted: 2018GGJ/2018GGJ.fspro
+  SourceBankPathUnformatted: 2018GGJ/Build
+  AutomaticEventLoading: 0
   AutomaticSampleLoading: 0
   ImportType: 0
   TargetAssetPath: 
@@ -55,5 +55,5 @@ MonoBehaviour:
   - Platform: 2
     Value: 32
   Plugins: []
-  MasterBank: 
+  MasterBank: Master Bank
   Banks: []

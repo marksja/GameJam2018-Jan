@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{d95f27b5-d86f-45cd-b891-a194d8a05780}">
+        <property name="name">
+            <value>commanderLoop</value>
+        </property>
+        <relationship name="folder">
+            <destination>{d41229d3-94d9-45d8-84f7-452a1768704d}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{02286a58-c3ed-4706-8897-809abb2e363f}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{02286a58-c3ed-4706-8897-809abb2e363f}">
+        <property name="initialValue">
+            <value>0</value>
+        </property>
+    </object>
+</objects>
