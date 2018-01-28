@@ -43,7 +43,7 @@ public class CommandQueue : MonoBehaviour {
 		orderQueue.Enqueue(sixtySix);
 	}
 
-	public int GetTurnDelay(){
+	static public int GetTurnDelay(){
 		return 1;
 	}
 
@@ -124,6 +124,7 @@ public class CommandQueue : MonoBehaviour {
 	public void ApplyAllDamages(){
 		foreach(Ship s in ships){
 			s.ApplyDamage();
+            s.TurnOffShieldInSeconds(.5f);
 		}
 	}
 }
