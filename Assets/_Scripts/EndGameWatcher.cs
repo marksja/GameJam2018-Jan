@@ -6,6 +6,7 @@ using TMPro;
 
 public class EndGameWatcher : MonoBehaviour {
 
+	public TurnManager turnManager;
 	public TextMeshProUGUI winText;
 
 	public Ship p1Destroyer;
@@ -34,6 +35,7 @@ public class EndGameWatcher : MonoBehaviour {
 				winningPlayerNum = 2;
 			}
 		}
+		turnManager.isGameOver = true;
 		winText.text = string.Format(winTextTemplate, winningPlayerNum.ToString());
 		winText.gameObject.SetActive(true);
 	}

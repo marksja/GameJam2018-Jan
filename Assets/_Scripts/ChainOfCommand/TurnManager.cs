@@ -16,6 +16,7 @@ public class TurnManager : MonoBehaviour {
 		public List<CommandQueue.Order> orders;
 	}
 
+	public bool isGameOver = false;
 	public IntEvent onTurnStart;
 	public IntEvent onTurnEnd;
 
@@ -92,6 +93,8 @@ public class TurnManager : MonoBehaviour {
 
         turnNum++;
         playersWithTurnsCompleted = 0;
-        onTurnStart.Invoke(turnNum);
+		if (!isGameOver) {
+        	onTurnStart.Invoke(turnNum);
+		}
 	}
 }
