@@ -5,8 +5,14 @@ using UnityEngine.Events;
 
 public class TurnManager : MonoBehaviour {
 
-	public UnityEvent<int> onTurnStart;
-	public UnityEvent<int> onTurnEnd;
+    [System.Serializable]
+    public class IntEvent : UnityEvent<int>
+    {
+
+    }
+
+	public IntEvent onTurnStart;
+	public IntEvent onTurnEnd;
 
 	public int turnNum;
 	int playersWithTurnsCompleted;
@@ -16,9 +22,10 @@ public class TurnManager : MonoBehaviour {
 	public List<CommandQueue> registeredCommandQueues;
 
 	// Use this for initialization
-	void Start () {
+	void Awake() {
 		Instance = this;
 		turnNum = 0;
+        playersWithTurnsCompleted = 0;
 	}
 	
 	// Update is called once per frame
@@ -41,20 +48,29 @@ public class TurnManager : MonoBehaviour {
 		List<CommandQueue.Order> orders = new List<CommandQueue.Order>();
 		
 		//Get all orders for this current turn;
-		foreach(CommandQueue q in registeredCommandQueues){
-			CommandQueue.Order[] ordersFromSingleQueue = q.SendCommands(turnNum);
-			foreach(CommandQueue.Order o in ordersFromSingleQueue){
-				q.ExecuteOrder(o);
-				orders.Add(o);
+		for(int i = 0; i < 2; ++i){
+			foreach(CommandQueue q in registeredCommandQueues){
+				CommandQueue.Order[] ordersFromSingleQueue = q.SendCommands(turnNum);
+				foreach(CommandQueue.Order o in ordersFromSingleQueue){
+					if(o.priority == i) continue;
+					if(o.shipID == -1) continue;
+					q.ExecuteOrder(o);
+					orders.Add(o);
+				}
 			}
 		}
-
 		foreach(CommandQueue q in registeredCommandQueues){
 			q.ApplyAllDamages();
 		}
 
-		onTurnEnd.Invoke(turnNum);
+
+		//onTurnEnd.Invoke(turnNum);
 		turnNum ++;
-		onTurnStart.Invoke(turnNum);
-	}
+        playersWithTurnsCompleted = 0;
+        onTurnStart.Invoke(turnNum);
+
+        foreach (CommandQueue q in registeredCommandQueues) {
+            q.ApplyAllDamages();
+        }
+    }
 }

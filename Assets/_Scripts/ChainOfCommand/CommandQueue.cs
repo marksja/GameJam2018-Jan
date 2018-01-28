@@ -14,6 +14,7 @@ public class CommandQueue : MonoBehaviour {
 		public int target;
 		public int turnIssued;
 		public int turnExecuted;
+		public int priority;
 	}
 
 	public CommandQueue opponentQueue;
@@ -22,7 +23,8 @@ public class CommandQueue : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		orderQueue = new Queue<Order>();	
+		orderQueue = new Queue<Order>();
+        TurnManager.Instance.RegisterCommandQueue(this);
 	}
 	
 	// Update is called once per frame
@@ -37,6 +39,7 @@ public class CommandQueue : MonoBehaviour {
 		sixtySix.target = targetID;
 		sixtySix.turnIssued = TurnManager.Instance.turnNum;
 		sixtySix.turnExecuted = sixtySix.turnIssued + GetTurnDelay();
+		sixtySix.priority = (sixtySix.order == Command.Shield) ? 0 : 1;
 		orderQueue.Enqueue(sixtySix);
 	}
 
@@ -50,10 +53,16 @@ public class CommandQueue : MonoBehaviour {
 			return null;
 		}
 		for(int i = 0; i < ships.Length; ++i){
-			Order sixtySix = orderQueue.Dequeue();
-			if(sixtySix.turnExecuted == turnNum){
+			if(!ships[i].alive){
+				continue;
+			}
+			Order sixtySix = orderQueue.Peek();
+			if(sixtySix.turnExecuted != turnNum){
 				//This order is invalid, make it so the turnManager can't execute it!
 				sixtySix.shipID = -1;
+			}
+			else{
+				orderQueue.Dequeue();
 			}
 			ordersForThisTurn[i] = sixtySix;
 		}
@@ -65,25 +74,25 @@ public class CommandQueue : MonoBehaviour {
 		int shipNum = sixtySix.shipID;
 		Ship Ship = ships[shipNum];
 		Ship targetShip;
+        Debug.Log(sixtySix.shipID);
 		switch(sixtySix.order){
-
 			case Command.Light:
 				//damage = 50
-				targetShip = opponentQueue.ships[sixtySix.shipID];
+				targetShip = opponentQueue.ships[sixtySix.target];
 				//Deal damage to the target ship
 				targetShip.TakeDamage(Ship.ship.lightDamage);
 
 				break;
 			case Command.Shield:
 				//Add temp hp = 150
-				targetShip = ships[sixtySix.shipID];
+				targetShip = ships[sixtySix.target];
 				//Apply a temporary hp pool
-				targetShip.TakeDamage(-Ship.ship.shieldHealth);
+				targetShip.AddShield(Ship.ship.shieldHealth);
 
 				break;
 			case Command.Heavy:
 				//damage = 150
-				targetShip = opponentQueue.ships[sixtySix.shipID];
+				targetShip = opponentQueue.ships[sixtySix.target];
 				//Deal damage to the target ship
 				targetShip.TakeDamage(Ship.ship.heavyDamage);
 
