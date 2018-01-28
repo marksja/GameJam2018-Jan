@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3944,49 +3944,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004497339822420, guid: 498aa4d1f4b0a2a459f67986490e1dde,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004497339822420, guid: 498aa4d1f4b0a2a459f67986490e1dde,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114954181358971290, guid: 498aa4d1f4b0a2a459f67986490e1dde,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114954181358971290, guid: 498aa4d1f4b0a2a459f67986490e1dde,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1428420270909934, guid: 498aa4d1f4b0a2a459f67986490e1dde, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004497339822420, guid: 498aa4d1f4b0a2a459f67986490e1dde,
-        type: 2}
-      propertyPath: m_text
-      value: '( W )
-
-        Shield
-
-        HP: 125'
-      objectReference: {fileID: 0}
-    - target: {fileID: 224187954382838586, guid: 498aa4d1f4b0a2a459f67986490e1dde,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 120.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 224299837465075240, guid: 498aa4d1f4b0a2a459f67986490e1dde,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: -1111
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 498aa4d1f4b0a2a459f67986490e1dde, type: 2}
@@ -10543,6 +10500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446c8e33e7c60a343966712c444068ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  victoryStinger: 
   turnManager: {fileID: 310938742}
   winText: {fileID: 1719787928}
   p1Destroyer: {fileID: 305828312}
@@ -12590,7 +12548,7 @@ MonoBehaviour:
 
     Shield
 
-    HP: 150'
+    HP: 125'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee1081be57bda854d8da09a7af4ce14a, type: 2}
   m_sharedMaterial: {fileID: 21614160327520976, guid: ee1081be57bda854d8da09a7af4ce14a,
@@ -14353,7 +14311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e7138b223c17a42b6d43a99ab4a0f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMusic: event:/Music/Chain_of_Command_Main_Theme
+  mainMusic: event:/Music/Main_Music
 --- !u!4 &1810997741
 Transform:
   m_ObjectHideFlags: 0
@@ -14428,7 +14386,7 @@ MonoBehaviour:
 
     Shield
 
-    HP: 150'
+    HP: 125'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee1081be57bda854d8da09a7af4ce14a, type: 2}
   m_sharedMaterial: {fileID: 21614160327520976, guid: ee1081be57bda854d8da09a7af4ce14a,
@@ -14590,7 +14548,7 @@ MonoBehaviour:
 
     Shield
 
-    HP: 150'
+    HP: 125'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee1081be57bda854d8da09a7af4ce14a, type: 2}
   m_sharedMaterial: {fileID: 21614160327520976, guid: ee1081be57bda854d8da09a7af4ce14a,
