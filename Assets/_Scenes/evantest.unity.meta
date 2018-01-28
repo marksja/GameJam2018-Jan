@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/_Scenes/evantest.unity.meta
+guid: 32d1d2b0483ec8f4fa9f1a3860f03939
+timeCreated: 1517121821
+=======
 guid: 09c3c7b12f00b41fb82e53f62e9a6ceb
 folderAsset: yes
 timeCreated: 1517117997
+>>>>>>> 73efa82f1b2373b22ae0eb625c0e4bfb8167dfc2:Assets/StreamingAssets.meta
 licenseType: Free
 DefaultImporter:
   externalObjects: {}
