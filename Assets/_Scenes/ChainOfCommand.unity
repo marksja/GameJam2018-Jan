@@ -10500,7 +10500,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446c8e33e7c60a343966712c444068ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  victoryStinger: 
+  victoryStinger: event:/Music/Victory_Stinger
+  shipAudioManager: {fileID: 1810997740}
   turnManager: {fileID: 310938742}
   winText: {fileID: 1719787928}
   p1Destroyer: {fileID: 305828312}

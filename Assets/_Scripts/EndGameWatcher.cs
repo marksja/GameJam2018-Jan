@@ -9,6 +9,7 @@ public class EndGameWatcher : MonoBehaviour {
 	[FMODUnity.EventRef]
 	public string victoryStinger;
 
+	public ShipAudioManager shipAudioManager;
 	public TurnManager turnManager;
 	public TextMeshProUGUI winText;
 
@@ -39,6 +40,7 @@ public class EndGameWatcher : MonoBehaviour {
 			}
 		}
 		turnManager.isGameOver = true;
+		shipAudioManager.EndMainMusic();
 		FMOD.Studio.EventInstance victoryEvent = FMODUnity.RuntimeManager.CreateInstance(victoryStinger);
 		victoryEvent.start();
 		winText.text = string.Format(winTextTemplate, winningPlayerNum.ToString());

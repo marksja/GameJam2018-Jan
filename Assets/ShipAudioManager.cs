@@ -7,6 +7,7 @@ public class ShipAudioManager : MonoBehaviour {
 	[FMODUnity.EventRef]
 	public string mainMusic;
 
+	FMOD.Studio.EventInstance mainThemeEvent;
 	FMOD.Studio.ParameterInstance FMODshipCount;
 	int p1ShipCount;
 	int p2ShipCount;
@@ -14,7 +15,7 @@ public class ShipAudioManager : MonoBehaviour {
 	void Start() {
 		p1ShipCount = 3;	// We assume each player starts with 3 ships
 		p2ShipCount = 3;
-		FMOD.Studio.EventInstance mainThemeEvent = FMODUnity.RuntimeManager.CreateInstance(mainMusic);
+		mainThemeEvent = FMODUnity.RuntimeManager.CreateInstance(mainMusic);
 		mainThemeEvent.getParameter("numShips", out FMODshipCount);
 		mainThemeEvent.start();
 	}
@@ -33,5 +34,9 @@ public class ShipAudioManager : MonoBehaviour {
 		if (minShipCount < (int)curShipCount) {
 			FMODshipCount.setValue(minShipCount);
 		}
+	}
+
+	public void EndMainMusic() {
+		mainThemeEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 	}
 }
