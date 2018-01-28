@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class EndGameWatcher : MonoBehaviour {
@@ -15,6 +15,12 @@ public class EndGameWatcher : MonoBehaviour {
 
 	void Start() {
 		StartCoroutine(EndCheckLoop());
+	}
+
+	void Update() {
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			SceneManager.LoadScene("MainMenu");
+		}
 	}
 
 	IEnumerator EndCheckLoop() {
