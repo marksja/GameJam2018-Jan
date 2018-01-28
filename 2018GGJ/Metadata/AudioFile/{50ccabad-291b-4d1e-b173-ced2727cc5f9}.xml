@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{50ccabad-291b-4d1e-b173-ced2727cc5f9}">
+        <property name="assetPath">
+            <value>Music/Chain_of_Command_Dejected_End_Music.wav</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>12.916666666666666</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{1351d359-4e35-4378-8d2b-61747793cd5b}</destination>
+        </relationship>
+    </object>
+</objects>

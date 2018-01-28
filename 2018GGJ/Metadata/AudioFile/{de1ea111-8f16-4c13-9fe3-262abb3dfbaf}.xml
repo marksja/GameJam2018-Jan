@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{de1ea111-8f16-4c13-9fe3-262abb3dfbaf}">
+        <property name="assetPath">
+            <value>Music/Chain_of_Command_Commander_Intro_Full_Length.wav</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>29.583333333333332</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{1351d359-4e35-4378-8d2b-61747793cd5b}</destination>
+        </relationship>
+    </object>
+</objects>

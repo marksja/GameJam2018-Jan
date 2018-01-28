@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{23b74cf9-9c88-440e-8990-6bca211ff137}">
+        <property name="assetPath">
+            <value>Sound Design, Electronic, Computer, Code 8 SND5686.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>96</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>0.85314583333333338</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{1351d359-4e35-4378-8d2b-61747793cd5b}</destination>
+        </relationship>
+    </object>
+</objects>
