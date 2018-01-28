@@ -125,6 +125,7 @@ public class CommandQueue : MonoBehaviour {
 	public void ApplyAllDamages(){
 		foreach(Ship s in ships){
 			s.ApplyDamage();
+            s.TurnOffShieldInSeconds(.5f);
 		}
 	}
 }
