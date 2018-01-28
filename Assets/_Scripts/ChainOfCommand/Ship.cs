@@ -40,7 +40,6 @@ public class Ship : MonoBehaviour {
 
 	public void AddShield(int shieldAmnt){
 		shield += shieldAmnt;
-		Debug.Log("Hello? Added a shield");
 		StartCoroutine(ShieldGrow());
 	}
 
@@ -62,14 +61,14 @@ public class Ship : MonoBehaviour {
 		}
 	}
 
-	public void ShowAttackTypeChoice(){
-		typeChoice.SetActive(true);
-		targetChoice.SetActive(false);
+    public void ShowAttackTypeChoice() {
+        typeChoice.SetActive(true);
+        targetChoice.SetActive(false);
 	}
 
 	public void ShowTargetChoice(){
-		typeChoice.SetActive(false);
-		targetChoice.SetActive(true);
+        typeChoice.SetActive(false);
+        targetChoice.SetActive(true); 
 	}
 
 	public void HideAll(){
@@ -110,7 +109,7 @@ public class Ship : MonoBehaviour {
 	}
 
 	public void LaserCaller(Vector3 target){
-		StartCoroutine(Laser(target));
+        StartCoroutine(Laser(target));
 	}
 	
 	public void Shield(){
