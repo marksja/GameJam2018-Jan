@@ -10,11 +10,12 @@ public class BobbingHandler : MonoBehaviour {
 
     private bool isBobbing = false;
     private Vector3 originalTransform;
-    
+    private bool waited = false;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         originalTransform = bobbee.GetComponent<Transform>().position;
-	}
+        StartCoroutine(SetWait());
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -34,8 +35,21 @@ public class BobbingHandler : MonoBehaviour {
         isBobbing = false;
     }
 
+    IEnumerator SetWait() {
+        if (!waited) {
+            
+            yield return new WaitForSeconds(1.1f);
+            waited = true;
+        }
+    }
+
     // Start bobbing until bobbing false and if ends and bobbing true the loop
     IEnumerator StartBobbingRoutine() {
+        if (!waited) {
+            
+            yield return new WaitForSeconds(1.1f);
+            waited = true;
+        }
         float time = 0;
         while ((time < bobbingPeriod) && isBobbing) {
 

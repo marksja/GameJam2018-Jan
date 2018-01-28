@@ -9,77 +9,73 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1914324798994246}
+  m_RootGameObject: {fileID: 1931142982616444}
   m_IsPrefabParent: 1
---- !u!1 &1914324798994246
+--- !u!1 &1931142982616444
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4892219332002768}
-  - component: {fileID: 114391118003632734}
-  m_Layer: 27
-  m_Name: bobber
+  - component: {fileID: 4947533449976778}
+  - component: {fileID: 114495622972405988}
+  m_Layer: 0
+  m_Name: WarpMaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4892219332002768
+--- !u!4 &4947533449976778
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1914324798994246}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 1931142982616444}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114391118003632734
+--- !u!114 &114495622972405988
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1914324798994246}
+  m_GameObject: {fileID: 1931142982616444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 272ab36987cbc124e887449c57a1641e, type: 3}
+  m_Script: {fileID: 11500000, guid: 02da0a0840879ab43b0520bc946599b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bobbee: {fileID: 0}
-  bobbingPeriod: 1
-  bobbingCurve:
+  warpTime: 1
+  warpCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: -0.0000035064295
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
+      value: 0
+      inSlope: 3.690476
+      outSlope: 3.690476
+      tangentMode: 0
     - serializedVersion: 2
-      time: 0.28919992
-      value: 0.3854568
+      time: 1
+      value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 136
-    - serializedVersion: 2
-      time: 0.71132
-      value: -0.3649719
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-    - serializedVersion: 2
-      time: 0.9991173
-      value: -0.0003086822
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
+      tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  leftWarpees:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  rightWarpees:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  warpDist: {x: 50, y: 0, z: 0}
