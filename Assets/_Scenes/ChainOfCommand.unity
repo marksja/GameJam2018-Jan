@@ -2409,6 +2409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e94541ff37cf6934db38eb17dc6f8e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGameOver: 0
   onTurnStart:
     m_PersistentCalls:
       m_Calls:
@@ -10470,6 +10471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446c8e33e7c60a343966712c444068ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnManager: {fileID: 310938742}
   winText: {fileID: 1719787928}
   p1Destroyer: {fileID: 305828312}
   p2Destroyer: {fileID: 1272132918}
