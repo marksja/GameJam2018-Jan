@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657892, g: 0.4964127, b: 0.5748172, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -14353,7 +14353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e7138b223c17a42b6d43a99ab4a0f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMusic: event:/Music/Chain_of_Command_Main_Theme
+  mainMusic: event:/Music/Main_Music
 --- !u!4 &1810997741
 Transform:
   m_ObjectHideFlags: 0
