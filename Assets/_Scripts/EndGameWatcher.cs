@@ -6,6 +6,9 @@ using TMPro;
 
 public class EndGameWatcher : MonoBehaviour {
 
+	[FMODUnity.EventRef]
+	public string victoryStinger;
+
 	public TurnManager turnManager;
 	public TextMeshProUGUI winText;
 
@@ -36,6 +39,8 @@ public class EndGameWatcher : MonoBehaviour {
 			}
 		}
 		turnManager.isGameOver = true;
+		FMOD.Studio.EventInstance victoryEvent = FMODUnity.RuntimeManager.CreateInstance(victoryStinger);
+		victoryEvent.start();
 		winText.text = string.Format(winTextTemplate, winningPlayerNum.ToString());
 		winText.gameObject.SetActive(true);
 	}
