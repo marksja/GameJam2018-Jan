@@ -21,6 +21,9 @@ public class Ship : MonoBehaviour {
 
 	public LineRenderer lineRenderer;
 	public GameObject shieldObject;
+	// Tutorial text
+	public GameObject typeTutorial;
+	public GameObject targetTutorial;
 
 	public void Start(){
 		lineRenderer = GetComponentInChildren<LineRenderer>();
@@ -72,6 +75,7 @@ public class Ship : MonoBehaviour {
 	public void HideAll(){
 		typeChoice.SetActive(false);
 		targetChoice.SetActive(false);
+		targetTutorial.SetActive(false);
 	}	
 
 	IEnumerator Laser(Vector3 target){
@@ -133,5 +137,16 @@ public class Ship : MonoBehaviour {
 
 			time += Time.deltaTime;
 		}
+	}
+	
+	/* Tutorial blurbs - JF */
+	public void ShowTypeTutorial() {
+		typeTutorial.SetActive(true);
+		targetTutorial.SetActive(false);
+	}
+
+	public void ShowTargetTutorial() {
+		typeTutorial.SetActive(false);
+		targetTutorial.SetActive(true);
 	}
 }
