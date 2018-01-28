@@ -16,6 +16,8 @@ public class InputHandler : MonoBehaviour
     private int input;
     private CommandQueue.Command[] prevInputs;
 
+    private bool displayTutorial = true;
+
     // Use this for initialization
     void Start() {
         prevInputs = new CommandQueue.Command[numberOfShips];
@@ -67,6 +69,9 @@ public class InputHandler : MonoBehaviour
             shipId = i;
 
             orders.ships[i].ShowAttackTypeChoice();
+            
+            // Display tutorial blurbs first time that commands are requested
+            if (displayTutorial) { orders.ships[i].ShowTypeTutorial(); }
 
             if (prevInputs[i] != CommandQueue.Command.Heavy) {
                 needInput = true;
@@ -76,6 +81,11 @@ public class InputHandler : MonoBehaviour
                 attackId = FindAttack(i, input);
             
                 orders.ships[i].ShowTargetChoice();
+
+                if (displayTutorial) { 
+                    orders.ships[i].ShowTargetTutorial(); 
+                    displayTutorial = false;
+                }
 
                 needInput = true;
                 needAction = false;
