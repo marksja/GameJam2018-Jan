@@ -109,6 +109,6 @@ public class InputHandler : MonoBehaviour
 
     CommandQueue.Command FindAttack(int ship, int input) {
         //if(input == 1) Debug.Log(ship + " " + orders.ships[ship].ship.actions[input]);
-        return orders.ships[ship].ship.actions[input];
+        return orders.ships[ship].shipData.actions[input];
     }
 }

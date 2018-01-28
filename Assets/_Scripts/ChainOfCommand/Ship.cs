@@ -5,7 +5,7 @@ using TMPro;
 
 public class Ship : MonoBehaviour {
 
-	public ShipData ship;
+	public ShipData shipData;
 
 	public int health;
 
@@ -30,8 +30,8 @@ public class Ship : MonoBehaviour {
 		alive = true;
 		damageTaken = 0;
 		shield = 0;
-        health = ship.maxHealth;
-		text.text = health + "/" + ship.maxHealth;
+        health = shipData.maxHealth;
+		text.text = health + "/" + shipData.maxHealth;
 	}
 
 	public void TakeDamage(int damageAmnt){
@@ -53,7 +53,7 @@ public class Ship : MonoBehaviour {
 		}
 		damageTaken = 0;
 
-		text.text = health + "/" + ship.maxHealth;
+		text.text = health + "/" + shipData.maxHealth;
 
 		if(health <= 0){
 			alive = false;

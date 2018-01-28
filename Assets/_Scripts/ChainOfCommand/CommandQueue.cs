@@ -84,8 +84,8 @@ public class CommandQueue : MonoBehaviour {
                 targetShip = opponentQueue.ships[sixtySix.target];
                 if (!targetShip.alive) { yield return null; }
                 //Deal damage to the target ship
-                targetShip.TakeDamage(Ship.ship.lightDamage);
-                if (targetShip.alive)
+                targetShip.TakeDamage(Ship.shipData.lightDamage);
+                if (targetShip.gameObject.activeInHierarchy)
                     Ship.LaserCaller(targetShip.transform.position);
 
                 break;
@@ -94,7 +94,7 @@ public class CommandQueue : MonoBehaviour {
                 targetShip = ships[sixtySix.target];
                 if (!targetShip.alive) { yield return null; }
                 //Apply a temporary hp pool
-                targetShip.AddShield(Ship.ship.shieldHealth);
+                targetShip.AddShield(Ship.shipData.shieldHealth);
 
                 break;
             case Command.Heavy:
@@ -102,9 +102,9 @@ public class CommandQueue : MonoBehaviour {
                 targetShip = opponentQueue.ships[sixtySix.target];
                 if (!targetShip.alive) { yield return null; }
                 //Deal damage to the target ship
-                targetShip.TakeDamage(Ship.ship.heavyDamage);
+                targetShip.TakeDamage(Ship.shipData.heavyDamage);
                 //Call two lasers for visual P L A C E H O L D E R
-                if (targetShip.alive) {
+                if (targetShip.gameObject.activeInHierarchy) {
                     Ship.LaserCaller(targetShip.transform.position);
                     Ship.LaserCaller(targetShip.transform.position);
                 }
