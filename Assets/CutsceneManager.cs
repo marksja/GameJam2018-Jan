@@ -18,6 +18,9 @@ public class CutsceneManager : MonoBehaviour {
 	public Transform p1CommanderPortrait;
 	public Transform p2CommanderPortrait;
 
+    public GameObject p1MissionText;
+    public GameObject p2MissionText;
+
 	// Public variables
 	public float beatsPerMinute = 144f;
 
@@ -36,7 +39,9 @@ public class CutsceneManager : MonoBehaviour {
 	void DisableUIElements() {
 		p1TransmissionText.SetActive(false);
 		p2TransmissionText.SetActive(false);
-	}
+        p1MissionText.SetActive(false);
+        p2MissionText.SetActive(false);
+}
 
 	// Returns the number of seconds required for the given number of beats to pass.
 	float BeatsToSeconds(int numBeats) {
@@ -59,13 +64,28 @@ public class CutsceneManager : MonoBehaviour {
 		StartCoroutine(FlashTransmission(p2TransmissionText, 8, 2));
 		yield return WaitForBeats(6);
 
-		// Two beats before the main theme, slide in the commander portraits
-		// and open their textboxes
-		//p1CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
-		//p2CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
+        // Two beats before the main theme, slide in the commander portraits
+        // and open their textboxes
+        //p1CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
+        //p2CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
 
-		// Display commander text
-	}
+        // Display commander text
+        p1MissionText.SetActive(true);
+        p2MissionText.SetActive(true);
+
+        //for (int i = 0; i < p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().textInfo.characterCount; ++i) {
+        //    p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().textInfo.characterInfo[i].isVisible = false;
+        //    p2MissionText.GetComponent<TMPro.TextMeshProUGUI>().textInfo.characterInfo[i].isVisible = false;
+        //}
+
+
+        //for (int i = 0; i < p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().textInfo.characterCount; ++i) {
+        //    p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().textInfo.characterInfo[i].isVisible = true;
+        //    p2MissionText.GetComponent<TMPro.TextMeshProUGUI>().textInfo.characterInfo[i].isVisible = true;
+        //    yield return new WaitForSeconds(.1f);
+        //}
+
+    }
 
 	// Toggle the "Incoming Transmission" text on and off for an amount of time.
 	// This function ensures the object will always end in the disabled state.
