@@ -19,6 +19,7 @@ public class Ship : MonoBehaviour {
 
 	public void Start(){
 		damageTaken = 0;
+		shield = 0;
         health = ship.maxHealth;
 		text.text = health + "/" + ship.maxHealth;
 	}

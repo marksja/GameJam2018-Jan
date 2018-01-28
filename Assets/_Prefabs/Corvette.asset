@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 250
   actions: 0000000002000000
-  lightDamage: 100
+  lightDamage: 50
   heavyDamage: 0
-  shieldHealth: 100
+  shieldHealth: 150

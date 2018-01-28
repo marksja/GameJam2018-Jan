@@ -51,10 +51,16 @@ public class CommandQueue : MonoBehaviour {
 			return null;
 		}
 		for(int i = 0; i < ships.Length; ++i){
-			Order sixtySix = orderQueue.Dequeue();
-			if(sixtySix.turnExecuted == turnNum){
+			if(!ships[i].gameObject.activeInHierarchy){
+				continue;
+			}
+			Order sixtySix = orderQueue.Peek();
+			if(sixtySix.turnExecuted != turnNum){
 				//This order is invalid, make it so the turnManager can't execute it!
 				sixtySix.shipID = -1;
+			}
+			else{
+				orderQueue.Dequeue();
 			}
 			ordersForThisTurn[i] = sixtySix;
 		}
