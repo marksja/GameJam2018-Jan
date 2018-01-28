@@ -67,7 +67,7 @@ public class InputHandler : MonoBehaviour
             orders.ships[i].ShowAttackTypeChoice();
             
             // Display tutorial blurbs first time that commands are requested
-            //if (displayTutorial) { orders.ships[i].ShowTypeTutorial(); }
+            if (displayTutorial) { orders.ships[i].ShowTypeTutorial(); }
 
             if (prevInputs[i] != CommandQueue.Command.Heavy) {
                 needInput = true;
@@ -77,10 +77,11 @@ public class InputHandler : MonoBehaviour
             
                 orders.ships[i].ShowTargetChoice();
 
-                //if (displayTutorial) { 
-                //    orders.ships[i].ShowTargetTutorial(); 
-                //    displayTutorial = false;
-                //}
+                if (displayTutorial) { 
+                    orders.ships[i].ShowTargetTutorial(); 
+                    displayTutorial = false;
+                }
+
                 input = -1;
                 while (!ShipIsAlive(input)) {
                     needInput = true;
