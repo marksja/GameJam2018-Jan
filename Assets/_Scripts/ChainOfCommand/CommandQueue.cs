@@ -47,11 +47,12 @@ public class CommandQueue : MonoBehaviour {
 		return 1;
 	}
 
-	public Order[] SendCommands(int turnNum){
-		Order[] ordersForThisTurn = new Order[ships.Length];
+	public List<Order> SendCommands(int turnNum){
+		List<Order> ordersForThisTurn = new List<Order>();
 		if(orderQueue.Count == 0){
 			return null;
 		}
+
 		// JF: Pop off all expired commands
 		while (orderQueue.Peek().turnExecuted < turnNum) {
 			orderQueue.Dequeue();
@@ -61,15 +62,16 @@ public class CommandQueue : MonoBehaviour {
 			if(!ships[i].alive){
 				continue;
 			}
-			Order sixtySix = orderQueue.Peek();
-			if(sixtySix.turnExecuted > turnNum){
-				//This order is invalid, make it so the turnManager can't execute it!
-				sixtySix.shipID = -1;
+			Order nextOrder = orderQueue.Peek();
+			if (nextOrder.turnExecuted > turnNum) {
+				// Not yet time to execute this order; leave it in queue
+				continue;
 			}
-			else {
-				orderQueue.Dequeue();
+			if (nextOrder.turnExecuted == turnNum) {
+				// Time to execute; add to list of orders
+				ordersForThisTurn.Add(nextOrder);
 			}
-			ordersForThisTurn[i] = sixtySix;
+			orderQueue.Dequeue();
 		}
 		return ordersForThisTurn;
 	}
