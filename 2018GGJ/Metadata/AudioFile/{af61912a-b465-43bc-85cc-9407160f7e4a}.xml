@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{af61912a-b465-43bc-85cc-9407160f7e4a}">
+        <property name="assetPath">
+            <value>Music/Chain_of_Command_Stressful_Transition.wav</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>13.333333333333334</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{1351d359-4e35-4378-8d2b-61747793cd5b}</destination>
+        </relationship>
+    </object>
+</objects>
