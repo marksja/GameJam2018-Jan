@@ -25,6 +25,9 @@ public class Ship : MonoBehaviour {
 	public GameObject typeTutorial;
 	public GameObject targetTutorial;
 
+	public ShipAudioManager shipAudioManager;
+	public int playerNum;
+
 	public void Start(){
 		lineRenderer = GetComponentInChildren<LineRenderer>();
 		alive = true;
@@ -39,6 +42,7 @@ public class Ship : MonoBehaviour {
 	}
 
 	public void AddShield(int shieldAmnt){
+		FMODUnity.RuntimeManager.PlayOneShot(shipData.shieldEvent, transform.position);
 		shield += shieldAmnt;
 		StartCoroutine(ShieldGrow());
 	}
@@ -56,6 +60,7 @@ public class Ship : MonoBehaviour {
 		text.text = health + "/" + shipData.maxHealth;
 
 		if(health <= 0){
+			shipAudioManager.ShipDied(playerNum);
 			alive = false;
 			this.gameObject.SetActive(false);
 		}
@@ -110,8 +115,20 @@ public class Ship : MonoBehaviour {
 		lineRenderer.SetPosition(1, start);
 	}
 
+	IEnumerator HeavyLaser(Vector3 target) {
+		lineRenderer.widthMultiplier *= 2;
+		yield return Laser(target);
+		lineRenderer.widthMultiplier /= 2;
+	}
+
 	public void LaserCaller(Vector3 target){
+		FMODUnity.RuntimeManager.PlayOneShot(shipData.lightAttackEvent, transform.position);
         StartCoroutine(Laser(target));
+	}
+
+	public void HeavyLaserCaller(Vector3 target){
+		FMODUnity.RuntimeManager.PlayOneShot(shipData.heavyAttackEvent, transform.position);
+		StartCoroutine(HeavyLaser(target));
 	}
 	
 	public void Shield(){

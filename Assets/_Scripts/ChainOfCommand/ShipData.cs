@@ -11,5 +11,12 @@ public class ShipData : ScriptableObject {
 
 	public int lightDamage;
 	public int heavyDamage;
-	public int shieldHealth;	
+	public int shieldHealth;
+
+	[FMODUnity.EventRef]
+	public string shieldEvent;
+	[FMODUnity.EventRef]
+	public string lightAttackEvent;
+	[FMODUnity.EventRef]
+	public string heavyAttackEvent;
 }

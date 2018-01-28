@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 34615525}
   - component: {fileID: 34615524}
   - component: {fileID: 34615523}
+  - component: {fileID: 34615526}
   - component: {fileID: 34615522}
   m_Layer: 0
   m_Name: Main Camera
@@ -345,13 +346,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &34615522
-AudioListener:
+--- !u!114 &34615522
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 34615521}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: 0
 --- !u!124 &34615523
 Behaviour:
   m_ObjectHideFlags: 0
@@ -408,6 +414,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &34615526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 34615521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9468c5f457ace64f8d4df6d642b107f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadEvent: 1
+  UnloadEvent: 0
+  Banks:
+  - Master Bank
+  CollisionTag: 
+  PreloadSamples: 0
 --- !u!1 &38078662
 GameObject:
   m_ObjectHideFlags: 0
@@ -2383,6 +2406,8 @@ MonoBehaviour:
   shieldObject: {fileID: 138934218}
   typeTutorial: {fileID: 862556882}
   targetTutorial: {fileID: 1510579781}
+  shipAudioManager: {fileID: 1810997740}
+  playerNum: 1
 --- !u!1 &310938741
 GameObject:
   m_ObjectHideFlags: 0
@@ -5899,6 +5924,8 @@ MonoBehaviour:
   shieldObject: {fileID: 576580200}
   typeTutorial: {fileID: 1856978344}
   targetTutorial: {fileID: 1856978344}
+  shipAudioManager: {fileID: 1810997740}
+  playerNum: 1
 --- !u!1 &731116702
 GameObject:
   m_ObjectHideFlags: 0
@@ -8496,7 +8523,7 @@ RectTransform:
   - {fileID: 2147174980}
   - {fileID: 1028029645}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8909,6 +8936,8 @@ MonoBehaviour:
   shieldObject: {fileID: 448596497}
   typeTutorial: {fileID: 582840242}
   targetTutorial: {fileID: 582840242}
+  shipAudioManager: {fileID: 1810997740}
+  playerNum: 2
 --- !u!1 &1179353263
 GameObject:
   m_ObjectHideFlags: 0
@@ -9862,6 +9891,8 @@ MonoBehaviour:
   shieldObject: {fileID: 638736158}
   typeTutorial: {fileID: 290715864}
   targetTutorial: {fileID: 46426383}
+  shipAudioManager: {fileID: 1810997740}
+  playerNum: 2
 --- !u!1 &1283221313
 GameObject:
   m_ObjectHideFlags: 0
@@ -10391,6 +10422,8 @@ MonoBehaviour:
   shieldObject: {fileID: 1941483529}
   typeTutorial: {fileID: 629761842}
   targetTutorial: {fileID: 1510579781}
+  shipAudioManager: {fileID: 1810997740}
+  playerNum: 1
 --- !u!1 &1380343452
 GameObject:
   m_ObjectHideFlags: 0
@@ -11810,6 +11843,8 @@ MonoBehaviour:
   shieldObject: {fileID: 114936780}
   typeTutorial: {fileID: 207594778}
   targetTutorial: {fileID: 46426383}
+  shipAudioManager: {fileID: 1810997740}
+  playerNum: 2
 --- !u!1 &1565019834
 GameObject:
   m_ObjectHideFlags: 0
@@ -13989,6 +14024,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1810997739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1810997741}
+  - component: {fileID: 1810997740}
+  m_Layer: 0
+  m_Name: ShipAudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1810997740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1810997739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0e7138b223c17a42b6d43a99ab4a0f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMusic: event:/Music/Chain_of_Command_Main_Theme
+--- !u!4 &1810997741
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1810997739}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.08074018, y: 0.027460031, z: -0.13671875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1821843001
 GameObject:
