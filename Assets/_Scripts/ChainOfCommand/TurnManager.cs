@@ -38,6 +38,8 @@ public class TurnManager : MonoBehaviour {
 	}
 
 	public void TurnComplete(){
+		Debug.Log("Completed a turn?");
+		Debug.Log(registeredCommandQueues.Count);
 		playersWithTurnsCompleted++;
 		if(playersWithTurnsCompleted >= registeredCommandQueues.Count){
 			ResolveTurn();
@@ -64,7 +66,7 @@ public class TurnManager : MonoBehaviour {
 		}
 
 
-		//onTurnEnd.Invoke(turnNum);
+		onTurnEnd.Invoke(turnNum);
 		turnNum ++;
         playersWithTurnsCompleted = 0;
         onTurnStart.Invoke(turnNum);
