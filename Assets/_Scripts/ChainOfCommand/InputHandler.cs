@@ -10,7 +10,6 @@ public class InputHandler : MonoBehaviour
     public int numberOfShips = 3;
     public CommandQueue orders;
 
-    private bool controllersIn = false;
     private bool needAction = true;
     private bool needInput = false;
     private int input;
