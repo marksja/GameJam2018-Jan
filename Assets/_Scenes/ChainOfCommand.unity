@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -823,6 +823,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114503445988810730, guid: 3b726a3b7fcbc584d91357c01c2e1a53,
+        type: 2}
+      propertyPath: m_text
+      value: "Select a target ship \n[ I ], [ O ], [ P ]"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b726a3b7fcbc584d91357c01c2e1a53, type: 2}
   m_IsPrefabParent: 0
@@ -1570,6 +1575,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114133783227554018, guid: 664290739b994a54a8a608a5dbe039ac,
+        type: 2}
+      propertyPath: m_text
+      value: FIRE [ I ] upon an enemy ship, or SHIELD [ O ] an ally!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 664290739b994a54a8a608a5dbe039ac, type: 2}
   m_IsPrefabParent: 0
@@ -2167,16 +2177,21 @@ Prefab:
     - target: {fileID: 114002381902924492, guid: dcc18c02469da2e45a2dcf5bbbeb70a9,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114002381902924492, guid: dcc18c02469da2e45a2dcf5bbbeb70a9,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1452370723238610, guid: dcc18c02469da2e45a2dcf5bbbeb70a9, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114002381902924492, guid: dcc18c02469da2e45a2dcf5bbbeb70a9,
+        type: 2}
+      propertyPath: m_text
+      value: FIRE heavy attack [ I ] or normal [ O ]
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcc18c02469da2e45a2dcf5bbbeb70a9, type: 2}
@@ -2308,7 +2323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipData: {fileID: 11400000, guid: 9268151b72303f34dbb7335cfe76fecd, type: 2}
+  shipData: {fileID: 0}
   health: 0
   damageTaken: 0
   shield: 0
@@ -5620,7 +5635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipData: {fileID: 11400000, guid: cd4ae4ff80079444f8f209902fe44a51, type: 2}
+  shipData: {fileID: 0}
   health: 0
   damageTaken: 0
   shield: 0
@@ -6256,16 +6271,21 @@ Prefab:
     - target: {fileID: 114002381902924492, guid: dcc18c02469da2e45a2dcf5bbbeb70a9,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114002381902924492, guid: dcc18c02469da2e45a2dcf5bbbeb70a9,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1452370723238610, guid: dcc18c02469da2e45a2dcf5bbbeb70a9, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114002381902924492, guid: dcc18c02469da2e45a2dcf5bbbeb70a9,
+        type: 2}
+      propertyPath: m_text
+      value: FIRE heavy attack [ Q ] or normal [ W ]
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcc18c02469da2e45a2dcf5bbbeb70a9, type: 2}
@@ -7981,6 +8001,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114503445988810730, guid: 3b726a3b7fcbc584d91357c01c2e1a53,
+        type: 2}
+      propertyPath: m_text
+      value: "Select a target ship \n[ I ], [ O ], [ P ]"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b726a3b7fcbc584d91357c01c2e1a53, type: 2}
   m_IsPrefabParent: 0
@@ -8841,7 +8866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipData: {fileID: 11400000, guid: cd4ae4ff80079444f8f209902fe44a51, type: 2}
+  shipData: {fileID: 0}
   health: 0
   damageTaken: 0
   shield: 0
@@ -9794,7 +9819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipData: {fileID: 11400000, guid: 9268151b72303f34dbb7335cfe76fecd, type: 2}
+  shipData: {fileID: 0}
   health: 0
   damageTaken: 0
   shield: 0
@@ -10228,7 +10253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446c8e33e7c60a343966712c444068ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winText: {fileID: 1719787928}
+  winText: {fileID: 0}
   p1Destroyer: {fileID: 305828312}
   p2Destroyer: {fileID: 1272132918}
 --- !u!4 &1366996614
@@ -10324,7 +10349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipData: {fileID: 11400000, guid: cd4ae4ff80079444f8f209902fe44a51, type: 2}
+  shipData: {fileID: 0}
   health: 0
   damageTaken: 0
   shield: 0
@@ -11651,6 +11676,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114133783227554018, guid: 664290739b994a54a8a608a5dbe039ac,
+        type: 2}
+      propertyPath: m_text
+      value: FIRE [ I ] upon an enemy ship, or SHIELD [ O ] an ally!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 664290739b994a54a8a608a5dbe039ac, type: 2}
   m_IsPrefabParent: 0
@@ -11863,7 +11893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541a6bf7a3a804aba77b0367ca374f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipData: {fileID: 11400000, guid: cd4ae4ff80079444f8f209902fe44a51, type: 2}
+  shipData: {fileID: 0}
   health: 0
   damageTaken: 0
   shield: 0
@@ -12873,6 +12903,11 @@ Prefab:
     - target: {fileID: 1750563239532814, guid: 3b726a3b7fcbc584d91357c01c2e1a53, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114503445988810730, guid: 3b726a3b7fcbc584d91357c01c2e1a53,
+        type: 2}
+      propertyPath: m_text
+      value: "Select a target ship \n[ I ], [ O ], [ P ]"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b726a3b7fcbc584d91357c01c2e1a53, type: 2}
