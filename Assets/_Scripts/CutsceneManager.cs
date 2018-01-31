@@ -21,8 +21,11 @@ public class CutsceneManager : MonoBehaviour {
     public GameObject p1MissionText;
     public GameObject p2MissionText;
 
-	// Public variables
-	public float beatsPerMinute = 144f;
+    public GameObject p1ObjectiveText;
+    public GameObject p2ObjectiveText;
+
+    // Public variables
+    public float beatsPerMinute = 144f;
 
 	// Private variables
 	float secondsPerBeat;
@@ -41,7 +44,9 @@ public class CutsceneManager : MonoBehaviour {
 		p2TransmissionText.SetActive(false);
         p1MissionText.SetActive(false);
         p2MissionText.SetActive(false);
-}
+        p1ObjectiveText.SetActive(false);
+        p2ObjectiveText.SetActive(false);
+    }
 
 	// Returns the number of seconds required for the given number of beats to pass.
 	float BeatsToSeconds(int numBeats) {
@@ -69,6 +74,18 @@ public class CutsceneManager : MonoBehaviour {
         //p1CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
         //p2CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
 
+
+        StartCoroutine("MissionText");
+        yield return WaitForBeats(40);
+
+        StartCoroutine("ObjectiveText");
+        yield return WaitForBeats(40);
+
+        //Load game scene
+        
+    }
+
+    IEnumerator MissionText() {
         // Display commander text
         string str1 = p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().text;
         string str2 = p2MissionText.GetComponent<TMPro.TextMeshProUGUI>().text;
@@ -78,13 +95,32 @@ public class CutsceneManager : MonoBehaviour {
 
         p1MissionText.SetActive(true);
         p2MissionText.SetActive(true);
-        
-        for (int i = 0; i < str1.Length; i++){
+
+        for (int i = 0; i < str1.Length; i++) {
             p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().text = str1.Substring(0, i);
             p2MissionText.GetComponent<TMPro.TextMeshProUGUI>().text = str2.Substring(0, i);
-            yield return null;
+            yield return new WaitForSeconds(.04f);
         }
+    }
 
+    IEnumerator ObjectiveText() {
+        p1MissionText.SetActive(false);
+        p2MissionText.SetActive(false);
+        //Objective text
+        string str1 = p1ObjectiveText.GetComponent<TMPro.TextMeshProUGUI>().text;
+        string str2 = p2ObjectiveText.GetComponent<TMPro.TextMeshProUGUI>().text;
+
+        p1ObjectiveText.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+        p2ObjectiveText.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+
+        p1ObjectiveText.SetActive(true);
+        p2ObjectiveText.SetActive(true);
+
+        for (int i = 0; i < str1.Length; i++) {
+            p1ObjectiveText.GetComponent<TMPro.TextMeshProUGUI>().text = str1.Substring(0, i);
+            p2ObjectiveText.GetComponent<TMPro.TextMeshProUGUI>().text = str2.Substring(0, i);
+            yield return new WaitForSeconds(.1f);
+        }
     }
 
 	// Toggle the "Incoming Transmission" text on and off for an amount of time.
