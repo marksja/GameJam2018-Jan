@@ -6,13 +6,11 @@ public class SignalSender : MonoBehaviour {
 
 	public GameObject signalPrefab;
 
-	public GameObject startSignal;
-	public GameObject midSignal;
-	public GameObject finalSignal;
+	GameObject startSignal;
+	GameObject midSignal;
+	GameObject finalSignal;
 
-
-	// Use this for initialization
-	void Start () {
+	void Start() {
 		startSignal = null;
 		midSignal = null;
 		finalSignal = null;
