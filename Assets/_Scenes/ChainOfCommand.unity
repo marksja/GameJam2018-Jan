@@ -4466,9 +4466,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signalPrefab: {fileID: 911365852}
-  startSignal: {fileID: 0}
-  midSignal: {fileID: 0}
-  finalSignal: {fileID: 0}
 --- !u!1 &571925894
 GameObject:
   m_ObjectHideFlags: 0
@@ -13940,9 +13937,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signalPrefab: {fileID: 1462938400}
-  startSignal: {fileID: 0}
-  midSignal: {fileID: 0}
-  finalSignal: {fileID: 0}
 --- !u!1 &1766594546
 GameObject:
   m_ObjectHideFlags: 0
