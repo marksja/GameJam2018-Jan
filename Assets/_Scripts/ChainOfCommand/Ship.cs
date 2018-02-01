@@ -56,7 +56,7 @@ public class Ship : MonoBehaviour {
 		FMODUnity.RuntimeManager.PlayOneShot(shipData.shieldEvent, transform.position);
 		shield += shieldAmnt;
         
-        shieldHandler.ShieldGrow(shield);
+        shieldHandler.ShieldGrow();
         
 	}
 

@@ -4,80 +4,63 @@ using UnityEngine;
 
 public class ShieldHandler : MonoBehaviour {
 
+    // Not actually sure if an enum is correct here --Cooper Riehl
+    public enum ShieldState {
+        Off, Regular, Super
+    }
+
     // Animation variables
-    public float shieldGrowTime = 1f;
-    public float shieldShrinkTime = 1f;
-    public float shieldDieTime = 1f;
+    public float shieldChangeTime = 0.5f;
 
     // Animation curves
     public AnimationCurve shieldGrowCurve;
     public AnimationCurve shieldShrinkCurve;
     public AnimationCurve shieldDieCurve;
 
-    // Use this for initialization
-    void Start () {
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Private state
+    ShieldState shieldState;
 
-    public void ShieldGrow(int shieldNum) {
-        StartCoroutine(ShieldGrowRoutine(shieldNum));
+    public void ShieldGrow() {
+        if (shieldState == ShieldState.Off) {
+            StartCoroutine(ChangeShieldSize(ShieldState.Regular));
+        }
+        else if (shieldState == ShieldState.Regular) {
+            StartCoroutine(ChangeShieldSize(ShieldState.Super));
+        }
     }
 
     public void ShieldShrink(float seconds) {
-        StartCoroutine(ShieldShrinkRoutine(seconds));
+        if (shieldState != ShieldState.Off) {
+            StartCoroutine(ShieldShrinkRoutine(seconds));
+        }
     }
 
-    public void ShieldSuperGrow() {
-        StartCoroutine(ShieldSuperGrowRoutine());
-    }
-
-    IEnumerator ShieldGrowRoutine(int shieldNum) {
+    IEnumerator ChangeShieldSize(ShieldState targetState) {
         float time = 0;
-        while (time < shieldGrowTime) {
-
-            float percent = time / shieldGrowTime;
-            this.transform.localScale = Vector3.LerpUnclamped(Vector3.zero, new Vector3(2f, 2f, 0), shieldGrowCurve.Evaluate(percent));
+        Vector3 curSize = ShieldSizeFromState(shieldState);
+        Vector3 targetSize = ShieldSizeFromState(targetState);
+        
+        shieldState = targetState;
+        while (time < shieldChangeTime) {
+            float percent = time / shieldChangeTime;
+            this.transform.localScale = Vector3.LerpUnclamped(curSize, targetSize, shieldGrowCurve.Evaluate(percent));
 
             yield return new WaitForEndOfFrame();
-
             time += Time.deltaTime;
-        }
-        if(shieldNum > 1) {
-            ShieldSuperGrow();
         }
     }
 
     IEnumerator ShieldShrinkRoutine(float seconds) {
         yield return new WaitForSeconds(seconds);
-        float time = 0;
-        while (time < shieldShrinkTime) {
-
-            float percent = time / shieldShrinkTime;
-            this.transform.localScale = Vector3.LerpUnclamped(this.transform.localScale, Vector3.zero, shieldShrinkCurve.Evaluate(percent));
-
-            yield return new WaitForEndOfFrame();
-
-            time += Time.deltaTime;
-        }
+        yield return ChangeShieldSize(ShieldState.Off);
     }
 
-    IEnumerator ShieldSuperGrowRoutine() {
-        float time = 0;
-        while (time < shieldGrowTime) {
-
-            float percent = time / shieldGrowTime;
-            this.transform.localScale = Vector3.LerpUnclamped(new Vector3(2f, 2f, 0), new Vector3(3f, 3f, 0), shieldGrowCurve.Evaluate(percent));
-
-            yield return new WaitForEndOfFrame();
-
-            time += Time.deltaTime;
+    Vector3 ShieldSizeFromState(ShieldState targetState) {
+        switch (targetState) {
+            case ShieldState.Off:       return Vector3.zero;
+            case ShieldState.Regular:   return new Vector3(2f, 2f, 2f);
+            case ShieldState.Super:     return new Vector3(3f, 3f, 3f);
         }
+        throw new UnityException("Invalid ShieldState!");
     }
-
-
 }
