@@ -53,3 +53,6 @@ TagManager:
   - name: C2
     uniqueID: 596663165
     locked: 0
+  - name: Effects
+    uniqueID: 4140823761
+    locked: 0

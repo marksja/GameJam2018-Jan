@@ -21,6 +21,9 @@ public class Ship : MonoBehaviour {
 	public GameObject targetChoice;
 
 	public LineRenderer lineRenderer;
+    public LineRenderer lineRendererBig;
+    public GameObject bigLaser;
+
 	public GameObject shieldObject;
 	// Tutorial text
 	public GameObject typeTutorial;
@@ -46,6 +49,10 @@ public class Ship : MonoBehaviour {
 		shield = 0;
         health = shipData.maxHealth;
         text.text = health + "/" + shipData.maxHealth;
+
+        if (bigLaser != null) {
+            bigLaser.SetActive(false);
+        }
 	}
 
 	public void TakeDamage(int damageAmnt){
@@ -110,6 +117,8 @@ public class Ship : MonoBehaviour {
 
 	IEnumerator Laser(Vector3 target){
 		
+
+
 		Vector3 start = transform.position;
 
 		lineRenderer.SetPosition(0, start);
@@ -139,10 +148,37 @@ public class Ship : MonoBehaviour {
 		lineRenderer.SetPosition(1, start);
 	}
 
-	IEnumerator HeavyLaser(Vector3 target) {
-		lineRenderer.widthMultiplier *= 2;
-		yield return Laser(target);
-		lineRenderer.widthMultiplier /= 2;
+    IEnumerator LaserBig(Vector3 target) {
+        Debug.Log("BigBoy");
+        Vector3 start = transform.position;
+
+        bigLaser.SetActive(true);
+        bigLaser.GetComponent<LaserAnimator>().AnimateLaser();
+        lineRendererBig.SetPosition(0, start);
+        lineRendererBig.SetPosition(1, start);
+
+        bigLaser.transform.position = start;
+
+        // Get target location
+        Vector3 targetDir = target - bigLaser.transform.position;
+        // Get angle
+        float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
+        bigLaser.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        
+        float time = 0;
+        while (time < 1f) {
+            //lineRendererBig.SetPosition(1, Vector3.Lerp(start, target, time / 0.6f));
+
+            yield return new WaitForEndOfFrame();
+        }
+         
+        bigLaser.SetActive(false);
+    }
+
+    IEnumerator HeavyLaser(Vector3 target) {
+		lineRendererBig.widthMultiplier *= 2;
+		yield return LaserBig(target);
+		lineRendererBig.widthMultiplier /=2;
 	}
 
 	public void LaserCaller(Vector3 target){
