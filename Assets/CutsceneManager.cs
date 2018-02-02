@@ -18,9 +18,6 @@ public class CutsceneManager : MonoBehaviour {
 	public Transform p1CommanderPortrait;
 	public Transform p2CommanderPortrait;
 
-    public GameObject p1MissionText;
-    public GameObject p2MissionText;
-
 	// Public variables
 	public float beatsPerMinute = 144f;
 
@@ -39,53 +36,36 @@ public class CutsceneManager : MonoBehaviour {
 	void DisableUIElements() {
 		p1TransmissionText.SetActive(false);
 		p2TransmissionText.SetActive(false);
-        p1MissionText.SetActive(false);
-        p2MissionText.SetActive(false);
-}
+	}
 
 	// Returns the number of seconds required for the given number of beats to pass.
 	float BeatsToSeconds(int numBeats) {
 		return numBeats * secondsPerBeat;
 	}
+	
+	IEnumerator PlayCutscene() {
+		yield return WaitForBeats(2);
+		// Start audio
+		GetComponent<AudioSource>().Play();
+		// There is a beat of silence at the start of the audio clip.
+		// This line may need to be removed in the future.
+		yield return WaitForBeats(1);
 
-    IEnumerator PlayCutscene() {
-        yield return WaitForBeats(2);
-        // Start audio
-        GetComponent<AudioSource>().Play();
-        // There is a beat of silence at the start of the audio clip.
-        // This line may need to be removed in the future.
-        yield return WaitForBeats(1);
+		// Flash the first transmission text for the first "call" sound
+		StartCoroutine(FlashTransmission(p1TransmissionText, 16, 2));
+		yield return WaitForBeats(8);
 
-        // Flash the first transmission text for the first "call" sound
-        StartCoroutine(FlashTransmission(p1TransmissionText, 16, 2));
-        yield return WaitForBeats(8);
+		// Add in the second transmission text for the second "call" sound
+		StartCoroutine(FlashTransmission(p2TransmissionText, 8, 2));
+		yield return WaitForBeats(6);
 
-        // Add in the second transmission text for the second "call" sound
-        StartCoroutine(FlashTransmission(p2TransmissionText, 8, 2));
-        yield return WaitForBeats(6);
+		// Two beats before the main theme, slide in the commander portraits
+		// and open their textboxes
+		//p1CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
+		//p2CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
 
-        // Two beats before the main theme, slide in the commander portraits
-        // and open their textboxes
-        //p1CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
-        //p2CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
-
-        // Display commander text
-        string str1 = p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().text;
-        string str2 = p2MissionText.GetComponent<TMPro.TextMeshProUGUI>().text;
-
-        p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().text = "";
-        p2MissionText.GetComponent<TMPro.TextMeshProUGUI>().text = "";
-
-        p1MissionText.SetActive(true);
-        p2MissionText.SetActive(true);
-        
-        for (int i = 0; i < str1.Length; i++){
-            p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().text = str1.Substring(0, i);
-            p2MissionText.GetComponent<TMPro.TextMeshProUGUI>().text = str2.Substring(0, i);
-            yield return null;
-        }
-
-    }
+		// Display commander text
+	}
 
 	// Toggle the "Incoming Transmission" text on and off for an amount of time.
 	// This function ensures the object will always end in the disabled state.

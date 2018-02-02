@@ -71,7 +71,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1456633464552978
 GameObject:
   m_ObjectHideFlags: 1
@@ -171,7 +171,7 @@ MonoBehaviour:
 
     Shield
 
-    HP: 125'
+    HP: 150'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee1081be57bda854d8da09a7af4ce14a, type: 2}
   m_sharedMaterial: {fileID: 21614160327520976, guid: ee1081be57bda854d8da09a7af4ce14a,
@@ -517,7 +517,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1227.07, y: 120.6}
+  m_AnchoredPosition: {x: -1227.07, y: 94.13}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224297327973855520
@@ -557,7 +557,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1111, y: 416.4}
+  m_AnchoredPosition: {x: -1078.9, y: 416.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224453496122433518

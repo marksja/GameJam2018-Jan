@@ -15,7 +15,7 @@ MonoBehaviour:
   actions: 0000000002000000
   lightDamage: 50
   heavyDamage: 0
-  shieldHealth: 125
+  shieldHealth: 150
   shieldEvent: event:/SFX/Ships/Corvette_Shield
   lightAttackEvent: event:/SFX/Ships/Corvette_Atk
   heavyAttackEvent: event:/SFX/Ships/Destroyer_Hvy

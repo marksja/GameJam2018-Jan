@@ -33,12 +33,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 *.log
-<<<<<<< HEAD
 fmod_editor.log
-fmod_editor.log
-=======
-*.log
-fmod_editor.log
->>>>>>> fea2180b3c49173a6821d572fe3b1c309bd8da8b
-*.log
-*.meta
