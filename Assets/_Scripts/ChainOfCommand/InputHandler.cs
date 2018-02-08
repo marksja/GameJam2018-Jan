@@ -10,6 +10,7 @@ public class InputHandler : MonoBehaviour
 
     private bool needAction = true;
     private bool needInput = false;
+    private bool onCooldown = false;
     private int input;
     private CommandQueue.Command[] prevInputs;
     private CommandQueue.Command[] prevprevInputs;
@@ -92,14 +93,25 @@ public class InputHandler : MonoBehaviour
             // Display tutorial blurbs first time that commands are requested
             if (displayTutorial) { orders.ships[id].ShowTypeTutorial(); }
 
-            if (prevInputs[id] != CommandQueue.Command.Heavy) {
-                
+            if (onCooldown && id == 1) {
+                attackId = CommandQueue.Command.Hold;
+            }
+            else {
                 input = 4;
                 while (input > 2) {
                     needInput = true;
                     needAction = true;
                     while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
-                    if (input == 3 && id > 0) { orders.ships[id].HideAll(); id -= 1; orders.ships[id].ShowTargetChoice(); prevInputs = prevprevInputs; goto Target; }
+                    if (input == 3 && id > 0) {
+                        orders.ships[id].HideAll();
+                        id -= 1;
+                        if(onCooldown && id == 1) {
+                            id -= 1;
+                        }
+                        orders.ships[id].ShowTargetChoice();
+                        prevInputs = prevprevInputs;
+                        goto Target;
+                    } //Go Back
                 }
 
                 attackId = FindAttack(id, input);
@@ -115,20 +127,20 @@ public class InputHandler : MonoBehaviour
                     needInput = true;
                     needAction = false;
                     while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
-                    if (input == 3) { attackId = CommandQueue.Command.Hold; orders.ships[id].HideAll(); goto Attack; } //Go back
+                    if (input == 3) { attackId = CommandQueue.Command.Hold;
+                        orders.ships[id].HideAll();
+                        goto Attack;
+                    } //Go back
                 }
                 
                 targetId = input;
-            }
-            else {
-                attackId = CommandQueue.Command.Hold; //Hold if we Heavy attacked last turn
             }
 
             orders.ships[id].HideAll();
             FancyTuple order = new FancyTuple(id, attackId, targetId);
             ordersForThisTurn[id] = order;
-            prevInputs[id] = attackId; //Store the last attack
             prevprevInputs[id] = prevInputs[id];
+            prevInputs[id] = attackId; //Store the last attack
         }
 
         // Command tutorials are only displayed the first time
@@ -140,8 +152,11 @@ public class InputHandler : MonoBehaviour
             int shipId = ordersForThisTurn[i].me;
             attackId = ordersForThisTurn[i].attac;
             targetId = ordersForThisTurn[i].target;
-            if(orders.ships[shipId].alive)
+            if (orders.ships[shipId].alive) {
+                if (attackId == CommandQueue.Command.Heavy) { onCooldown = true; }
+                if (attackId == CommandQueue.Command.Hold && shipId == 1) { onCooldown = false; }
                 orders.IssueCommand(shipId, attackId, targetId); //Give the order
+            }
         }
         TurnManager.Instance.TurnComplete();
         yield return new WaitForSeconds(0);

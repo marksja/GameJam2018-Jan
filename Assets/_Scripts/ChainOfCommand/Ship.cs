@@ -101,8 +101,9 @@ public class Ship : MonoBehaviour {
 
 	public void ShowTargetChoice(){
         typeChoice.SetActive(false);
-        targetChoice.SetActive(true); 
-	}
+        targetChoice.SetActive(true);
+        bobbingHandler.StartBobbing();
+    }
 
 	public void HideAll(){
         

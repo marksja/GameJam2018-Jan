@@ -9,5 +9,8 @@ EditorBuildSettings:
     path: Assets/_Scenes/MainMenu.unity
     guid: 0774a11ff93fa64408a2ad1e0830b02c
   - enabled: 1
+    path: Assets/_Scenes/CommanderIntro.unity
+    guid: 1b877bd68aafbe045b8761353a4b6498
+  - enabled: 1
     path: Assets/_Scenes/ChainOfCommand.unity
     guid: c6faf1d901fadc842bb93d689d23b670
