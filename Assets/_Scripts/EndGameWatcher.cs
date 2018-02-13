@@ -13,14 +13,17 @@ public class EndGameWatcher : MonoBehaviour {
 	public Ship p2Destroyer;
 
 	string winTextTemplate = "Player {0} wins!";
+    ShipAudioManager audioManager;
 
 	void Start() {
 		StartCoroutine(EndCheckLoop());
+        audioManager = GameObject.Find("ShipAudioManager").GetComponent<ShipAudioManager>();
 	}
 
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.Escape)) {
-			SceneManager.LoadScene("MainMenu");
+            audioManager.mainThemeEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            SceneManager.LoadScene("MainMenu");
 		}
 	}
 
