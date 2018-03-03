@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 //using DG.Tweening;
@@ -48,6 +49,12 @@ public class CutsceneManager : MonoBehaviour {
         p2ObjectiveText.SetActive(false);
     }
 
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            SceneManager.LoadScene("ChainOfCommand");
+        }
+    }
+
 	// Returns the number of seconds required for the given number of beats to pass.
 	float BeatsToSeconds(int numBeats) {
 		return numBeats * secondsPerBeat;
@@ -79,10 +86,10 @@ public class CutsceneManager : MonoBehaviour {
         yield return WaitForBeats(40);
 
         StartCoroutine("ObjectiveText");
-        yield return WaitForBeats(40);
+        yield return WaitForBeats(45);
 
         //Load game scene
-        
+        SceneManager.LoadScene("ChainOfCommand");
     }
 
     IEnumerator MissionText() {

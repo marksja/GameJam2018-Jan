@@ -7,11 +7,12 @@ public class MainMenu : MonoBehaviour {
 
 	// Use this for initialization
 	public void OnClick() {
-		SceneManager.LoadScene("ChainOfCommand");
+		SceneManager.LoadScene("CommanderIntro"); //Load the intro not the game
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Return)) { OnClick(); }
+        if (Input.GetKey(KeyCode.Escape)) { Application.Quit(); }
 	}
 }
