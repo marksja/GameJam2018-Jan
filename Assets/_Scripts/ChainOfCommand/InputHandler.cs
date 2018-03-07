@@ -17,7 +17,6 @@ public class InputHandler : MonoBehaviour
 
     // JF: Hacky way to control when tutorials appear
     private bool displayTutorial = true;
-    private bool displayDelayTutorial = false;
 
     class FancyTuple
     {
@@ -146,7 +145,6 @@ public class InputHandler : MonoBehaviour
         // Command tutorials are only displayed the first time
         // Display the delay tutorial on the next turn
         displayTutorial = false;
-        displayDelayTutorial = true;
 
         for(int i = 0; i < 3; i++) {
             int shipId = ordersForThisTurn[i].me;
