@@ -117,6 +117,7 @@ public class Ship : MonoBehaviour {
 	public void ShowTargetChoice(){
         typeChoice.SetActive(false);
         targetChoice.SetActive(true);
+        StartBobbing();
     }
 
 	public void HideAll(){
@@ -132,9 +133,10 @@ public class Ship : MonoBehaviour {
 
     // If not yet bobbing then start bobbing
     public void StartBobbing() {
-        originalTransform = transform.position; // TODO: make sure this doesn't get set to a non-default position
-
-        if (!isBobbing) { isBobbing = true; }
+        if (!isBobbing) {
+            originalTransform = transform.position;
+            isBobbing = true;
+        }
     }
 
     // Stop bobbing immediately

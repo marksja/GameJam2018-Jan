@@ -157,7 +157,7 @@ public class InputHandler : MonoBehaviour
             }
         }
         TurnManager.Instance.TurnComplete();
-        yield return new WaitForSeconds(0);
+        yield return null;
     }
 
     bool ShipIsAlive(int targetId, CommandQueue.Command attackId) {
