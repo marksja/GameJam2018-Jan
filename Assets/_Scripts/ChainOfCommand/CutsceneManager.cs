@@ -81,7 +81,6 @@ public class CutsceneManager : MonoBehaviour {
         //p1CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
         //p2CommanderPortrait.DOLocalMoveX(0, BeatsToSeconds(1));
 
-
         StartCoroutine("MissionText");
         yield return WaitForBeats(40);
 

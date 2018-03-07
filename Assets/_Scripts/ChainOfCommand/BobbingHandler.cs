@@ -47,7 +47,7 @@ public class BobbingHandler : MonoBehaviour {
     IEnumerator StartBobbingRoutine() {
         if (!waited) {
             
-            yield return new WaitForSeconds(1.1f);
+            yield return new WaitForEndOfFrame();
             waited = true;
         }
         float time = 0;
