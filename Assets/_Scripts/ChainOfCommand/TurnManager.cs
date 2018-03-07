@@ -6,10 +6,7 @@ using UnityEngine.Events;
 public class TurnManager : MonoBehaviour {
 
     [System.Serializable]
-    public class IntEvent : UnityEvent<int>
-    {
-
-    }
+    public class IntEvent : UnityEvent<int> {}
 
 	struct QueueOrdersForTurn {
 		public CommandQueue queue;
@@ -37,17 +34,15 @@ public class TurnManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update() {}
 
 	public void RegisterCommandQueue(CommandQueue queue){
 		registeredCommandQueues.Add(queue);
 	}
 
 	public void TurnComplete(){
-		playersWithTurnsCompleted++;
-		if(playersWithTurnsCompleted >= registeredCommandQueues.Count){
+		++playersWithTurnsCompleted;
+		if (playersWithTurnsCompleted >= registeredCommandQueues.Count) {
 			ResolveTurn();
 		}
 	}
@@ -87,9 +82,7 @@ public class TurnManager : MonoBehaviour {
 			}
 		}
         
-        foreach (CommandQueue q in registeredCommandQueues){
-			q.ApplyAllDamages();
-		}
+        foreach (CommandQueue q in registeredCommandQueues){ q.ApplyAllDamages(); }
 
         turnNum++;
         playersWithTurnsCompleted = 0;

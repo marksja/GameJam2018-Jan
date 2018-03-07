@@ -14,7 +14,6 @@ public class Ship : MonoBehaviour {
 
 	public bool alive = true;
     
-
 	public TextMeshProUGUI text;
 
 	public GameObject typeChoice;
@@ -64,7 +63,6 @@ public class Ship : MonoBehaviour {
 		shield += shieldAmnt;
         
         shieldHandler.ShieldGrow();
-        
 	}
 
 	public void ApplyDamage(){
@@ -117,9 +115,6 @@ public class Ship : MonoBehaviour {
     }	
 
 	IEnumerator Laser(Vector3 target){
-		
-
-
 		Vector3 start = transform.position;
 
 		lineRenderer.SetPosition(0, start);
@@ -192,11 +187,7 @@ public class Ship : MonoBehaviour {
 		StartCoroutine(HeavyLaser(target));
 	}
 	
-	public void Shield(){
-
-	}
-
-	
+	public void Shield() {}
 	
 	/* Tutorial blurbs - JF */
 	public void ShowTypeTutorial() {

@@ -6,11 +6,14 @@ public class WarpHandler : MonoBehaviour {
 
     public float warpTime = 1f;
     public AnimationCurve warpCurve;
+    public GameObject playerOne;
+    public GameObject playerTwo;
     public GameObject[] leftWarpees;
-    private Vector3[] leftTransforms;
     public GameObject[] rightWarpees;
-    private Vector3[] rightTransforms;
     public Vector3 warpDist;
+
+    private Vector3[] leftTransforms;
+    private Vector3[] rightTransforms;
 	// Use this for initialization
 	void Start () {
         // Store left transforms
@@ -31,31 +34,30 @@ public class WarpHandler : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update () {}
 
-    // Start bobbing until bobbing false and if ends and bobbing true the loop
+    // Start bobbing until bobbing false and if ends and bobbing true the loop <- what?
     IEnumerator StartWarpRoutine() {
-        // yield return new WaitForSeconds(.2f);
         float time = 0;
         while ((time < warpTime)) {
-
             float percent = time / warpTime;
             for (int i = 0; i < leftWarpees.Length; i++) {
                 leftWarpees[i].GetComponentInChildren<SpriteRenderer>().enabled = true;
-                leftWarpees[i].GetComponent<Transform>().position = Vector3.LerpUnclamped(leftTransforms[i]-warpDist, leftTransforms[i], warpCurve.Evaluate(percent));
+                leftWarpees[i].GetComponent<Transform>().position = 
+                    Vector3.LerpUnclamped(leftTransforms[i]-warpDist, leftTransforms[i], warpCurve.Evaluate(percent));
             }
             for (int i = 0; i < rightWarpees.Length; i++) {
                 rightWarpees[i].GetComponentInChildren<SpriteRenderer>().enabled = true;
-                rightWarpees[i].GetComponent<Transform>().position = Vector3.LerpUnclamped(rightTransforms[i] + warpDist, rightTransforms[i], warpCurve.Evaluate(percent));
+                rightWarpees[i].GetComponent<Transform>().position = 
+                    Vector3.LerpUnclamped(rightTransforms[i] + warpDist, rightTransforms[i], warpCurve.Evaluate(percent));
             }
-
 
             yield return new WaitForEndOfFrame();
 
             time += Time.deltaTime;
         }
-       
+        // start input handler scripts
+        playerOne.GetComponent<InputHandler>().enabled = true;
+        playerTwo.GetComponent<InputHandler>().enabled = true;
     }
 }
