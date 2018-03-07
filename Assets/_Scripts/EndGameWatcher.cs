@@ -12,6 +12,9 @@ public class EndGameWatcher : MonoBehaviour {
 	public Ship p1Destroyer;
 	public Ship p2Destroyer;
 
+    public InputHandler p1InputHandler;
+    public InputHandler p2InputHandler;
+
 	string winTextTemplate = "Player {0} wins!";
     ShipAudioManager audioManager;
 
@@ -28,18 +31,25 @@ public class EndGameWatcher : MonoBehaviour {
 	}
 
 	IEnumerator EndCheckLoop() {
-		int winningPlayerNum = 0;
-		while (winningPlayerNum == 0) {
+        string win_text = "";
+		while (win_text == "") {
 			yield return new WaitForSeconds(0.1f);
 			if (p1Destroyer.alive && !p2Destroyer.alive) {
-				winningPlayerNum = 1;
-			}
+                win_text = string.Format(winTextTemplate, 1.ToString());
+            }
 			else if (!p1Destroyer.alive && p2Destroyer.alive) {
-				winningPlayerNum = 2;
-			}
+                win_text = string.Format(winTextTemplate, 2.ToString());
+            }
+            else if (!p1Destroyer.alive && !p2Destroyer.alive) {
+                win_text = "Draw!";
+            }
 		}
 		turnManager.isGameOver = true;
-		winText.text = string.Format(winTextTemplate, winningPlayerNum.ToString());
-		winText.gameObject.SetActive(true);
+        winText.text = win_text;
+        winText.gameObject.SetActive(true);
+
+        // disable further player-specific input
+        p1InputHandler.enabled = false;
+        p2InputHandler.enabled = false;
 	}
 }
