@@ -86,7 +86,7 @@ public class CutsceneManager : MonoBehaviour {
         yield return WaitForBeats(40);
 
         StartCoroutine("ObjectiveText");
-        yield return WaitForBeats(45);
+        yield return WaitForBeats(17);
 
         //Load game scene
         SceneManager.LoadScene("ChainOfCommand");
@@ -103,9 +103,13 @@ public class CutsceneManager : MonoBehaviour {
         p1MissionText.SetActive(true);
         p2MissionText.SetActive(true);
 
-        for (int i = 0; i < str1.Length; i++) {
-            p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().text = str1.Substring(0, i);
-            p2MissionText.GetComponent<TMPro.TextMeshProUGUI>().text = str2.Substring(0, i);
+        for (int i = 0; i < str1.Length || i < str2.Length; i++) {
+            if (i < str1.Length) {
+                p1MissionText.GetComponent<TMPro.TextMeshProUGUI>().text = str1.Substring(0, i + 1);
+            }
+            if (i < str2.Length) {
+                p2MissionText.GetComponent<TMPro.TextMeshProUGUI>().text = str2.Substring(0, i + 1);
+            }
             yield return new WaitForSeconds(.04f);
         }
     }
@@ -124,8 +128,8 @@ public class CutsceneManager : MonoBehaviour {
         p2ObjectiveText.SetActive(true);
 
         for (int i = 0; i < str1.Length; i++) {
-            p1ObjectiveText.GetComponent<TMPro.TextMeshProUGUI>().text = str1.Substring(0, i);
-            p2ObjectiveText.GetComponent<TMPro.TextMeshProUGUI>().text = str2.Substring(0, i);
+            p1ObjectiveText.GetComponent<TMPro.TextMeshProUGUI>().text = str1.Substring(0, i + 1);
+            p2ObjectiveText.GetComponent<TMPro.TextMeshProUGUI>().text = str2.Substring(0, i + 1);
             yield return new WaitForSeconds(.1f);
         }
     }
