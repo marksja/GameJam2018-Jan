@@ -10768,6 +10768,8 @@ MonoBehaviour:
   winText: {fileID: 1719787928}
   p1Destroyer: {fileID: 305828312}
   p2Destroyer: {fileID: 1272132918}
+  p1InputHandler: {fileID: 839014132}
+  p2InputHandler: {fileID: 10165801}
 --- !u!4 &1366996614
 Transform:
   m_ObjectHideFlags: 0

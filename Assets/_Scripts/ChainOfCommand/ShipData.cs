@@ -4,8 +4,10 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "Inventory/List", order = 1)]
 public class ShipData : ScriptableObject {
-
+    public enum Type { CORVETTE, DESTROYER };
+    
 	public int maxHealth;
+    public Type type;
 
 	public CommandQueue.Command[] actions;
 

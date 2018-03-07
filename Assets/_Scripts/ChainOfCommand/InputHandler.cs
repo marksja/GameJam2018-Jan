@@ -10,7 +10,7 @@ public class InputHandler : MonoBehaviour
 
     private bool needAction = true;
     private bool needInput = false;
-    private bool onCooldown = false;
+    private bool destroyerOnCooldown = false;
     private int input;
     private CommandQueue.Command[] prevInputs;
     private CommandQueue.Command[] prevprevInputs;
@@ -92,7 +92,7 @@ public class InputHandler : MonoBehaviour
             // Display tutorial blurbs first time that commands are requested
             if (displayTutorial) { orders.ships[id].ShowTypeTutorial(); }
 
-            if (onCooldown && id == 1) {
+            if (destroyerOnCooldown && orders.ships[id].shipData.type == ShipData.Type.DESTROYER) {
                 attackId = CommandQueue.Command.Hold;
             }
             else {
@@ -104,7 +104,7 @@ public class InputHandler : MonoBehaviour
                     if (input == 3 && id > 0) {
                         orders.ships[id].HideAll();
                         id -= 1;
-                        if(onCooldown && id == 1) {
+                        if(destroyerOnCooldown && orders.ships[id].shipData.type == ShipData.Type.DESTROYER) {
                             id -= 1;
                         }
                         orders.ships[id].ShowTargetChoice();
@@ -146,13 +146,16 @@ public class InputHandler : MonoBehaviour
         // Display the delay tutorial on the next turn
         displayTutorial = false;
 
-        for(int i = 0; i < 3; i++) {
+        for(int i = 0; i < ordersForThisTurn.Length; i++) {
             int shipId = ordersForThisTurn[i].me;
+            Ship currentShip = orders.ships[shipId];
+
             attackId = ordersForThisTurn[i].attac;
             targetId = ordersForThisTurn[i].target;
-            if (orders.ships[shipId].alive) {
-                if (attackId == CommandQueue.Command.Heavy) { onCooldown = true; }
-                if (attackId == CommandQueue.Command.Hold && shipId == 1) { onCooldown = false; }
+            if (currentShip.alive) {
+                if (attackId == CommandQueue.Command.Heavy) { destroyerOnCooldown = true; }
+                if (attackId == CommandQueue.Command.Hold && 
+                    currentShip.shipData.type == ShipData.Type.DESTROYER) { destroyerOnCooldown = false; }
                 orders.IssueCommand(shipId, attackId, targetId); //Give the order
             }
         }

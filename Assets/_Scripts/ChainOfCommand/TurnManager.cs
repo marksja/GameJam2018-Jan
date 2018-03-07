@@ -60,8 +60,6 @@ public class TurnManager : MonoBehaviour {
 		if (turnNum == 1) { delayTutorial.SetActive(false); }
 
         //Get all orders for this current turn;
-
-		// TODO: Not this.
 		List<QueueOrdersForTurn> incomingCommands = new List<QueueOrdersForTurn>();
 		foreach (CommandQueue q in registeredCommandQueues) {
 			QueueOrdersForTurn queueOrders = new QueueOrdersForTurn();
@@ -70,21 +68,21 @@ public class TurnManager : MonoBehaviour {
 			incomingCommands.Add(queueOrders);
 		}
 		
-		for (int currPriority = 0; currPriority < 2; ++currPriority) {
+		for (int currPriority = 0; currPriority < 3; ++currPriority) {
 			foreach (QueueOrdersForTurn queueOrders in incomingCommands) {
-				foreach (CommandQueue.Order o in queueOrders.orders) {
-					if (o.priority == currPriority) { 
-						queueOrders.queue.ExecuteOrder(o);
-						yield return new WaitForSeconds(0.4f);
-						orders.Add(o);
+				foreach (CommandQueue.Order sixtySix in queueOrders.orders) {
+					if (sixtySix.priority == currPriority) { 
+						queueOrders.queue.ExecuteOrder(sixtySix); // yes, m'lord
+                        yield return new WaitForSeconds(0.4f);
+						orders.Add(sixtySix);
 					}
 				}
 			}
 		}
         
-        foreach (CommandQueue q in registeredCommandQueues){ q.ApplyAllDamages(); }
+        foreach (CommandQueue q in registeredCommandQueues) { q.ApplyAllDamages(); }
 
-        turnNum++;
+        ++turnNum;
         playersWithTurnsCompleted = 0;
 		if (!isGameOver) {
         	onTurnStart.Invoke(turnNum);

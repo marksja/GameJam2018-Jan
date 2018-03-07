@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CommandQueue : MonoBehaviour {
-
 	public Ship[] ships;
 
-	public enum Command {Light, Heavy, Shield, Hold};
+	public enum Command { Light, Heavy, Shield, Hold, Swap };
 
 	public struct Order{
 		public int shipID;
-		public Command order;
+		public Command command;
 		public int target;
 		public int turnIssued;
 		public int turnExecuted;
@@ -33,14 +32,29 @@ public class CommandQueue : MonoBehaviour {
 	}
 
 	public void IssueCommand(int shipID, Command command, int targetID){
-		Order sixtySix = new Order();
-		sixtySix.shipID = shipID;
-		sixtySix.order = command;
-		sixtySix.target = targetID;
-		sixtySix.turnIssued = TurnManager.Instance.turnNum;
-		sixtySix.turnExecuted = sixtySix.turnIssued + GetTurnDelay();
-		sixtySix.priority = (sixtySix.order == Command.Shield) ? 0 : 1;
-		orderQueue.Enqueue(sixtySix);
+		Order order = new Order();
+		order.shipID = shipID;
+		order.command = command;
+		order.target = targetID;
+		order.turnIssued = TurnManager.Instance.turnNum;
+		order.turnExecuted = order.turnIssued + GetTurnDelay();
+
+        switch (command) {
+            case Command.Swap: {
+                order.priority = 0;
+                break;
+            }
+            case Command.Shield: {
+                order.priority = 1;
+                break;
+            }
+            default: {
+                order.priority = 2;
+                break;
+            }
+        }
+
+		orderQueue.Enqueue(order);
 	}
 
 	static public int GetTurnDelay(){
@@ -75,15 +89,15 @@ public class CommandQueue : MonoBehaviour {
 		}
 		return ordersForThisTurn;
 	}
-	public void ExecuteOrder(Order sixtySix){
-        //Yes, My Lord
-        int shipNum = sixtySix.shipID;
+
+	public void ExecuteOrder(Order order){
+        int shipNum = order.shipID;
         Ship currentShip = ships[shipNum];
         Ship targetShip;
-        switch (sixtySix.order) {
+        switch (order.command) {
             case Command.Light:
                 //damage = 50
-                targetShip = opponentQueue.ships[sixtySix.target];
+                targetShip = opponentQueue.ships[order.target];
                 if (!targetShip.alive) { return; }
                 //Deal damage to the target ship
                 targetShip.TakeDamage(currentShip.shipData.lightDamage);
@@ -94,7 +108,7 @@ public class CommandQueue : MonoBehaviour {
                 break;
             case Command.Shield:
                 //Add temp hp = 150
-                targetShip = ships[sixtySix.target];
+                targetShip = ships[order.target];
                 if (!targetShip.alive) { return; }
                 //Apply a temporary hp pool
                 targetShip.AddShield(currentShip.shipData.shieldHealth);
@@ -102,7 +116,7 @@ public class CommandQueue : MonoBehaviour {
                 break;
             case Command.Heavy:
                 //damage = 150
-                targetShip = opponentQueue.ships[sixtySix.target];
+                targetShip = opponentQueue.ships[order.target];
                 if (!targetShip.alive) { return; }
                 //Deal damage to the target ship
                 targetShip.TakeDamage(currentShip.shipData.heavyDamage);

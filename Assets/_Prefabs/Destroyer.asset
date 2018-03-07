@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: Destroyer
   m_EditorClassIdentifier: 
   maxHealth: 750
+  type: 1
   actions: 0000000001000000
   lightDamage: 50
   heavyDamage: 150
