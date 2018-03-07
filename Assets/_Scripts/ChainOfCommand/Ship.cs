@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 
 public class Ship : MonoBehaviour {
-
 	public ShipData shipData;
 
 	public int health;
@@ -28,18 +27,19 @@ public class Ship : MonoBehaviour {
 	public GameObject typeTutorial;
 	public GameObject targetTutorial;
     // Effects
-    public GameObject bobObject;
+    public float bobbingPeriod = 1f;
+    public AnimationCurve bobbingCurve;
 
-	public ShipAudioManager shipAudioManager;
+    private float bobbingTime = 0;
+    private bool isBobbing = false;
+    private Vector3 originalTransform;
+
+    public ShipAudioManager shipAudioManager;
 	public int playerNum;
 
     private ShieldHandler shieldHandler;
-    private BobbingHandler bobbingHandler;
 
-	void Awake() {
-        shieldHandler = shieldObject.GetComponent<ShieldHandler>();
-        bobbingHandler = bobObject.GetComponent<BobbingHandler>();
-	}
+	void Awake() { shieldHandler = shieldObject.GetComponent<ShieldHandler>(); }
 
 	public void Start(){
 		lineRenderer = GetComponentInChildren<LineRenderer>();
@@ -54,7 +54,25 @@ public class Ship : MonoBehaviour {
         }
 	}
 
-	public void TakeDamage(int damageAmnt){
+    public void Update() {
+        if (isBobbing) {
+            if (bobbingTime < bobbingPeriod) {
+                float percent = bobbingTime / bobbingPeriod;
+                transform.position = Vector3.LerpUnclamped(
+                    originalTransform,
+                    new Vector3(originalTransform.x, originalTransform.y + 1, originalTransform.z),
+                    bobbingCurve.Evaluate(percent)
+                    );
+
+                bobbingTime += Time.deltaTime;
+            }
+            else {
+                bobbingTime = 0;
+            }
+        }
+    }
+
+    public void TakeDamage(int damageAmnt){
 		damageTaken += damageAmnt;
 	}
 
@@ -83,7 +101,6 @@ public class Ship : MonoBehaviour {
 			this.gameObject.SetActive(false);
 		}
         TurnOffShieldInSeconds(0);
-
     }
 
     public void TurnOffShieldInSeconds(float seconds) {
@@ -94,13 +111,12 @@ public class Ship : MonoBehaviour {
         typeChoice.SetActive(true);
         targetChoice.SetActive(false);
         // Juice
-        bobbingHandler.StartBobbing();
+        StartBobbing();
     }
 
 	public void ShowTargetChoice(){
         typeChoice.SetActive(false);
         targetChoice.SetActive(true);
-        bobbingHandler.StartBobbing();
     }
 
 	public void HideAll(){
@@ -111,10 +127,24 @@ public class Ship : MonoBehaviour {
             targetTutorial.SetActive(false);
         }
         // Juice
-        bobbingHandler.StopBobbing();
-    }	
+        StopBobbing();
+    }
 
-	IEnumerator Laser(Vector3 target){
+    // If not yet bobbing then start bobbing
+    public void StartBobbing() {
+        originalTransform = transform.position; // TODO: make sure this doesn't get set to a non-default position
+
+        if (!isBobbing) { isBobbing = true; }
+    }
+
+    // Stop bobbing immediately
+    public void StopBobbing() {
+        transform.position = originalTransform;
+        bobbingTime = 0;
+        isBobbing = false;
+    }
+
+    IEnumerator Laser(Vector3 target){
 		Vector3 start = transform.position;
 
 		lineRenderer.SetPosition(0, start);
@@ -162,11 +192,7 @@ public class Ship : MonoBehaviour {
         bigLaser.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         
         float time = 0;
-        while (time < 1f) {
-            //lineRendererBig.SetPosition(1, Vector3.Lerp(start, target, time / 0.6f));
-
-            yield return new WaitForEndOfFrame();
-        }
+        while (time < 1f) { yield return new WaitForEndOfFrame(); }
          
         bigLaser.SetActive(false);
     }

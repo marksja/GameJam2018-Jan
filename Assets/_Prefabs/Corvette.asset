@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Name: Corvette
   m_EditorClassIdentifier: 
   maxHealth: 400
-  actions: 0000000002000000
+  type: 0
+  actions: 000000000200000004000000
   lightDamage: 50
   heavyDamage: 0
   shieldHealth: 125
