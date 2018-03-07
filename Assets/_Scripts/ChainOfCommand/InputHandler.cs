@@ -97,11 +97,11 @@ public class InputHandler : MonoBehaviour
                 input = 4;
                 while (input > 2) {
                     needInput = true;
-                    while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
+                    while (needInput) { yield return null; } //Blocking until we have input
                     if (input == 3 && id > 0) {
                         // undo cascade
                         orders.ships[id].HideAll();
-                        id -= 1;
+                        id -= 1; // last ship
                         if(destroyerOnCooldown && orders.ships[id].shipData.type == ShipData.Type.DESTROYER) {
                             id -= 1;
                         }
@@ -153,7 +153,7 @@ public class InputHandler : MonoBehaviour
                 if (attackId == CommandQueue.Command.HEAVY) { destroyerOnCooldown = true; }
                 if (attackId == CommandQueue.Command.HOLD && 
                     currentShip.shipData.type == ShipData.Type.DESTROYER) { destroyerOnCooldown = false; }
-                orders.IssueCommand(shipId, attackId, targetId); //Give the order
+                orders.IssueCommand(currentShip, attackId, targetId); //Give the order
             }
         }
         TurnManager.Instance.TurnComplete();

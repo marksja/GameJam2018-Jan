@@ -8,7 +8,7 @@ public class CommandQueue : MonoBehaviour {
 	public enum Command { LIGHT, HEAVY, SHIELD, HOLD, SWAP };
 
 	public struct Order{
-		public int shipID;
+		public Ship ship;
 		public Command command;
 		public int target;
 		public int turnIssued;
@@ -27,13 +27,11 @@ public class CommandQueue : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update () {}
 
-	public void IssueCommand(int shipID, Command command, int targetID){
+	public void IssueCommand(Ship ship, Command command, int targetID){
 		Order order = new Order();
-		order.shipID = shipID;
+		order.ship = ship;
 		order.command = command;
 		order.target = targetID;
 		order.turnIssued = TurnManager.Instance.turnNum;
@@ -91,8 +89,7 @@ public class CommandQueue : MonoBehaviour {
 	}
 
 	public void ExecuteOrder(Order order){
-        int shipNum = order.shipID;
-        Ship currentShip = ships[shipNum];
+        Ship currentShip = order.ship;
         Ship targetShip;
         switch (order.command) {
             case Command.LIGHT:
@@ -128,6 +125,7 @@ public class CommandQueue : MonoBehaviour {
                 break;
             case Command.SWAP:
                 targetShip = ships[order.target];
+                int shipNum = GetShipNum(currentShip);
                 ships[order.target] = currentShip;
                 ships[shipNum] = targetShip;
 
@@ -152,4 +150,14 @@ public class CommandQueue : MonoBehaviour {
             s.TurnOffShieldInSeconds(.5f);
 		}
 	}
+
+    // @return index of ship s in allied array   
+    // @error: return -1
+    private int GetShipNum(Ship ship_in) {
+        for (int i = 0; i < ships.Length; ++i) {
+            if (ship_in == ships[i]) { return i; }
+        }
+
+        return -1;
+    }
 }
