@@ -8,7 +8,6 @@ public class InputHandler : MonoBehaviour
     public int numberOfShips = 3;
     public CommandQueue orders;
 
-    private bool needAction = true;
     private bool needInput = false;
     private bool destroyerOnCooldown = false;
     private int input;
@@ -39,8 +38,8 @@ public class InputHandler : MonoBehaviour
         prevInputs = new CommandQueue.Command[numberOfShips];
         prevprevInputs = new CommandQueue.Command[numberOfShips];
         for (int i = 0; i < numberOfShips; i++) {
-            prevInputs[i] = CommandQueue.Command.Hold;
-            prevprevInputs[i] = CommandQueue.Command.Hold;
+            prevInputs[i] = CommandQueue.Command.HOLD;
+            prevprevInputs[i] = CommandQueue.Command.HOLD;
         }
 
         StartCoroutine("ChooseCommands");
@@ -58,11 +57,10 @@ public class InputHandler : MonoBehaviour
                 input = 1;
                 needInput = false;
             }
-            else if (!needAction && (playerNumber == 0 ? Input.GetKeyDown(KeyCode.E) : Input.GetKeyDown(KeyCode.P))) {
+            else if (playerNumber == 0 ? Input.GetKeyDown(KeyCode.E) : Input.GetKeyDown(KeyCode.P)) {
                 //Debug.Log("Meh");
                 input = 2;
                 needInput = false;
-                needAction = true;
             }
             else if (playerNumber == 0 ? Input.GetKeyDown(KeyCode.R) : Input.GetKeyDown(KeyCode.U)) {
                 //Undo Button
@@ -77,7 +75,7 @@ public class InputHandler : MonoBehaviour
     }
 
     IEnumerator ChooseCommands() {
-        CommandQueue.Command attackId = CommandQueue.Command.Hold;
+        CommandQueue.Command attackId = CommandQueue.Command.HOLD;
         int targetId = -1;
 
         //We go through all the ships we have and choose the ship Id, the attack the choose, and their target
@@ -93,15 +91,15 @@ public class InputHandler : MonoBehaviour
             if (displayTutorial) { orders.ships[id].ShowTypeTutorial(); }
 
             if (destroyerOnCooldown && orders.ships[id].shipData.type == ShipData.Type.DESTROYER) {
-                attackId = CommandQueue.Command.Hold;
+                attackId = CommandQueue.Command.HOLD;
             }
             else {
                 input = 4;
                 while (input > 2) {
                     needInput = true;
-                    needAction = true;
                     while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
                     if (input == 3 && id > 0) {
+                        // undo cascade
                         orders.ships[id].HideAll();
                         id -= 1;
                         if(destroyerOnCooldown && orders.ships[id].shipData.type == ShipData.Type.DESTROYER) {
@@ -124,9 +122,8 @@ public class InputHandler : MonoBehaviour
                 input = -1;
                 while (!ShipIsAlive(input, attackId)) {
                     needInput = true;
-                    needAction = false;
                     while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
-                    if (input == 3) { attackId = CommandQueue.Command.Hold;
+                    if (input == 3) { attackId = CommandQueue.Command.HOLD;
                         orders.ships[id].HideAll();
                         goto Attack;
                     } //Go back
@@ -153,8 +150,8 @@ public class InputHandler : MonoBehaviour
             attackId = ordersForThisTurn[i].attac;
             targetId = ordersForThisTurn[i].target;
             if (currentShip.alive) {
-                if (attackId == CommandQueue.Command.Heavy) { destroyerOnCooldown = true; }
-                if (attackId == CommandQueue.Command.Hold && 
+                if (attackId == CommandQueue.Command.HEAVY) { destroyerOnCooldown = true; }
+                if (attackId == CommandQueue.Command.HOLD && 
                     currentShip.shipData.type == ShipData.Type.DESTROYER) { destroyerOnCooldown = false; }
                 orders.IssueCommand(shipId, attackId, targetId); //Give the order
             }
@@ -166,7 +163,7 @@ public class InputHandler : MonoBehaviour
     bool ShipIsAlive(int targetId, CommandQueue.Command attackId) {
         if (targetId < 0) return false;
         switch (attackId) {
-            case CommandQueue.Command.Shield: {
+            case CommandQueue.Command.SHIELD: {
                 // Ensure requested allied ship is alive
                 return orders.ships[targetId].alive;
             }

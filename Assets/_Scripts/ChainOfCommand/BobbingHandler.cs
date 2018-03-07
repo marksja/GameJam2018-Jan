@@ -12,15 +12,10 @@ public class BobbingHandler : MonoBehaviour {
     private Vector3 originalTransform;
     private bool waited = false;
 	// Use this for initialization
-	void Awake () {
-        originalTransform = bobbee.GetComponent<Transform>().position;
-        StartCoroutine(SetWait());
-    }
+	void Awake () { StartCoroutine(SetWait()); }
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update () {}
 
     // If not yet bobbing then start bobbing
     public void StartBobbing() {
@@ -46,15 +41,19 @@ public class BobbingHandler : MonoBehaviour {
     // Start bobbing until bobbing false and if ends and bobbing true the loop
     IEnumerator StartBobbingRoutine() {
         if (!waited) {
-            
             yield return new WaitForEndOfFrame();
             waited = true;
         }
+        originalTransform = bobbee.transform.position;
         float time = 0;
         while ((time < bobbingPeriod) && isBobbing) {
 
             float percent = time / bobbingPeriod;
-            bobbee.GetComponent<Transform>().position = Vector3.LerpUnclamped(originalTransform, new Vector3(originalTransform.x,originalTransform.y+1,originalTransform.z), bobbingCurve.Evaluate(percent));
+            bobbee.GetComponent<Transform>().position = Vector3.LerpUnclamped(
+                originalTransform, 
+                new Vector3(originalTransform.x,originalTransform.y+1,originalTransform.z), 
+                bobbingCurve.Evaluate(percent)
+                );
 
             yield return new WaitForEndOfFrame();
 

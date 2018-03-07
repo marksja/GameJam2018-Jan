@@ -5,7 +5,7 @@ using UnityEngine;
 public class CommandQueue : MonoBehaviour {
 	public Ship[] ships;
 
-	public enum Command { Light, Heavy, Shield, Hold, Swap };
+	public enum Command { LIGHT, HEAVY, SHIELD, HOLD, SWAP };
 
 	public struct Order{
 		public int shipID;
@@ -40,11 +40,11 @@ public class CommandQueue : MonoBehaviour {
 		order.turnExecuted = order.turnIssued + GetTurnDelay();
 
         switch (command) {
-            case Command.Swap: {
+            case Command.SWAP: {
                 order.priority = 0;
                 break;
             }
-            case Command.Shield: {
+            case Command.SHIELD: {
                 order.priority = 1;
                 break;
             }
@@ -95,7 +95,7 @@ public class CommandQueue : MonoBehaviour {
         Ship currentShip = ships[shipNum];
         Ship targetShip;
         switch (order.command) {
-            case Command.Light:
+            case Command.LIGHT:
                 //damage = 50
                 targetShip = opponentQueue.ships[order.target];
                 if (!targetShip.alive) { return; }
@@ -106,7 +106,7 @@ public class CommandQueue : MonoBehaviour {
 				}
 
                 break;
-            case Command.Shield:
+            case Command.SHIELD:
                 //Add temp hp = 150
                 targetShip = ships[order.target];
                 if (!targetShip.alive) { return; }
@@ -114,7 +114,7 @@ public class CommandQueue : MonoBehaviour {
                 targetShip.AddShield(currentShip.shipData.shieldHealth);
 
                 break;
-            case Command.Heavy:
+            case Command.HEAVY:
                 //damage = 150
                 targetShip = opponentQueue.ships[order.target];
                 if (!targetShip.alive) { return; }
@@ -126,7 +126,18 @@ public class CommandQueue : MonoBehaviour {
                 }
 
                 break;
-            case Command.Hold:
+            case Command.SWAP:
+                targetShip = ships[order.target];
+                ships[order.target] = currentShip;
+                ships[shipNum] = targetShip;
+
+                // Swap sprite locations as well
+                var transform_temp = currentShip.transform.position;
+                currentShip.transform.position = targetShip.transform.position;
+                targetShip.transform.position = transform_temp;
+
+                break;
+            case Command.HOLD:
                 //Do nothing
 
                 break;
