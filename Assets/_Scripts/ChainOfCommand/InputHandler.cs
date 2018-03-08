@@ -17,24 +17,23 @@ public class InputHandler : MonoBehaviour
     // JF: Hacky way to control when tutorials appear
     private bool displayTutorial = true;
 
-    class FancyTuple
-    {
-        public int me;
-        public CommandQueue.Command attac;
+    class CommandData {
+        public Ship me;
+        public CommandQueue.Command action;
         public int target;
 
-        public FancyTuple(int x, CommandQueue.Command y, int z) {
+        public CommandData(Ship x, CommandQueue.Command y, int z) {
             me = x;
-            attac = y;
+            action = y;
             target = z;
         }
     };
 
-    private FancyTuple[] ordersForThisTurn;
+    private CommandData[] ordersForThisTurn;
 
     // Use this for initialization
     void Start() {
-        ordersForThisTurn = new FancyTuple[3];
+        ordersForThisTurn = new CommandData[numberOfShips];
         prevInputs = new CommandQueue.Command[numberOfShips];
         prevprevInputs = new CommandQueue.Command[numberOfShips];
         for (int i = 0; i < numberOfShips; i++) {
@@ -70,9 +69,7 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    public void StartTurn(int turnStart) {
-        StartCoroutine("ChooseCommands");
-    }
+    public void StartTurn(int turnStart) { StartCoroutine("ChooseCommands"); }
 
     IEnumerator ChooseCommands() {
         CommandQueue.Command attackId = CommandQueue.Command.HOLD;
@@ -80,9 +77,7 @@ public class InputHandler : MonoBehaviour
 
         //We go through all the ships we have and choose the ship Id, the attack the choose, and their target
         for (int id = 0; id < numberOfShips; id++) {
-            if(!orders.ships[id].alive){
-                continue;
-            }
+            if (!orders.ships[id].alive) { continue; }
 
             Attack:
             orders.ships[id].ShowAttackTypeChoice();
@@ -102,52 +97,51 @@ public class InputHandler : MonoBehaviour
                         // undo cascade
                         orders.ships[id].HideAll();
                         id -= 1; // last ship
-                        if(destroyerOnCooldown && orders.ships[id].shipData.type == ShipData.Type.DESTROYER) {
+                        if(destroyerOnCooldown && 
+                            orders.ships[id].shipData.type == ShipData.Type.DESTROYER) {
                             id -= 1;
                         }
                         orders.ships[id].ShowTargetChoice();
                         prevInputs = prevprevInputs;
                         goto Target;
-                    } //Go Back
+                    } // Go Back
                 }
 
                 attackId = FindAttack(id, input);
             
                 orders.ships[id].ShowTargetChoice();
 
-                if (displayTutorial) { 
-                    orders.ships[id].ShowTargetTutorial();
-                }
+                if (displayTutorial) { orders.ships[id].ShowTargetTutorial(); }
+
                 Target:
                 input = -1;
                 while (!ShipIsAlive(input, attackId)) {
                     needInput = true;
-                    while (needInput) { yield return new WaitForEndOfFrame(); } //Blocking until we have input
-                    if (input == 3) { attackId = CommandQueue.Command.HOLD;
+                    while (needInput) { yield return null; } //Blocking until we have input
+                    if (input == 3) { 
+                        attackId = CommandQueue.Command.HOLD;
                         orders.ships[id].HideAll();
                         goto Attack;
-                    } //Go back
+                    } // Go back
                 }
                 
                 targetId = input;
             }
 
             orders.ships[id].HideAll();
-            FancyTuple order = new FancyTuple(id, attackId, targetId);
+            CommandData order = new CommandData(orders.ships[id], attackId, targetId);
             ordersForThisTurn[id] = order;
             prevprevInputs[id] = prevInputs[id];
             prevInputs[id] = attackId; //Store the last attack
         }
 
         // Command tutorials are only displayed the first time
-        // Display the delay tutorial on the next turn
         displayTutorial = false;
 
         for(int i = 0; i < ordersForThisTurn.Length; i++) {
-            int shipId = ordersForThisTurn[i].me;
-            Ship currentShip = orders.ships[shipId];
+            Ship currentShip = ordersForThisTurn[i].me;
 
-            attackId = ordersForThisTurn[i].attac;
+            attackId = ordersForThisTurn[i].action;
             targetId = ordersForThisTurn[i].target;
             if (currentShip.alive) {
                 if (attackId == CommandQueue.Command.HEAVY) { destroyerOnCooldown = true; }
@@ -160,9 +154,9 @@ public class InputHandler : MonoBehaviour
         yield return null;
     }
 
-    bool ShipIsAlive(int targetId, CommandQueue.Command attackId) {
+    bool ShipIsAlive(int targetId, CommandQueue.Command actionId) {
         if (targetId < 0) return false;
-        switch (attackId) {
+        switch (actionId) {
             case CommandQueue.Command.SHIELD: {
                 // Ensure requested allied ship is alive
                 return orders.ships[targetId].alive;
