@@ -18,7 +18,9 @@ public class CommandQueue : MonoBehaviour {
 
 	public CommandQueue opponentQueue;
 
-	public Queue<Order> orderQueue; 
+	public Queue<Order> orderQueue;
+
+    private int kSwapDamage = 50;
 
 	// Use this for initialization
 	void Start () {
@@ -38,18 +40,15 @@ public class CommandQueue : MonoBehaviour {
 		order.turnExecuted = order.turnIssued + GetTurnDelay();
 
         switch (command) {
-            case Command.SWAP: {
+            case Command.SWAP: 
                 order.priority = 0;
                 break;
-            }
-            case Command.SHIELD: {
+            case Command.SHIELD: 
                 order.priority = 1;
                 break;
-            }
-            default: {
+            default:
                 order.priority = 2;
                 break;
-            }
         }
 
 		orderQueue.Enqueue(order);
@@ -95,18 +94,19 @@ public class CommandQueue : MonoBehaviour {
             case Command.LIGHT:
                 //damage = 50
                 targetShip = opponentQueue.ships[order.target];
-                if (!targetShip.alive) { return; }
-                //Deal damage to the target ship
-                targetShip.TakeDamage(currentShip.shipData.lightDamage);
                 if (currentShip.gameObject.activeInHierarchy) {
                     currentShip.LaserCaller(targetShip.transform.position);
-				}
+                }
+                if (targetShip.alive) {
+                    //Deal damage to the target ship
+                    targetShip.TakeDamage(currentShip.shipData.lightDamage);
+                }
 
                 break;
             case Command.SHIELD:
                 //Add temp hp = 150
                 targetShip = ships[order.target];
-                if (!targetShip.alive) { return; }
+                if (!targetShip.alive) { break; }
                 //Apply a temporary hp pool
                 targetShip.AddShield(currentShip.shipData.shieldHealth);
 
@@ -114,25 +114,41 @@ public class CommandQueue : MonoBehaviour {
             case Command.HEAVY:
                 //damage = 150
                 targetShip = opponentQueue.ships[order.target];
-                if (!targetShip.alive) { return; }
-                //Deal damage to the target ship
-                targetShip.TakeDamage(currentShip.shipData.heavyDamage);
-                //Call two lasers for visual P L A C E H O L D E R
                 if (currentShip.gameObject.activeInHierarchy) {
                     currentShip.HeavyLaserCaller(targetShip.transform.position);
+                }
+                if (targetShip.alive) {
+                    //Deal damage to the target ship
+                    targetShip.TakeDamage(currentShip.shipData.heavyDamage);
                 }
 
                 break;
             case Command.SWAP:
                 targetShip = ships[order.target];
+                if (targetShip == currentShip) {
+                    // Cannot swap to own position; does nothing
+                    break;
+                }
                 int shipNum = GetShipNum(currentShip);
                 ships[order.target] = currentShip;
                 ships[shipNum] = targetShip;
+
+                // Swap ship number sprites
+                var number_sprite_temp = 
+                    currentShip.transform.Find("Sprite/Number").GetComponent<SpriteRenderer>().sprite;
+                currentShip.transform.Find("Sprite/Number").GetComponent<SpriteRenderer>().sprite =
+                    targetShip.transform.Find("Sprite/Number").GetComponent<SpriteRenderer>().sprite;
+                targetShip.transform.Find("Sprite/Number").GetComponent<SpriteRenderer>().sprite = 
+                    number_sprite_temp;
 
                 // Swap sprite locations as well
                 var transform_temp = currentShip.transform.position;
                 currentShip.transform.position = targetShip.transform.position;
                 targetShip.transform.position = transform_temp;
+
+                // emergency warp swapping deals damage to each ship
+                currentShip.TakeDamage(kSwapDamage);
+                targetShip.TakeDamage(kSwapDamage);
 
                 break;
             case Command.HOLD:

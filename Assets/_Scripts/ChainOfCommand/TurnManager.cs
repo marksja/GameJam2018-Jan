@@ -48,10 +48,10 @@ public class TurnManager : MonoBehaviour {
 	}
 
 	public void ResolveTurn(){
-		StartCoroutine(GrossCoroutine());
+		StartCoroutine(ExecuteActions());
     }
 
-	IEnumerator GrossCoroutine(){
+	IEnumerator ExecuteActions(){
 		List<CommandQueue.Order> orders = new List<CommandQueue.Order>();
 
         onTurnEnd.Invoke(turnNum);

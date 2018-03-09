@@ -72,67 +72,65 @@ public class InputHandler : MonoBehaviour
     public void StartTurn(int turnStart) { StartCoroutine("ChooseCommands"); }
 
     IEnumerator ChooseCommands() {
-        CommandQueue.Command attackId = CommandQueue.Command.HOLD;
+        CommandQueue.Command actionId = CommandQueue.Command.HOLD;
         int targetId = -1;
 
         //We go through all the ships we have and choose the ship Id, the attack the choose, and their target
-        for (int id = 0; id < numberOfShips; id++) {
-            if (!orders.ships[id].alive) { continue; }
+        for (int idx = 0; idx < numberOfShips; idx++) {
+            if (!orders.ships[idx].alive) { continue; }
 
             Attack:
-            orders.ships[id].ShowAttackTypeChoice();
+            orders.ships[idx].ShowAttackTypeChoice();
             
             // Display tutorial blurbs first time that commands are requested
-            if (displayTutorial) { orders.ships[id].ShowTypeTutorial(); }
+            if (displayTutorial) { orders.ships[idx].ShowTypeTutorial(); }
 
-            if (destroyerOnCooldown && orders.ships[id].shipData.type == ShipData.Type.DESTROYER) {
-                attackId = CommandQueue.Command.HOLD;
+            if (destroyerOnCooldown && orders.ships[idx].shipData.type == ShipData.Type.DESTROYER) {
+                actionId = CommandQueue.Command.HOLD;
             }
             else {
                 input = 4;
                 while (input > 2) {
                     needInput = true;
                     while (needInput) { yield return null; } //Blocking until we have input
-                    if (input == 3 && id > 0) {
+                    if (input == 3 && idx > 0) {
                         // undo cascade
-                        orders.ships[id].HideAll();
-                        id -= 1; // last ship
+                        orders.ships[idx].HideAll();
+                        idx -= 1; // last ship
                         if(destroyerOnCooldown && 
-                            orders.ships[id].shipData.type == ShipData.Type.DESTROYER) {
-                            id -= 1;
+                            orders.ships[idx].shipData.type == ShipData.Type.DESTROYER) {
+                            idx -= 1;
                         }
-                        orders.ships[id].ShowTargetChoice();
+                        orders.ships[idx].ShowTargetChoice();
                         prevInputs = prevprevInputs;
                         goto Target;
                     } // Go Back
                 }
 
-                attackId = FindAttack(id, input);
+                actionId = GetAction(idx, input);
             
-                orders.ships[id].ShowTargetChoice();
+                orders.ships[idx].ShowTargetChoice();
 
-                if (displayTutorial) { orders.ships[id].ShowTargetTutorial(); }
+                if (displayTutorial) { orders.ships[idx].ShowTargetTutorial(); }
 
                 Target:
                 input = -1;
-                while (!ShipIsAlive(input, attackId)) {
-                    needInput = true;
-                    while (needInput) { yield return null; } //Blocking until we have input
-                    if (input == 3) { 
-                        attackId = CommandQueue.Command.HOLD;
-                        orders.ships[id].HideAll();
-                        goto Attack;
-                    } // Go back
-                }
+                needInput = true;
+                while (needInput) { yield return null; } //Blocking until we have input
+                if (input == 3) { 
+                    actionId = CommandQueue.Command.HOLD;
+                    orders.ships[idx].HideAll();
+                    goto Attack;
+                } // Go back
                 
                 targetId = input;
             }
 
-            orders.ships[id].HideAll();
-            CommandData order = new CommandData(orders.ships[id], attackId, targetId);
-            ordersForThisTurn[id] = order;
-            prevprevInputs[id] = prevInputs[id];
-            prevInputs[id] = attackId; //Store the last attack
+            orders.ships[idx].HideAll();
+            CommandData order = new CommandData(orders.ships[idx], actionId, targetId);
+            ordersForThisTurn[idx] = order;
+            prevprevInputs[idx] = prevInputs[idx];
+            prevInputs[idx] = actionId; //Store the last attack
         }
 
         // Command tutorials are only displayed the first time
@@ -141,34 +139,20 @@ public class InputHandler : MonoBehaviour
         for(int i = 0; i < ordersForThisTurn.Length; i++) {
             Ship currentShip = ordersForThisTurn[i].me;
 
-            attackId = ordersForThisTurn[i].action;
+            actionId = ordersForThisTurn[i].action;
             targetId = ordersForThisTurn[i].target;
             if (currentShip.alive) {
-                if (attackId == CommandQueue.Command.HEAVY) { destroyerOnCooldown = true; }
-                if (attackId == CommandQueue.Command.HOLD && 
+                if (actionId == CommandQueue.Command.HEAVY) { destroyerOnCooldown = true; }
+                if (actionId == CommandQueue.Command.HOLD && 
                     currentShip.shipData.type == ShipData.Type.DESTROYER) { destroyerOnCooldown = false; }
-                orders.IssueCommand(currentShip, attackId, targetId); //Give the order
+                orders.IssueCommand(currentShip, actionId, targetId); //Give the order
             }
         }
         TurnManager.Instance.TurnComplete();
         yield return null;
     }
 
-    bool ShipIsAlive(int targetId, CommandQueue.Command actionId) {
-        if (targetId < 0) return false;
-        switch (actionId) {
-            case CommandQueue.Command.SHIELD: {
-                // Ensure requested allied ship is alive
-                return orders.ships[targetId].alive;
-            }
-            default: {
-                // Offensive; ensure requested enemy ship is alive
-                return orders.opponentQueue.ships[targetId].alive;
-            }
-        }
-    }
-
-    CommandQueue.Command FindAttack(int ship, int input) {
+    CommandQueue.Command GetAction(int ship, int input) {
         return orders.ships[ship].shipData.actions[input];
     }
 }
