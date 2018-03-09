@@ -49,9 +49,7 @@ public class Ship : MonoBehaviour {
         health = shipData.maxHealth;
         text.text = health + "/" + shipData.maxHealth;
 
-        if (bigLaser != null) {
-            bigLaser.SetActive(false);
-        }
+        if (bigLaser != null) { bigLaser.SetActive(false); }
 	}
 
     public void Update() {
@@ -177,7 +175,6 @@ public class Ship : MonoBehaviour {
 	}
 
     IEnumerator LaserBig(Vector3 target) {
-        Debug.Log("BigBoy");
         Vector3 start = transform.position;
 
         bigLaser.SetActive(true);

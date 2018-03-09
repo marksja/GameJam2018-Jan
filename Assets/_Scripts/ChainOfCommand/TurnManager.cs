@@ -36,22 +36,20 @@ public class TurnManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {}
 
-	public void RegisterCommandQueue(CommandQueue queue){
+	public void RegisterCommandQueue(CommandQueue queue) {
 		registeredCommandQueues.Add(queue);
 	}
 
-	public void TurnComplete(){
+	public void TurnComplete() {
 		++playersWithTurnsCompleted;
 		if (playersWithTurnsCompleted >= registeredCommandQueues.Count) {
 			ResolveTurn();
 		}
 	}
 
-	public void ResolveTurn(){
-		StartCoroutine(ExecuteActions());
-    }
+	public void ResolveTurn() { StartCoroutine(ExecuteActions()); }
 
-	IEnumerator ExecuteActions(){
+	IEnumerator ExecuteActions() {
 		List<CommandQueue.Order> orders = new List<CommandQueue.Order>();
 
         onTurnEnd.Invoke(turnNum);
@@ -68,7 +66,8 @@ public class TurnManager : MonoBehaviour {
 			incomingCommands.Add(queueOrders);
 		}
 		
-		for (int currPriority = 0; currPriority < 3; ++currPriority) {
+        // Maximum priority level of 2
+		for (int currPriority = 0; currPriority <= CommandQueue.kLowestPriority; ++currPriority) {
 			foreach (QueueOrdersForTurn queueOrders in incomingCommands) {
 				foreach (CommandQueue.Order sixtySix in queueOrders.orders) {
 					if (sixtySix.priority == currPriority) { 
@@ -84,8 +83,6 @@ public class TurnManager : MonoBehaviour {
 
         ++turnNum;
         playersWithTurnsCompleted = 0;
-		if (!isGameOver) {
-        	onTurnStart.Invoke(turnNum);
-		}
+		if (!isGameOver) { onTurnStart.Invoke(turnNum); }
 	}
 }

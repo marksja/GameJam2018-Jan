@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CommandQueue : MonoBehaviour {
-	public Ship[] ships;
-
 	public enum Command { LIGHT, HEAVY, SHIELD, HOLD, SWAP };
 
 	public struct Order{
@@ -15,15 +13,18 @@ public class CommandQueue : MonoBehaviour {
 		public int turnExecuted;
 		public int priority;
 	}
+    public Ship[] ships;
 
-	public CommandQueue opponentQueue;
+    public Queue<Order> orderQueue;
 
-	public Queue<Order> orderQueue;
+    public CommandQueue opponentQueue;
 
     private int kSwapDamage = 50;
 
-	// Use this for initialization
-	void Start () {
+    public static int kLowestPriority = 2;
+
+    // Use this for initialization
+    void Start () {
 		orderQueue = new Queue<Order>();
         TurnManager.Instance.RegisterCommandQueue(this);
 	}
@@ -47,7 +48,7 @@ public class CommandQueue : MonoBehaviour {
                 order.priority = 1;
                 break;
             default:
-                order.priority = 2;
+                order.priority = kLowestPriority;
                 break;
         }
 
