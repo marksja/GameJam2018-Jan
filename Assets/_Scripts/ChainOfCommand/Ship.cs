@@ -39,10 +39,17 @@ public class Ship : MonoBehaviour {
 
     private ShieldHandler shieldHandler;
 
-	void Awake() { shieldHandler = shieldObject.GetComponent<ShieldHandler>(); }
+    private Transform mainSpriteTransform;
+    private float origScaleY;
+
+	void Awake() {
+        shieldHandler = shieldObject.GetComponent<ShieldHandler>();
+        mainSpriteTransform = transform.Find("Sprite");
+        origScaleY = mainSpriteTransform.localScale.y;
+        lineRenderer = GetComponentInChildren<LineRenderer>();
+    }
 
 	public void Start(){
-		lineRenderer = GetComponentInChildren<LineRenderer>();
 		alive = true;
 		damageTaken = 0;
 		shield = 0;
@@ -50,6 +57,8 @@ public class Ship : MonoBehaviour {
         text.text = health + "/" + shipData.maxHealth;
 
         if (bigLaser != null) { bigLaser.SetActive(false); }
+
+        WarpIn();
 	}
 
     public void Update() {
@@ -211,9 +220,21 @@ public class Ship : MonoBehaviour {
 		FMODUnity.RuntimeManager.PlayOneShot(shipData.heavyAttackEvent, transform.position);
 		StartCoroutine(HeavyLaser(target));
 	}
-	
-	public void Shield() {}
-	
+
+    public void WarpIn() {
+        StartCoroutine(WarpInAnimation());
+    }
+
+
+    IEnumerator WarpInAnimation() {
+        float time = 0f;
+        while (time < 1) {
+            mainSpriteTransform.localScale = new Vector3(mainSpriteTransform.localScale.x, time * origScaleY, 0);
+            time += Time.deltaTime * 1.5f;
+            yield return null;
+        }
+    }
+    
 	/* Tutorial blurbs - JF */
 	public void ShowTypeTutorial() {
 		if (targetTutorial != null) {

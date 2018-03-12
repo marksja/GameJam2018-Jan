@@ -90,14 +90,14 @@ public class CommandQueue : MonoBehaviour {
 
 	public void ExecuteOrder(Order order){
         Ship currentShip = order.ship;
+
+        if (!order.ship.alive) { return; }
         Ship targetShip;
         switch (order.command) {
             case Command.LIGHT:
                 //damage = 50
                 targetShip = opponentQueue.ships[order.target];
-                if (currentShip.gameObject.activeInHierarchy) {
-                    currentShip.LaserCaller(targetShip.transform.position);
-                }
+                currentShip.LaserCaller(targetShip.transform.position);
                 if (targetShip.alive) {
                     //Deal damage to the target ship
                     targetShip.TakeDamage(currentShip.shipData.lightDamage);
@@ -115,9 +115,7 @@ public class CommandQueue : MonoBehaviour {
             case Command.HEAVY:
                 //damage = 150
                 targetShip = opponentQueue.ships[order.target];
-                if (currentShip.gameObject.activeInHierarchy) {
-                    currentShip.HeavyLaserCaller(targetShip.transform.position);
-                }
+                currentShip.HeavyLaserCaller(targetShip.transform.position);
                 if (targetShip.alive) {
                     //Deal damage to the target ship
                     targetShip.TakeDamage(currentShip.shipData.heavyDamage);
@@ -133,6 +131,10 @@ public class CommandQueue : MonoBehaviour {
                 int shipNum = GetShipNum(currentShip);
                 ships[order.target] = currentShip;
                 ships[shipNum] = targetShip;
+
+                // Play warpswap animation
+                currentShip.WarpIn();
+                targetShip.WarpIn();
 
                 // Swap ship number sprites
                 var number_sprite_temp = 
