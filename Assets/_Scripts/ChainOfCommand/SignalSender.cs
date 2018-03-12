@@ -57,8 +57,6 @@ public class SignalSender : MonoBehaviour {
 		Color startAlpha = sr.color;
 		
 		while(timeMid < 2f){
-
-
 			//midSignal.transform.localScale = Vector3.Lerp(ogScale, new Vector3(3.5f, 5f, 1f), timeMid / 1f);
 			midSignal.transform.localScale = Vector3.Lerp(ogScale, new Vector3(8f, 6f, 1f), timeMid / 2f);
 			if (timeMid >= 1f) {
