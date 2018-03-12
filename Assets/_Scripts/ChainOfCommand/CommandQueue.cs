@@ -134,7 +134,7 @@ public class CommandQueue : MonoBehaviour {
 
                 // Play warpswap animation
                 currentShip.WarpIn();
-                targetShip.WarpIn();
+                if (targetShip.alive) { targetShip.WarpIn(); }
 
                 // Swap ship number sprites
                 var number_sprite_temp = 
@@ -151,7 +151,7 @@ public class CommandQueue : MonoBehaviour {
 
                 // emergency warp swapping deals damage to each ship
                 currentShip.TakeDamage(kSwapDamage);
-                targetShip.TakeDamage(kSwapDamage);
+                if (targetShip.alive) { targetShip.TakeDamage(kSwapDamage); }
 
                 break;
             case Command.HOLD:
