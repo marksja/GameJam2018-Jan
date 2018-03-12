@@ -142,10 +142,10 @@ public class CommandQueue : MonoBehaviour {
                 targetShip.transform.Find("Sprite/Number").GetComponent<SpriteRenderer>().sprite = 
                     number_sprite_temp;
 
-                // Swap sprite locations as well
-                var transform_temp = currentShip.transform.position;
-                currentShip.transform.position = targetShip.transform.position;
-                targetShip.transform.position = transform_temp;
+                // Swap sprite y locations as well
+                var temp = currentShip.transform.position;
+                currentShip.transform.position = new Vector3(temp.x, targetShip.transform.position.y, 0);
+                targetShip.transform.position = new Vector3(targetShip.transform.position.x, temp.y, 0);
 
                 // emergency warp swapping deals damage to each ship
                 currentShip.TakeDamage(kSwapDamage);
