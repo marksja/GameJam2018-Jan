@@ -1806,11 +1806,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -3637,7 +3637,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 414956729}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -567, y: 284, z: 0}
+  m_LocalPosition: {x: -413, y: 120.6, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 1402327065}
@@ -3893,7 +3893,7 @@ Prefab:
     - target: {fileID: 224297327973855520, guid: 498aa4d1f4b0a2a459f67986490e1dde,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 800
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224297327973855520, guid: 498aa4d1f4b0a2a459f67986490e1dde,
         type: 2}
@@ -3940,25 +3940,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114004497339822420, guid: 498aa4d1f4b0a2a459f67986490e1dde,
+    - target: {fileID: 224187954382838586, guid: 498aa4d1f4b0a2a459f67986490e1dde,
         type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004497339822420, guid: 498aa4d1f4b0a2a459f67986490e1dde,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114954181358971290, guid: 498aa4d1f4b0a2a459f67986490e1dde,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114954181358971290, guid: 498aa4d1f4b0a2a459f67986490e1dde,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
+      propertyPath: m_AnchoredPosition.y
+      value: -153.7
       objectReference: {fileID: 0}
     - target: {fileID: 1428420270909934, guid: 498aa4d1f4b0a2a459f67986490e1dde, type: 2}
       propertyPath: m_IsActive
@@ -3967,21 +3952,21 @@ Prefab:
     - target: {fileID: 114004497339822420, guid: 498aa4d1f4b0a2a459f67986490e1dde,
         type: 2}
       propertyPath: m_text
-      value: '( W )
+      value: '( E )
 
-        Shield
+        Swap
 
-        HP: 125'
+        HP: -50'
       objectReference: {fileID: 0}
-    - target: {fileID: 224187954382838586, guid: 498aa4d1f4b0a2a459f67986490e1dde,
+    - target: {fileID: 114004497339822420, guid: 498aa4d1f4b0a2a459f67986490e1dde,
         type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 120.6
+      propertyPath: m_havePropertiesChanged
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 224299837465075240, guid: 498aa4d1f4b0a2a459f67986490e1dde,
+    - target: {fileID: 114004497339822420, guid: 498aa4d1f4b0a2a459f67986490e1dde,
         type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: -1111
+      propertyPath: m_isInputParsingRequired
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 498aa4d1f4b0a2a459f67986490e1dde, type: 2}
@@ -7573,11 +7558,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -11278,7 +11263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1401064093
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12938,7 +12923,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1582991004}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -275, y: 427, z: 0}
+  m_LocalPosition: {x: -413, y: 395, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 240778148}
@@ -13591,7 +13576,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1676238918}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -452, y: -9, z: 0}
+  m_LocalPosition: {x: -413, y: -153.7, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 2026950677}
@@ -15751,11 +15736,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
